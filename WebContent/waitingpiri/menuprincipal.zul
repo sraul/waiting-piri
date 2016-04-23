@@ -1,0 +1,41 @@
+<?page title="Waiting Piri - Web" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<style src="/css/style.css" />
+	<window border="0" width="100%" height="100%">
+		<hbox height="50px" width="100%" sclass="cabecera rounded"
+			align="center">
+			<label sclass="titulo">Menú Principal</label>
+			<div hflex="true" />
+			<button sclass="btn-success" iconSclass="z-icon-sign-out">
+				Salir..
+			</button>
+			<div width="20px"></div>
+		</hbox>
+
+		<vbox width="100%" vflex="true" pack="center" align="center">
+			<button sclass="btn-success btn-lg" width="300px"
+				height="60px"
+				href="funcionarios.zul">
+				Administrar Funcionarios
+			</button>
+			<div height="10px" />
+			<button sclass="btn-success btn-lg" width="300px"
+				height="60px">
+				Administrar Choferes
+			</button>
+			<div height="10px" />
+			<button sclass="btn-success btn-lg" width="300px"
+				height="60px">
+				Administrar Colectivos
+			</button>
+			<div height="10px" />
+			<button sclass="btn-success btn-lg" width="300px"
+				height="60px">
+				Monitorear Colectivos
+			</button>
+		</vbox>
+
+		<hbox height="50px" width="100%" sclass="cabecera rounded">
+		</hbox>
+	</window>
+</zk>

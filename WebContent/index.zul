@@ -1,9 +1,7 @@
 <?page title="Waiting Piri - Web"?>
 <?link rel="icon" type="image/x-icon" href="images/logo.ico"?>
 <window border="0" width="100%" height="100%">
-	<image src="images/WaitingPiri.png" height="50px"
-		style="margin:20px"></image>
-	<hbox width="100%" height="65%" pack="center" align="center">
+	<hbox width="100%" height="80%" pack="center" align="center">
 		<image src="images/logo.png" height="200px"></image>
 		<space></space>
 		<vbox width="100%" height="100%" pack="center" align="center">
@@ -15,7 +13,8 @@
 			<div height="5px"></div>
 			<textbox class="form-control" placeholder="Password.."></textbox>
 			<div height="5px"></div>
-			<button sclass="btn-success" hflex="true">Ingresar..</button>
+			<button sclass="btn-success" hflex="true"
+				href="/waitingpiri/menuprincipal.zul">Ingresar..</button>
 		</vbox>
 	</hbox>
 </window>

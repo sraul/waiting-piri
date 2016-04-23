@@ -1,0 +1,39 @@
+<?page title="Waiting Piri - Web" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<style src="/css/style.css" />
+	<window border="0" width="100%" height="100%">
+		<hbox height="50px" width="100%" sclass="cabecera rounded"
+			align="center">
+			<label sclass="titulo">Administrar Funcionarios</label>
+			<div hflex="true" />
+			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
+				href="menuprincipal.zul">
+				Atrás..
+			</button>
+			<div width="20px"></div>
+		</hbox>
+
+		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
+		
+			<hbox vflex="true" width="100%">
+				
+				<listbox vflex="true" sclass="rounded">
+					<listhead>
+						<listheader label="Nombre"/>
+					</listhead>
+				</listbox>
+				<space />
+				<grid vflex="true" sclass="rounded">
+					<columns>
+						<column label="Ficha Funcionario"/>
+					</columns>
+				</grid>
+				
+			</hbox>
+			
+		</vbox>
+
+		<hbox height="50px" width="100%" sclass="cabecera rounded">
+		</hbox>
+	</window>
+</zk>
