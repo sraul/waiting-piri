@@ -13,24 +13,84 @@
 			<div width="20px"></div>
 		</hbox>
 
-		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
-		
+		<vbox width="100%" vflex="true" pack="center" align="center"
+			style="padding:10px">
+
 			<hbox vflex="true" width="100%">
-				
+
 				<listbox vflex="true" sclass="rounded">
 					<listhead>
-						<listheader label="Nombre"/>
+						<listheader label="Nombre" />
 					</listhead>
 				</listbox>
+
 				<space />
-				<grid vflex="true" sclass="rounded">
-					<columns>
-						<column label="Ficha Funcionario"/>
-					</columns>
-				</grid>
-				
+
+				<vlayout vflex="true">
+					<grid vflex="true" sclass="rounded">
+						<auxhead>
+							<auxheader colspan="2"
+								label="Ficha Funcionario" style="text-align:center">
+							</auxheader>
+						</auxhead>
+						<columns>
+							<column width="30%" />
+							<column />
+						</columns>
+						<rows>
+							<row>
+								<label sclass="field" value="ID:" />
+								<intbox readonly="true" />
+							</row>
+							<row>
+								<label sclass="field"
+									value="NOMBRE Y APELLIDO:" />
+								<textbox hflex="true" />
+							</row>
+							<row>
+								<label sclass="field" value="CÉDULA:" />
+								<textbox hflex="true" />
+							</row>
+							<row>
+								<label sclass="field"
+									value="DIRECCIÓN:" />
+								<textbox hflex="true" />
+							</row>
+							<row>
+								<label sclass="field" value="TELÉFONO:" />
+								<textbox hflex="true" />
+							</row>
+							<row>
+								<label sclass="field" value="CARGO:" />
+								<combobox hflex="true" />
+							</row>
+						</rows>
+					</grid>
+
+					<hlayout>
+						<button sclass="btn-success" width="130px"
+							iconSclass="z-icon-plus">
+							Nuevo
+						</button>
+						<button sclass="btn-success" width="130px"
+							iconSclass="z-icon-pencil">
+							Editar
+						</button>
+						<button sclass="btn-success" width="130px"
+							iconSclass="z-icon-floppy-o">
+							Guardar
+						</button>
+						<button sclass="btn-success" width="130px"
+							iconSclass="z-icon-trash-o">
+							Eliminar
+						</button>
+					</hlayout>
+
+				</vlayout>
+
+
 			</hbox>
-			
+
 		</vbox>
 
 		<hbox height="50px" width="100%" sclass="cabecera rounded">
