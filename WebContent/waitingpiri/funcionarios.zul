@@ -21,9 +21,38 @@
 			<hbox vflex="true" width="100%">
 
 				<listbox vflex="true" sclass="rounded">
-					<listhead>
-						<listheader label="Nombre" />
+					<listhead style="text-align:center">
+						<listheader label="ID" width="100px"/>
+						<listheader label="NOMBRE Y APELLIDO" />
+						<listheader label="CÉDULA" width="100px"/>
 					</listhead>
+					<auxhead>
+						<auxheader>
+							<hlayout>
+								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
+								<textbox hflex="true" placeholder="Buscar.."/>
+							</hlayout>
+						</auxheader>
+						<auxheader>
+							<hlayout>
+								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
+								<textbox hflex="true" placeholder="Buscar.." />
+							</hlayout>
+						</auxheader>
+						<auxheader>
+							<hlayout>
+								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
+								<textbox hflex="true" placeholder="Buscar.." />
+							</hlayout>
+						</auxheader>
+					</auxhead>
+					<listfoot>
+						<listfooter span="3">
+							<hlayout>
+								<label value="0 ítems" sclass="field"/>
+							</hlayout>
+						</listfooter>
+					</listfoot>
 				</listbox>
 
 				<space />

@@ -10,6 +10,7 @@ import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.io.Files;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
@@ -37,6 +38,7 @@ public class FuncionarioViewModel {
 	@Listen("onUpload=#fotoUpload")
 	public void subirFoto(UploadEvent event) throws Exception {
 		this.subirImagen(event);
+		Executions.sendRedirect("/waitingpiri/funcionarios.zul");
 	}
 	
 	/**
