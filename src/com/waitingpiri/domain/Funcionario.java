@@ -1,4 +1,4 @@
-package waitingpiri.domain;
+package com.waitingpiri.domain;
 
 public class Funcionario {
 

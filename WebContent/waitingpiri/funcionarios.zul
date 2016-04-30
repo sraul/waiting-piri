@@ -1,7 +1,9 @@
 <?page title="Waiting Piri - Web" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<style src="/css/style.css" />
-	<window border="0" width="100%" height="100%">
+	<window border="0" width="100%" height="100%"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.FuncionarioViewModel')">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
 			<label sclass="titulo">Administrar Funcionarios</label>
@@ -63,6 +65,20 @@
 							<row>
 								<label sclass="field" value="CARGO:" />
 								<combobox hflex="true" />
+							</row>
+							<row height="10px"></row>
+							<row>
+								<label sclass="field" value="FOTOGRAFÍA:" />
+								<hlayout valign="bottom">
+									<image height="230px" width="270px"
+										src="/fotos/funcionario.png" />
+									<fileupload
+										id="fotoUpload"
+										width="130px" iconSclass="z-icon-upload"
+										upload="true">
+										Subir Foto..
+									</fileupload>
+								</hlayout>
 							</row>
 						</rows>
 					</grid>
