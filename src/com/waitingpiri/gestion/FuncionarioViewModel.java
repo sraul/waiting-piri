@@ -9,6 +9,7 @@ import java.util.List;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.DependsOn;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.io.Files;
 import org.zkoss.zk.ui.Component;
@@ -25,6 +26,10 @@ public class FuncionarioViewModel {
 	
 	static final String PATH_FOTOS_FUNCIONARIOS = Sessions.getCurrent().getWebApp().getRealPath("fotos")
 			+ "/";
+	
+	private String filterID = "";
+	private String filterNA = "";
+	private String filterCI = "";
 
 	@Init
 	public void init() {
@@ -68,9 +73,6 @@ public class FuncionarioViewModel {
 		InputStream file = event.getMedia().getStreamData();
 		String destino = folder + fileName + "." + format;
 		
-		System.out.println("-------------- DESTINO -----------------");
-		System.out.println(destino);
-		
 		this.copiarArchivo(file, destino);
 	}
 	
@@ -83,6 +85,72 @@ public class FuncionarioViewModel {
 		Files.copy(dst, file);
 	}
 	
+	/**
+	 * GET / SET
+	 */
+	
+	public List<Funcionario> getFuncionarios() {
+		List<Funcionario> out = new ArrayList<Funcionario>();
+		out.addAll(FuncionarioData.getFuncionariosData());
+		return out;
+	}
+	
+	@DependsOn({ "filterID", "filterNA", "filterCI" })
+	public List<Funcionario> getFuncionarios_() {
+		List<Funcionario> out = new ArrayList<Funcionario>();
+
+		if (this.filterCI.isEmpty() && this.filterID.isEmpty() && this.filterNA.isEmpty()) {
+			return this.getFuncionarios();
+		}
+
+		for (Funcionario func : this.getFuncionarios()) {
+
+			// na y ci no estan vacio
+			if ((!func.getNombreApellido().isEmpty()
+					&& func.getNombreApellido().toLowerCase().indexOf(this.filterNA.toLowerCase()) >= 0)
+					&& (!func.getCedula().isEmpty()
+							&& func.getCedula().toLowerCase().indexOf(this.filterCI.toLowerCase()) >= 0)) {
+				out.add(func);
+
+				// ci vacio
+			} else if ((!func.getNombreApellido().isEmpty()
+					&& func.getNombreApellido().toLowerCase().indexOf(this.filterNA.toLowerCase()) >= 0)
+					&& (func.getCedula().isEmpty())) {
+				out.add(func);
+
+				// na vacio
+			} else if ((!func.getCedula().isEmpty()
+					&& func.getCedula().toLowerCase().indexOf(this.filterCI.toLowerCase()) >= 0)
+					&& (func.getNombreApellido().isEmpty())) {
+				out.add(func);
+			}
+		}
+		return out;
+	}
+
+	public String getFilterID() {
+		return filterID;
+	}
+
+	public void setFilterID(String filterID) {
+		this.filterID = filterID;
+	}
+
+	public String getFilterNA() {
+		return filterNA;
+	}
+
+	public void setFilterNA(String filterNA) {
+		this.filterNA = filterNA;
+	}
+
+	public String getFilterCI() {
+		return filterCI;
+	}
+
+	public void setFilterCI(String filterCI) {
+		this.filterCI = filterCI;
+	}
 }
 
 /**
@@ -90,22 +158,23 @@ public class FuncionarioViewModel {
  */
 class FuncionarioData {
 	
-	private int id = 1;
-	
 	/**
 	 * @return los funcionarios de prueba..
 	 */
-	public List<Funcionario> getFuncionariosData() {
+	public static List<Funcionario> getFuncionariosData() {
 		List<Funcionario> out = new ArrayList<Funcionario>();
+
+		String[] nombres = new String[] { "Juan Perez", "Luis Gimenez", "Lida Herrera", "Geronimo Rojas",
+				"Hipolito Juarez", "Violeta Ruiz", "Damian Espinola", "Fabian Caceres", "Kike Hernandez",
+				"Dario Lezcano" };
 		
-		String[] nombres = new String[] {"Juan Perez", "Luis Gimenez", "Lida Herrera", "Geronimo Rojas", "Hipolito Juarez", "Violeta Ruiz", "Damian Espinola", "Fabian Caceres", "Kike Hernandez","Dario Lezcano"};
 		String[] cedulas = new String[] {"3.500.200", "132.456", "1.369.874", "9.513.574", "6.314.785", "9.874.563", "789.562", "856.321","6.321.457","456.782"};
-		
+
 		for (int i = 0; i < 10; i++) {
-			Funcionario func = new Funcionario(this.id, nombres[i], cedulas[i]);
+			Funcionario func = new Funcionario(i + 1, nombres[i], cedulas[i]);
 			out.add(func);
 		}
-		
+
 		return out;
 	}
 	
