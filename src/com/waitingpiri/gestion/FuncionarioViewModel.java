@@ -3,6 +3,8 @@ package com.waitingpiri.gestion;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.ContextParam;
@@ -16,6 +18,8 @@ import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.util.Clients;
+
+import com.waitingpiri.domain.Funcionario;
 
 public class FuncionarioViewModel {
 	
@@ -77,6 +81,32 @@ public class FuncionarioViewModel {
 			throws IOException {
 		File dst = new File(destino);
 		Files.copy(dst, file);
+	}
+	
+}
+
+/**
+ * Datos de prueba de funcionarios..
+ */
+class FuncionarioData {
+	
+	private int id = 1;
+	
+	/**
+	 * @return los funcionarios de prueba..
+	 */
+	public List<Funcionario> getFuncionariosData() {
+		List<Funcionario> out = new ArrayList<Funcionario>();
+		
+		String[] nombres = new String[] {"Juan Perez", ""};
+		String[] cedulas = new String[] {"3500200", ""};
+		
+		for (int i = 0; i < 10; i++) {
+			Funcionario func = new Funcionario(this.id, nombres[i], cedulas[i]);
+			out.add(func);
+		}
+		
+		return out;
 	}
 	
 }

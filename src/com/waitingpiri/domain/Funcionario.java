@@ -8,6 +8,12 @@ public class Funcionario {
 	private String direccion;
 	private String telefono;
 	private int cargo;
+	
+	public Funcionario(int id, String nombreApellido, String cedula) {
+		this.id = id;
+		this.nombreApellido = nombreApellido;
+		this.cedula = cedula;
+	}
 
 	public int getId() {
 		return id;
