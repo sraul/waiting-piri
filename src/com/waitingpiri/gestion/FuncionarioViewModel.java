@@ -99,7 +99,7 @@ class FuncionarioData {
 		List<Funcionario> out = new ArrayList<Funcionario>();
 		
 		String[] nombres = new String[] {"Juan Perez", "Luis Gimenez", "Lida Herrera", "Geronimo Rojas", "Hipolito Juarez", "Violeta Ruiz", "Damian Espinola", "Fabian Caceres", "Kike Hernandez","Dario Lezcano"};
-		String[] cedulas = new String[] {"3500200", "132456", "12369874", "9513574", "96314785", "9874563", "789562", "856321","6321457","456782"};
+		String[] cedulas = new String[] {"3.500.200", "132.456", "1.369.874", "9.513.574", "6.314.785", "9.874.563", "789.562", "856.321","6.321.457","456.782"};
 		
 		for (int i = 0; i < 10; i++) {
 			Funcionario func = new Funcionario(this.id, nombres[i], cedulas[i]);
