@@ -129,6 +129,25 @@ public class FuncionarioViewModel {
 		}
 		return out;
 	}
+	
+	/**
+	 * @return el cargo segun el id..
+	 */
+	public String getCargo(int idCargo) {
+		return Funcionario.getCargos().get(idCargo);
+	}
+	
+	/**
+	 * @return los cargos..
+	 */
+	public List<String[]> getCargos() {
+		List<String[]> out = new ArrayList<String[]>();
+		for (Integer key : Funcionario.getCargos().keySet()) {
+			String[] cargo = new String[] { key.toString(), this.getCargo(key) };
+			out.add(cargo);
+		}
+		return out;
+	}
 
 	public String getFilterID() {
 		return filterID;
@@ -177,13 +196,18 @@ class FuncionarioData {
 		String[] nombres = new String[] { "Juan Perez", "Luis Gimenez", "Lida Herrera", "Geronimo Rojas",
 				"Hipolito Juarez", "Violeta Ruiz", "Damian Espinola", "Fabian Caceres", "Kike Hernandez",
 				"Dario Lezcano" };
-		
-		String[] cedulas = new String[] {"3.500.200", "132.456", "1.369.874", "9.513.574", "6.314.785", "9.874.563", "789.562", "856.321","6.321.457","456.782"};
 
-		String[] direcciones = new String[] {"Direccion1","Direccion2","Direccion3","Direccion4","Direccion5","Direccion6","Direccion7","Direccion8","Direccion9","Direccion10"};
+		String[] cedulas = new String[] { "3.500.200", "132.456", "1.369.874", "9.513.574", "6.314.785", "9.874.563",
+				"789.562", "856.321", "6.321.457", "456.782" };
+
+		String[] direcciones = new String[] { "Direccion1", "Direccion2", "Direccion3", "Direccion4", "Direccion5",
+				"Direccion6", "Direccion7", "Direccion8", "Direccion9", "Direccion10" };
+
+		String[] telefonos = new String[] { "Telefono1", "Telefono2", "Telefono3", "Telefono4", "Telefono5",
+				"Telefono6", "Telefono7", "Telefono8", "Telefono9", "Telefono10" };
 		
-		String[] telefonos = new String[]{"Telefono1","Telefono2","Telefono3","Telefono4","Telefono5","Telefono6","Telefono7","Telefono8","Telefono9","Telefono10"};
- 		
+		
+
 		for (int i = 0; i < 10; i++) {
 			Funcionario func = new Funcionario(i + 1, nombres[i], cedulas[i], direcciones[i], telefonos[i]);
 			out.add(func);

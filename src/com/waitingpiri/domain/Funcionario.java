@@ -1,6 +1,13 @@
 package com.waitingpiri.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Funcionario {
+	
+	static final int ID_CARGO_GERENTE = 1;
+	static final int ID_CARGO_AUXILIAR = 2;
+	static final int ID_CARGO_CHOFER = 3;
 
 	private int id;
 	private String nombreApellido;
@@ -15,6 +22,17 @@ public class Funcionario {
 		this.cedula = cedula;
 		this.direccion = direccion;
 		this.telefono = telefono;
+	}
+	
+	/**
+	 * @return los cargos disponibles..
+	 */
+	public static final Map<Integer, String> getCargos() {
+		Map<Integer, String> cargos = new HashMap<Integer, String>();		
+		cargos.put(ID_CARGO_GERENTE, "Gerente Administrativo");
+		cargos.put(ID_CARGO_AUXILIAR, "Auxiliar Administrativo");
+		cargos.put(ID_CARGO_CHOFER, "Chofer");
+		return cargos;
 	}
 
 	public int getId() {

@@ -110,7 +110,12 @@
 							</row>
 							<row>
 								<label sclass="field" value="CARGO:" />
-								<combobox hflex="true" />
+								<combobox hflex="true"
+									model="@load(vm.cargos)">
+									<template name="model">
+										<comboitem label="@load(each[1])"/>
+									</template>
+								</combobox>
 							</row>
 							<row height="10px"></row>
 							<row>
