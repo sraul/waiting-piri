@@ -111,9 +111,11 @@
 							<row>
 								<label sclass="field" value="CARGO:" />
 								<combobox hflex="true"
-									model="@load(vm.cargos)">
+									model="@load(vm.cargos)"
+									value="@load(vm.getCargo(vm.selectedFuncionario.cargo))">
 									<template name="model">
-										<comboitem label="@load(each[1])"/>
+										<comboitem label="@load(each[1])"
+											image="@load(vm.getIconCargo(each[0]))"/>
 									</template>
 								</combobox>
 							</row>

@@ -138,6 +138,13 @@ public class FuncionarioViewModel {
 	}
 	
 	/**
+	 * @return el cargo segun el id..
+	 */
+	public String getIconCargo(String idCargo) {
+		return "/images/cargo_" + idCargo + ".png";
+	}
+	
+	/**
 	 * @return los cargos..
 	 */
 	public List<String[]> getCargos() {
