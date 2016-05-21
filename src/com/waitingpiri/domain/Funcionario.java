@@ -16,12 +16,13 @@ public class Funcionario {
 	private String telefono;
 	private int cargo;
 	
-	public Funcionario(int id, String nombreApellido, String cedula, String direccion, String telefono) {
+	public Funcionario(int id, String nombreApellido, String cedula, String direccion, String telefono, int cargo) {
 		this.id = id;
 		this.nombreApellido = nombreApellido;
 		this.cedula = cedula;
 		this.direccion = direccion;
 		this.telefono = telefono;
+		this.cargo=cargo;
 	}
 	
 	/**
