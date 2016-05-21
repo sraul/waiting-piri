@@ -9,10 +9,12 @@ public class Funcionario {
 	private String telefono;
 	private int cargo;
 	
-	public Funcionario(int id, String nombreApellido, String cedula) {
+	public Funcionario(int id, String nombreApellido, String cedula, String direccion, String telefono) {
 		this.id = id;
 		this.nombreApellido = nombreApellido;
 		this.cedula = cedula;
+		this.direccion = direccion;
+		this.telefono = telefono;
 	}
 
 	public int getId() {

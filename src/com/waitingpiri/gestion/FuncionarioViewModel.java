@@ -30,6 +30,8 @@ public class FuncionarioViewModel {
 	private String filterID = "";
 	private String filterNA = "";
 	private String filterCI = "";
+	
+	private Funcionario selectedFuncionario;
 
 	@Init
 	public void init() {
@@ -151,6 +153,14 @@ public class FuncionarioViewModel {
 	public void setFilterCI(String filterCI) {
 		this.filterCI = filterCI;
 	}
+
+	public Funcionario getSelectedFuncionario() {
+		return selectedFuncionario;
+	}
+
+	public void setSelectedFuncionario(Funcionario selectedFuncionario) {
+		this.selectedFuncionario = selectedFuncionario;
+	}
 }
 
 /**
@@ -170,8 +180,12 @@ class FuncionarioData {
 		
 		String[] cedulas = new String[] {"3.500.200", "132.456", "1.369.874", "9.513.574", "6.314.785", "9.874.563", "789.562", "856.321","6.321.457","456.782"};
 
+		String[] direcciones = new String[]{};
+		
+		String[] telefonos = new String[]{};
+ 		
 		for (int i = 0; i < 10; i++) {
-			Funcionario func = new Funcionario(i + 1, nombres[i], cedulas[i]);
+			Funcionario func = new Funcionario(i + 1, nombres[i], cedulas[i], direcciones[i], telefonos[i]);
 			out.add(func);
 		}
 
