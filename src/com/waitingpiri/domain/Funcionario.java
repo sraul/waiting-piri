@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class Funcionario {
 	
-	static final int ID_CARGO_GERENTE = 1;
-	static final int ID_CARGO_AUXILIAR = 2;
-	static final int ID_CARGO_CHOFER = 3;
+	public static final int ID_CARGO_GERENTE = 1;
+	public static final int ID_CARGO_AUXILIAR = 2;
+	public static final int ID_CARGO_CHOFER = 3;
 
 	private int id;
 	private String nombreApellido;

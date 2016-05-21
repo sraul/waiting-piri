@@ -205,7 +205,8 @@ class FuncionarioData {
 
 		String[] telefonos = new String[] { "Telefono1", "Telefono2", "Telefono3", "Telefono4", "Telefono5",
 				"Telefono6", "Telefono7", "Telefono8", "Telefono9", "Telefono10" };
-		Integer[] cargos= new Integer[]{ 1,2,3,3,3,3,2,3,2,3};
+		Integer[] cargos= new Integer[]{Funcionario.ID_CARGO_GERENTE, Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_AUXILIAR, Funcionario.ID_CARGO_CHOFER,Funcionario.ID_CARGO_CHOFER,
+				Funcionario.ID_CARGO_CHOFER,Funcionario.ID_CARGO_AUXILIAR, Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_CHOFER,Funcionario.ID_CARGO_CHOFER};
 		
 		for (int i = 0; i < 10; i++) {
 			Funcionario func = new Funcionario(i + 1, nombres[i], cedulas[i], direcciones[i], telefonos[i], cargos[i]);
