@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.DependsOn;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -22,7 +24,7 @@ import org.zkoss.zk.ui.util.Clients;
 
 import com.waitingpiri.domain.Funcionario;
 
-public class FuncionarioViewModel {
+public class FuncionarioViewModel implements ABM {
 	
 	static final String PATH_FOTOS_FUNCIONARIOS = Sessions.getCurrent().getWebApp().getRealPath("fotos")
 			+ "/";
@@ -32,6 +34,8 @@ public class FuncionarioViewModel {
 	private String filterCI = "";
 	
 	private Funcionario selectedFuncionario;
+	
+	private boolean modoEdicion = false;
 
 	@Init
 	public void init() {
@@ -87,10 +91,34 @@ public class FuncionarioViewModel {
 		Files.copy(dst, file);
 	}
 	
+	@Override
+	public void nuevo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Command
+	@NotifyChange("modoEdicion")
+	public void editar() {
+		this.modoEdicion = !this.modoEdicion;			
+	}
+
+	@Override
+	public void guardar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 	/**
 	 * GET / SET
-	 */
-	
+	 */	
 	public List<Funcionario> getFuncionarios() {
 		List<Funcionario> out = new ArrayList<Funcionario>();
 		out.addAll(FuncionarioData.getFuncionariosData());
@@ -156,6 +184,34 @@ public class FuncionarioViewModel {
 		}
 		return out;
 	}
+	
+	@Override
+	@DependsOn("modoEdicion")
+	public boolean isGuardarEnabled() {		
+		return this.isModoEdicion();
+	}
+
+	@Override
+	@DependsOn("selectedFuncionario")
+	public boolean isEditarEnabled() {
+		return this.selectedFuncionario != null;
+	}
+
+	@Override
+	@DependsOn("modoEdicion")
+	public boolean isNuevoEnabled() {
+		boolean out = true;		
+		if (this.isModoEdicion()) {
+			out = false;
+		}		
+		return out;
+	}
+
+	@Override
+	@DependsOn({ "selectedFuncionario", "modoEdicion" })
+	public boolean isEliminarEnabled() {
+		return this.selectedFuncionario != null && !this.isModoEdicion();
+	}
 
 	public String getFilterID() {
 		return filterID;
@@ -187,6 +243,14 @@ public class FuncionarioViewModel {
 
 	public void setSelectedFuncionario(Funcionario selectedFuncionario) {
 		this.selectedFuncionario = selectedFuncionario;
+	}
+
+	public boolean isModoEdicion() {
+		return modoEdicion;
+	}
+
+	public void setModoEdicion(boolean soloLectura) {
+		this.modoEdicion = soloLectura;
 	}
 }
 

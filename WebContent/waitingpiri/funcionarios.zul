@@ -23,7 +23,8 @@
 
 				<listbox vflex="true" sclass="rounded"
 					model="@load(vm.funcionarios_)"
-					selectedItem="@bind(vm.selectedFuncionario)">
+					selectedItem="@bind(vm.selectedFuncionario)"
+					visible="@load(!vm.modoEdicion)">
 					<listhead style="text-align:center">
 						<listheader label="ID" width="100px" align="right" style="text-align:center" />
 						<listheader label="NOMBRE Y APELLIDO" />
@@ -91,29 +92,34 @@
 								<label sclass="field"
 									value="NOMBRE Y APELLIDO:" />
 								<textbox hflex="true" 
-									value="@bind(vm.selectedFuncionario.nombreApellido)"/>
+									value="@bind(vm.selectedFuncionario.nombreApellido)"
+									readonly="@load(!vm.modoEdicion)"/>
 							</row>
 							<row>
 								<label sclass="field" value="CÉDULA:" />
 								<textbox hflex="true" 
-									value="@bind(vm.selectedFuncionario.cedula)"/>
+									value="@bind(vm.selectedFuncionario.cedula)"
+									readonly="@load(!vm.modoEdicion)"/>
 							</row>
 							<row>
 								<label sclass="field"
 									value="DIRECCIÓN:" />
 								<textbox hflex="true" 
-									value="@bind(vm.selectedFuncionario.direccion)"/>
+									value="@bind(vm.selectedFuncionario.direccion)"
+									readonly="@load(!vm.modoEdicion)"/>
 							</row>
 							<row>
 								<label sclass="field" value="TELÉFONO:" />
 								<textbox hflex="true" 
-									value="@bind(vm.selectedFuncionario.telefono)"/>
+									value="@bind(vm.selectedFuncionario.telefono)"
+									readonly="@load(!vm.modoEdicion)"/>
 							</row>
 							<row>
 								<label sclass="field" value="CARGO:" />
 								<combobox hflex="true"
 									model="@load(vm.cargos)"
-									value="@load(vm.getCargo(vm.selectedFuncionario.cargo))">
+									value="@load(vm.getCargo(vm.selectedFuncionario.cargo))"
+									readonly="@load(!vm.modoEdicion)">
 									<template name="model">
 										<comboitem label="@load(each[1])"
 											image="@load(vm.getIconCargo(each[0]))"/>
@@ -129,7 +135,8 @@
 									<fileupload
 										id="fotoUpload"
 										width="130px" iconSclass="z-icon-upload"
-										upload="true">
+										upload="true"
+										disabled="@load(!vm.modoEdicion)">
 										Subir Foto..
 									</fileupload>
 								</hlayout>
@@ -139,19 +146,24 @@
 
 					<hlayout>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-plus" style="background-color:#008080">
+							iconSclass="z-icon-plus" style="background-color:#008080"
+							disabled="@load(!vm.nuevoEnabled)">
 							Nuevo
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-pencil" style="background-color:#008080">
-							Editar
+							iconSclass="@load(vm.modoEdicion? 'z-icon-times' : 'z-icon-pencil')" style="background-color:#008080"
+							onClick="@command('editar')"
+							label="@load(vm.modoEdicion? 'Cancelar' : 'Editar')"
+							disabled="@load(!vm.editarEnabled)">
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-floppy-o" style="background-color:#008080">
+							iconSclass="z-icon-floppy-o" style="background-color:#008080"
+							disabled="@load(!vm.guardarEnabled)">
 							Guardar
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-trash-o" style="background-color:#008080">
+							iconSclass="z-icon-trash-o" style="background-color:#008080"
+							disabled="@load(!vm.eliminarEnabled)">
 							Eliminar
 						</button>
 					</hlayout>
