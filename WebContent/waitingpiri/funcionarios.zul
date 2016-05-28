@@ -4,12 +4,13 @@
 	<window border="0" width="100%" height="100%"
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('com.waitingpiri.gestion.FuncionarioViewModel')">
+		<!-- Cabecera -->
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
 			<label sclass="titulo">Administrar Funcionarios</label>
 			<div hflex="true" />
 			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
-				href="menuprincipal.zul">
+				href="menuprincipal.zul" style="background-color:White; color:#008080">
 				Atrás..
 			</button>
 			<div width="20px"></div>
@@ -138,19 +139,19 @@
 
 					<hlayout>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-plus">
+							iconSclass="z-icon-plus" style="background-color:#008080">
 							Nuevo
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-pencil">
+							iconSclass="z-icon-pencil" style="background-color:#008080">
 							Editar
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-floppy-o">
+							iconSclass="z-icon-floppy-o" style="background-color:#008080">
 							Guardar
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-trash-o">
+							iconSclass="z-icon-trash-o" style="background-color:#008080">
 							Eliminar
 						</button>
 					</hlayout>

@@ -7,16 +7,17 @@
 }
 
 .cabecera {
-	background: green;
+	background-color:#008080;
 }
 
 .titulo {
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	color: white;
+	color:white;
 	font-weight: bold;
 	font-size: 12pt;
 	margin-left: 15px;
+	
 }
 
 .field {

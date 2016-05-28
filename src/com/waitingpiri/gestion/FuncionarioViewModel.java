@@ -100,6 +100,7 @@ public class FuncionarioViewModel {
 	@DependsOn({ "filterID", "filterNA", "filterCI" })
 	public List<Funcionario> getFuncionarios_() {
 		List<Funcionario> out = new ArrayList<Funcionario>();
+		
 
 		if (this.filterCI.isEmpty() && this.filterID.isEmpty() && this.filterNA.isEmpty()) {
 			return this.getFuncionarios();

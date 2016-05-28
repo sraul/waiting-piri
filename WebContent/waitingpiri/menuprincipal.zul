@@ -6,7 +6,8 @@
 			align="center">
 			<label sclass="titulo">Menú Principal</label>
 			<div hflex="true" />
-			<button sclass="btn-success" iconSclass="z-icon-sign-out">
+			<button sclass="btn-success" iconSclass="z-icon-sign-out"
+				style="background-color:white;color:#008080">
 				Salir..
 			</button>
 			<div width="20px"></div>
@@ -14,23 +15,25 @@
 
 		<vbox width="100%" vflex="true" pack="center" align="center">
 			<button sclass="btn-success btn-lg" width="300px"
-				height="60px"
-				href="funcionarios.zul">
+				height="60px" href="funcionarios.zul"
+				style="background-color:#008080">
 				Administrar Funcionarios
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="300px"
-				height="60px">
+				height="60px" href="choferes.zul"
+				style="background-color:#008080">
 				Administrar Choferes
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="300px"
-				height="60px">
+				height="60px" href="colectivos.zul"
+				style="background-color:#008080">
 				Administrar Colectivos
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="300px"
-				height="60px">
+				height="60px" style="background-color:#008080">
 				Monitorear Colectivos
 			</button>
 		</vbox>
