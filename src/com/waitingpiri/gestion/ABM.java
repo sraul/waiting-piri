@@ -41,4 +41,14 @@ public interface ABM {
 	 * @return true si eliminar esta habilitado..
 	 */
 	public boolean isEliminarEnabled();
+	
+	/**
+	 * @return el ultimo id..
+	 */
+	public int getLastId();
+	
+	/**
+	 * @return true si son datos validos..
+	 */
+	public boolean validarDatos();
 }

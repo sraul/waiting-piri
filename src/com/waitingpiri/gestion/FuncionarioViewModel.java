@@ -21,6 +21,7 @@ import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Messagebox;
 
 import com.waitingpiri.domain.Funcionario;
 
@@ -33,9 +34,12 @@ public class FuncionarioViewModel implements ABM {
 	private String filterNA = "";
 	private String filterCI = "";
 	
+	private List<Funcionario> funcionariosNuevos = new ArrayList<Funcionario>();
+	
 	private Funcionario selectedFuncionario;
 	
 	private boolean modoEdicion = false;
+	private boolean editando = false;
 
 	@Init
 	public void init() {
@@ -91,22 +95,34 @@ public class FuncionarioViewModel implements ABM {
 		Files.copy(dst, file);
 	}
 	
-	@Override
+	@Command
+	@NotifyChange({ "modoEdicion", "selectedFuncionario" })
 	public void nuevo() {
-		// TODO Auto-generated method stub
-		
+		this.modoEdicion = true;
+		this.selectedFuncionario = new Funcionario(this.getLastId(), "", "", "", "", Funcionario.ID_CARGO_AUXILIAR);
 	}
 
 	@Command
 	@NotifyChange("modoEdicion")
 	public void editar() {
-		this.modoEdicion = !this.modoEdicion;			
+		this.modoEdicion = !this.modoEdicion;	
+		this.editando = true;
 	}
 
-	@Override
+	@Command
+	@NotifyChange({ "modoEdicion", "funcionariosNuevos", "selectedFuncionario", "funcionarios_" })
 	public void guardar() {
-		// TODO Auto-generated method stub
-		
+		if (!this.validarDatos()) {
+			Messagebox.show("Error de Datos, verifique..", "Validación de Datos..", Messagebox.OK, Messagebox.ERROR);
+			return;
+		}
+		if (!this.editando) {
+			this.getFuncionariosNuevos().add(this.selectedFuncionario);
+		}		
+		this.selectedFuncionario = null;
+		this.modoEdicion = false;
+		this.editando = false;
+		Clients.showNotification("Registro Agregado..");
 	}
 
 	@Override
@@ -115,6 +131,23 @@ public class FuncionarioViewModel implements ABM {
 		
 	}
 	
+	@Override
+	public int getLastId() {
+		return 100;
+	}
+	
+	@Override
+	public boolean validarDatos() {
+		boolean out = true;
+
+		// campos obligatorios..
+		if (this.selectedFuncionario.getNombreApellido().trim().isEmpty() || this.selectedFuncionario.getCedula().trim().isEmpty()
+				|| this.selectedFuncionario.getTelefono().trim().isEmpty()) {
+			out = false;
+		}
+
+		return out;
+	}
 	
 	/**
 	 * GET / SET
@@ -122,6 +155,7 @@ public class FuncionarioViewModel implements ABM {
 	public List<Funcionario> getFuncionarios() {
 		List<Funcionario> out = new ArrayList<Funcionario>();
 		out.addAll(FuncionarioData.getFuncionariosData());
+		out.addAll(this.funcionariosNuevos);
 		return out;
 	}
 	
@@ -251,6 +285,14 @@ public class FuncionarioViewModel implements ABM {
 
 	public void setModoEdicion(boolean soloLectura) {
 		this.modoEdicion = soloLectura;
+	}
+
+	public List<Funcionario> getFuncionariosNuevos() {
+		return funcionariosNuevos;
+	}
+
+	public void setFuncionariosNuevos(List<Funcionario> funcionariosNuevos) {
+		this.funcionariosNuevos = funcionariosNuevos;
 	}
 }
 

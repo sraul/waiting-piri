@@ -89,17 +89,25 @@
 									value="@load(vm.selectedFuncionario.id)"/>
 							</row>
 							<row>
-								<label sclass="field"
-									value="NOMBRE Y APELLIDO:" />
+								<hlayout valign="middle">
+									<label sclass="field"
+										value="NOMBRE Y APELLIDO:" />
+									<label sclass="required">*</label>								
+								</hlayout>								
 								<textbox hflex="true" 
 									value="@bind(vm.selectedFuncionario.nombreApellido)"
-									readonly="@load(!vm.modoEdicion)"/>
+									readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
 							</row>
 							<row>
-								<label sclass="field" value="CÉDULA:" />
+								<hlayout valign="middle">
+									<label sclass="field" value="CÉDULA:" />
+									<label sclass="required">*</label>								
+								</hlayout>								
 								<textbox hflex="true" 
 									value="@bind(vm.selectedFuncionario.cedula)"
-									readonly="@load(!vm.modoEdicion)"/>
+									readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
 							</row>
 							<row>
 								<label sclass="field"
@@ -109,10 +117,14 @@
 									readonly="@load(!vm.modoEdicion)"/>
 							</row>
 							<row>
-								<label sclass="field" value="TELÉFONO:" />
+								<hlayout valign="middle">
+									<label sclass="field" value="TELÉFONO:" />
+									<label sclass="required">*</label>								
+								</hlayout>								
 								<textbox hflex="true" 
 									value="@bind(vm.selectedFuncionario.telefono)"
-									readonly="@load(!vm.modoEdicion)"/>
+									readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
 							</row>
 							<row>
 								<label sclass="field" value="CARGO:" />
@@ -147,7 +159,8 @@
 					<hlayout>
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-plus" style="background-color:#008080"
-							disabled="@load(!vm.nuevoEnabled)">
+							disabled="@load(!vm.nuevoEnabled)"
+							onClick="@command('nuevo')">
 							Nuevo
 						</button>
 						<button sclass="btn-success" width="130px"
@@ -158,7 +171,8 @@
 						</button>
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-floppy-o" style="background-color:#008080"
-							disabled="@load(!vm.guardarEnabled)">
+							disabled="@load(!vm.guardarEnabled)"
+							onClick="@command('guardar')">
 							Guardar
 						</button>
 						<button sclass="btn-success" width="130px"

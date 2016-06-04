@@ -23,3 +23,8 @@
 .field {
 	font-weight: bold;
 }
+
+.required {
+	font-weight: bold;
+	color: red;
+}
