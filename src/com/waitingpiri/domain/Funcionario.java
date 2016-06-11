@@ -10,15 +10,15 @@ public class Funcionario {
 	public static final int ID_CARGO_CHOFER = 3;
 
 	private int id;
-	private String nombreApellido;
+	private String nombre;
 	private String cedula;
 	private String direccion;
 	private String telefono;
 	private int cargo;
 	
-	public Funcionario(int id, String nombreApellido, String cedula, String direccion, String telefono, int cargo) {
+	public Funcionario(int id, String nombre, String cedula, String direccion, String telefono, int cargo) {
 		this.id = id;
-		this.nombreApellido = nombreApellido;
+		this.nombre = nombre;
 		this.cedula = cedula;
 		this.direccion = direccion;
 		this.telefono = telefono;
@@ -44,12 +44,12 @@ public class Funcionario {
 		this.id = id;
 	}
 
-	public String getNombreApellido() {
-		return nombreApellido;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreApellido(String nombreApellido) {
-		this.nombreApellido = nombreApellido;
+	public void setNombre(String nombreApellido) {
+		this.nombre = nombreApellido;
 	}
 
 	public String getCedula() {

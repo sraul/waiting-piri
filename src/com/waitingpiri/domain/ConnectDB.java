@@ -3,6 +3,7 @@ package com.waitingpiri.domain;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ConnectDB {
 
@@ -45,4 +46,11 @@ public class ConnectDB {
 		System.out.println("Conexion exitosa..!!");
 	}
 	
+	/**
+	 * execute update..
+	 */
+	public void executeUpdate(String sql) throws Exception {
+		Statement statement = connection.createStatement();
+		statement.executeUpdate(sql);
+	}
 }

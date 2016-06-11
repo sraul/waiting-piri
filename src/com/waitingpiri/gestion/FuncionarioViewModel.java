@@ -141,7 +141,7 @@ public class FuncionarioViewModel implements ABM {
 		boolean out = true;
 
 		// campos obligatorios..
-		if (this.selectedFuncionario.getNombreApellido().trim().isEmpty() || this.selectedFuncionario.getCedula().trim().isEmpty()
+		if (this.selectedFuncionario.getNombre().trim().isEmpty() || this.selectedFuncionario.getCedula().trim().isEmpty()
 				|| this.selectedFuncionario.getTelefono().trim().isEmpty()) {
 			out = false;
 		}
@@ -171,22 +171,22 @@ public class FuncionarioViewModel implements ABM {
 		for (Funcionario func : this.getFuncionarios()) {
 
 			// na y ci no estan vacio
-			if ((!func.getNombreApellido().isEmpty()
-					&& func.getNombreApellido().toLowerCase().indexOf(this.filterNA.toLowerCase()) >= 0)
+			if ((!func.getNombre().isEmpty()
+					&& func.getNombre().toLowerCase().indexOf(this.filterNA.toLowerCase()) >= 0)
 					&& (!func.getCedula().isEmpty()
 							&& func.getCedula().toLowerCase().indexOf(this.filterCI.toLowerCase()) >= 0)) {
 				out.add(func);
 
 				// ci vacio
-			} else if ((!func.getNombreApellido().isEmpty()
-					&& func.getNombreApellido().toLowerCase().indexOf(this.filterNA.toLowerCase()) >= 0)
+			} else if ((!func.getNombre().isEmpty()
+					&& func.getNombre().toLowerCase().indexOf(this.filterNA.toLowerCase()) >= 0)
 					&& (func.getCedula().isEmpty())) {
 				out.add(func);
 
 				// na vacio
 			} else if ((!func.getCedula().isEmpty()
 					&& func.getCedula().toLowerCase().indexOf(this.filterCI.toLowerCase()) >= 0)
-					&& (func.getNombreApellido().isEmpty())) {
+					&& (func.getNombre().isEmpty())) {
 				out.add(func);
 			}
 		}
