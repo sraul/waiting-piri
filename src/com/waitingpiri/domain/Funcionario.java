@@ -11,14 +11,16 @@ public class Funcionario {
 
 	private int id;
 	private String nombre;
+	private String apellido;
 	private String cedula;
 	private String direccion;
 	private String telefono;
 	private int cargo;
 	
-	public Funcionario(int id, String nombre, String cedula, String direccion, String telefono, int cargo) {
+	public Funcionario(int id, String nombre, String apellido, String cedula, String direccion, String telefono, int cargo) {
 		this.id = id;
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.cedula = cedula;
 		this.direccion = direccion;
 		this.telefono = telefono;
@@ -82,6 +84,14 @@ public class Funcionario {
 
 	public void setCargo(int cargo) {
 		this.cargo = cargo;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 	
 }

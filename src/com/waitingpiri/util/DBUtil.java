@@ -9,10 +9,11 @@ public class DBUtil {
 	
 	static final String CREATE_TABLE_FUNCIONARIO = "CREATE TABLE FUNCIONARIO (" 
             + "ID INT(64) NOT NULL AUTO_INCREMENT,"  
-            + "NOMBRE VARCHAR(2)," 
-            + "CEDULA VARCHAR(2)," 
-            + "DIRECCION VARCHAR(2),"
-            + "TELEFONO VARCHAR(2),"
+            + "NOMBRE VARCHAR(200),"
+            + "APELLIDO VARCHAR(200),"
+            + "CEDULA VARCHAR(10)," 
+            + "DIRECCION VARCHAR(200),"
+            + "TELEFONO VARCHAR(10),"
             + "CARGO INT(2), "
             + "PRIMARY KEY(ID))";
 
@@ -29,5 +30,9 @@ public class DBUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	
+	}
+	
+	public static void main(String[] args) {
+		DBUtil.poblarDB(null);
+	}
 }

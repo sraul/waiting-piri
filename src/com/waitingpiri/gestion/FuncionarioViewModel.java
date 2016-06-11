@@ -99,7 +99,7 @@ public class FuncionarioViewModel implements ABM {
 	@NotifyChange({ "modoEdicion", "selectedFuncionario" })
 	public void nuevo() {
 		this.modoEdicion = true;
-		this.selectedFuncionario = new Funcionario(this.getLastId(), "", "", "", "", Funcionario.ID_CARGO_AUXILIAR);
+		this.selectedFuncionario = new Funcionario(this.getLastId(), "", "", "", "", "", Funcionario.ID_CARGO_AUXILIAR);
 	}
 
 	@Command
@@ -323,7 +323,7 @@ class FuncionarioData {
 				Funcionario.ID_CARGO_CHOFER,Funcionario.ID_CARGO_AUXILIAR, Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_CHOFER,Funcionario.ID_CARGO_CHOFER};
 		
 		for (int i = 0; i < 10; i++) {
-			Funcionario func = new Funcionario(i + 1, nombres[i], cedulas[i], direcciones[i], telefonos[i], cargos[i]);
+			Funcionario func = new Funcionario(i + 1, nombres[i], nombres[i], cedulas[i], direcciones[i], telefonos[i], cargos[i]);
 			out.add(func);
 		}
 
