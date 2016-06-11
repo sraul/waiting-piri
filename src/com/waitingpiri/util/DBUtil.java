@@ -33,6 +33,6 @@ public class DBUtil {
 	}
 	
 	public static void main(String[] args) {
-		DBUtil.poblarDB(null);
+		DBUtil.poblarDB(DataUtil.getFuncionariosData());
 	}
 }
