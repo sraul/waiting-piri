@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.waitingpiri.domain.Funcionario;
+import com.waitingpiri.domain.Usuario;
 
 public class DataUtil {
 
@@ -40,4 +41,10 @@ public class DataUtil {
 		return out;
 	}
 	
+	/**
+	 * @return los datos de usuarios..
+	 */
+	public static List<Usuario> getUsuariosData() {
+		return null;
+	}
 }
