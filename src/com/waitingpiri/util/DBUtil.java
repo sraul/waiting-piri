@@ -24,10 +24,11 @@ public class DBUtil {
 			System.out.println("Tabla [funcionario] creada..");
 
 			for (Funcionario func : funcionarios) {
-				String insert = INSERT_FUNCIONARIO + func.getNombre() + ", " + func.getApellido() + ", "
-						+ func.getCedula() + ", " + func.getDireccion() + ", " + func.getTelefono() + ", "
+				String insert = INSERT_FUNCIONARIO + "'" + func.getNombre() + "', '" + func.getApellido() + "', '"
+						+ func.getCedula() + "', '" + func.getDireccion() + "', '" + func.getTelefono() + "', "
 						+ func.getCargo() + " )";
 				conn.executeUpdate(insert);
+				System.out.println("Funcionario insertado..");
 			}
 
 		} catch (Exception e) {
