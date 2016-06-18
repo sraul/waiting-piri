@@ -56,6 +56,20 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * test usuario..
+	 */
+	public static void testUsuario(String nick, String password) {
+		ConnectDB conn = ConnectDB.getInstance();
+		Usuario user = conn.getUsuario(nick, password);
+		if (user == null) {
+			System.out.println("No se encontro un usuario con esos datos..");
+		} else {
+			System.out.println("Usuario encontrado.. ID: " + user.getId() + " NICK: " + user.getNick() + " PASS: "
+					+ user.getPassword());
+		}
+	}
 
 	public static void main(String[] args) {
 		DBUtil.poblarDB(DataUtil.getFuncionariosData(),
