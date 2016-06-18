@@ -1,6 +1,9 @@
 <?page title="Waiting Piri - Web"?>
 <?link rel="icon" type="image/x-icon" href="images/logo.ico"?>
-<window border="0" width="100%" height="100%">
+<window apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.waitingpiri.gestion.InicioViewModel')"
+	border="0" width="100%" height="100%"
+	onCreate="tx_user.focus()">
 	<hbox width="100%" height="80%" pack="center" align="center">
 		<image src="images/logo.png" height="200px"></image>
 		<space></space>
@@ -8,13 +11,21 @@
 			<label class="label label-success"
 				style="font-size:12pt; background-color:#008080">Login del Sistema</label>
 			<div height="20px"></div>
-			<textbox class="form-control" placeholder="Usuario.." 
-				width="250px"/>
+			<textbox id="tx_user" class="form-control" placeholder="Usuario.." 
+				width="250px"
+				constraint="no empty"
+				value="@bind(vm.nick)"
+				onOK="@command('login')"/>
 			<div height="5px"></div>
-			<textbox class="form-control" placeholder="Password.."></textbox>
+			<textbox class="form-control" placeholder="Password.."
+				type="password"
+				constraint="no empty"
+				value="@bind(vm.password)"
+				onOK="@command('login')"></textbox>
 			<div height="5px"></div>
 			<button sclass="btn-success" hflex="true"
-				href="/waitingpiri/menuprincipal.zul" style="Background-color:#008080">Ingresar..</button>
+				style="Background-color:#008080"
+				onClick="@command('login')">Ingresar..</button>
 		</vbox>
 	</hbox>
 </window>
