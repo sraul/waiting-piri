@@ -27,7 +27,7 @@
 					visible="@load(!vm.modoEdicion)">
 					<listhead style="text-align:center">
 						<listheader label="ID" width="100px" align="right" style="text-align:center" />
-						<listheader label="NOMBRE Y APELLIDO" />
+						<listheader label="NOMBRE" />
 						<listheader label="CÉDULA" width="100px" align="right" style="text-align:center"/>
 					</listhead>
 					<auxhead>
@@ -55,7 +55,7 @@
 					<template name="model">
 						<listitem>
 							<listcell label="@load(each.id)"/>
-							<listcell label="@load(each.nombreApellido)"/>
+							<listcell label="@load(each.nombre)"/>
 							<listcell label="@load(each.cedula)"/>
 						</listitem>
 					</template>					
@@ -91,11 +91,11 @@
 							<row>
 								<hlayout valign="middle">
 									<label sclass="field"
-										value="NOMBRE Y APELLIDO:" />
+										value="NOMBRE:" />
 									<label sclass="required">*</label>								
 								</hlayout>								
 								<textbox hflex="true" 
-									value="@bind(vm.selectedFuncionario.nombreApellido)"
+									value="@bind(vm.selectedFuncionario.nombre)"
 									readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 							</row>
