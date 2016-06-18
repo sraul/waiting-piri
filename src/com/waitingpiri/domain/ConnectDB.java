@@ -2,8 +2,11 @@ package com.waitingpiri.domain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConnectDB {
 
@@ -52,5 +55,27 @@ public class ConnectDB {
 	public void executeUpdate(String sql) throws Exception {
 		Statement statement = connection.createStatement();
 		statement.executeUpdate(sql);
+	}
+	
+	/**
+	 * @return Usuario segun nick y password..
+	 */
+	public Usuario getUsuario(String nick, String password) {
+		List<Usuario> out = new ArrayList<Usuario>();
+		String sql = "SELECT * FROM USUARIO WHERE NICK = '" + nick + "' AND PASSWORD = '" + password + "'";
+
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				int id = result.getInt("ID");
+				Usuario user = new Usuario(id, nick, password);
+				out.add(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return out.size() > 0 ? out.get(0) : null;
 	}
 }

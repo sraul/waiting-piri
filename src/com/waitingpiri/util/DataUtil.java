@@ -33,6 +33,7 @@ public class DataUtil {
 		String[] telefonos = new String[] { "Telefono1", "Telefono2",
 				"Telefono3", "Telefono4", "Telefono5", "Telefono6",
 				"Telefono7", "Telefono8", "Telefono9", "Telefono10" };
+		
 		Integer[] cargos = new Integer[] { Funcionario.ID_CARGO_GERENTE,
 				Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_AUXILIAR,
 				Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_CHOFER,
