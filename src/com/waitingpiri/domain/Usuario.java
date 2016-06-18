@@ -5,13 +5,13 @@ public class Usuario {
 	private int id;
 	private String nick;
 	private String password;
-	private boolean activo;
+	//private boolean activo;
 	
-	public Usuario(int id, String nick, String password, boolean activo) {
+	public Usuario(int id, String nick, String password) {
 		this.id = id;
 		this.nick = nick;
 		this.password = password;
-		this.activo = activo;
+		//this.activo = activo;
 	}
 
 	public String getNick() {
@@ -30,14 +30,14 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public boolean isActivo() {
+/*	public boolean isActivo() {
 		return activo;
 	}
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-
+*/
 	public int getId() {
 		return id;
 	}
