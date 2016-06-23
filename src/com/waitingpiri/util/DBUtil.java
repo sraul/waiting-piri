@@ -2,6 +2,7 @@ package com.waitingpiri.util;
 
 import java.util.List;
 
+import com.waitingpiri.domain.Colectivo;
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Funcionario;
 import com.waitingpiri.domain.Usuario;
@@ -17,16 +18,22 @@ public class DBUtil {
 	static final String CREATE_TABLE_USUARIO = "CREATE TABLE USUARIO ("
 			+ "ID INT(64) NOT NULL AUTO_INCREMENT," + "NICK VARCHAR(200),"
 			+ "PASSWORD VARCHAR(200)," + "PRIMARY KEY(ID))";
+	
+	static final String CREATE_TABLE_COLECTIVO = "CREATE TABLE COLECTIVO ("
+			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "NROCOLEC VARCHAR(200)," 
+			+ "NROCHASIS VARCHAR(200)," + "NROCHAPA VARCHAR(200)," + "PRIMARY KEY(ID))";
 
 	static final String INSERT_FUNCIONARIO = "INSERT INTO FUNCIONARIO (NOMBRE, APELLIDO, CEDULA, DIRECCION, TELEFONO, CARGO) values (";
 
 	// Tarea: sql insertar usuarios
 	static final String INSERT_USUARIO = "INSERT INTO USUARIO (NICK, PASSWORD) values (";
+	
+	static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS, NROCHAPA) values (";
 
 	/**
 	 * pobla la base de datos..
 	 */
-	public static void poblarDB(List<Funcionario> funcionarios, List<Usuario> usuarios) {
+	public static void poblarDB(List<Funcionario> funcionarios, List<Usuario> usuarios, List<Colectivo> colectivos) {
 		try {
 
 			ConnectDB conn = ConnectDB.getInstance();
@@ -35,6 +42,9 @@ public class DBUtil {
 			
 			conn.executeUpdate(CREATE_TABLE_USUARIO);
 			System.out.println("Tabla [usuario] creada..");
+			
+			conn.executeUpdate(CREATE_TABLE_COLECTIVO);
+			System.out.println("Tabla [colectivo] creada..");
 
 			for (Funcionario func : funcionarios) {
 				String insert = INSERT_FUNCIONARIO + "'" + func.getNombre()
@@ -51,6 +61,12 @@ public class DBUtil {
 				String insert = INSERT_USUARIO + "'" + usu.getNick() + "','" + usu.getPassword() + "')";
 				conn.executeUpdate(insert);
 				System.out.println("Usuario insertado..");
+			}
+			
+			for (Colectivo col : colectivos){
+				String insert = INSERT_COLECTIVO + "'" + col.getNroColec() + "','" + col.getNroChasis() + "','" + col.getNroChapa() + "')";
+				conn.executeUpdate(insert);
+				System.out.println("Colectivo insertado..");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,6 +89,7 @@ public class DBUtil {
 
 	public static void main(String[] args) {
 		DBUtil.poblarDB(DataUtil.getFuncionariosData(),
-				DataUtil.getUsuariosData());
+				DataUtil.getUsuariosData(),DataUtil.getColectivos());
 	}
+	
 }
