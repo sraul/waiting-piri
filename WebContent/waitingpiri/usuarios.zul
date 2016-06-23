@@ -1,0 +1,89 @@
+<?page title="Waiting-Piri" contentType="text/html;charset=UTF-8"?>
+<zk>
+<style src="/css/style.css" />
+<window border="0" width="100%" height="100%">
+	<hbox height="50px" width="100%" sclass="cabecera rounded"
+	align="center">
+		<label sclass="titulo">Administrar Usuarios</label>
+		<div hflex="true" />
+			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
+				href="menuprincipal.zul">
+				Atrás..
+				</button>
+			<div width="20px"></div>
+	</hbox>
+
+		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
+			<hbox width="100" vflex="true">
+			<listbox vflex="true" sclass="rounded">
+				<listhead style="text-align:center">
+					<listheader  label="ID" width="100px" align="right" style="text-align:center"/>
+					<listheader label="NICK" width="100px" align="right" style="text-align:center"/>
+				</listhead>
+			<auxhead>
+				<auxheader>
+					<hlayout>
+						<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
+						<textbox hflex="true" placeholder="Buscar.."/>
+					</hlayout>		
+				</auxheader>
+				<auxheader>
+				<hlayout>
+						<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
+						<textbox hflex="true" placeholder="Buscar.."/>
+					</hlayout>		
+				</auxheader>
+			</auxhead>
+				</listbox>
+				
+				<space/>
+				
+				<vlayout vflex="true">
+					<grid vflex="true" sclass="rounded">
+						<auxhead>
+							<auxheader colspan="2"
+								label="Ficha Usuario" style="text-align:center">
+							</auxheader>
+						</auxhead>
+						<columns>
+							<column width="30%" />
+							<column />
+						</columns>
+						<rows>
+								<row>
+									<label sclass="field" value="ID:" />
+									<intbox readonly="true" />
+								</row>
+								<row>
+									<label sclass="field" value="NICK"/>
+									<textbox hflex="true"/>
+									</row>
+								<row>
+									<label sclass="field" value="PASSWORD"/>
+									<textbox hflex="true"/>
+								</row>
+						</rows>
+				</grid>
+					<hlayout>
+						<button sclass="btn-success" width="130px"
+							iconSclass="z-icon-plus"
+							 style="background-color:#008080"> Nuevo</button>
+						<button sclass="btn-success" width="130px"
+						iconSclass="z-icon-pencil"
+							 style="background-color:#008080">Editar </button>
+						<button Sclass="btn-success" width="130px"
+						iconSclass="z-icon-floppy-o" 
+							style="background-color:#008080">Guardar</button>
+						<button Sclass="btn-success" width="130px"
+						iconSclass="z-icon-trash-o"
+						 style="background-color:#008080">Eliminar</button>
+					</hlayout>
+				
+				</vlayout>
+				
+			</hbox>
+			
+		
+		</vbox>
+</window>
+</zk>

@@ -21,9 +21,9 @@
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="300px"
-				height="60px" href="choferes.zul"
+				height="60px" href="usuarios.zul"
 				style="background-color:#008080">
-				Administrar Choferes
+				Administrar Usuarios
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="300px"
