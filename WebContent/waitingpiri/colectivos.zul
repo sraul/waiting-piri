@@ -59,7 +59,7 @@
 								<intbox readonly="true"/>
 							</row>
 							<row>
-								<label sclass="field" value="NRO CHASIS:"/>
+								<label sclass="field" value="NRO COLECTIVO:"/>
 								<textbox hflex="true"/>
 							</row>
 							<row>
@@ -67,7 +67,7 @@
 								<textbox hflex="true"/>
 							</row> 
 							<row>
-								<label sclass="field" value="NRO COLECTIVO:"/>
+								<label sclass="field" value="NRO CHASIS:"/>
 								<textbox hflex="true"/>
 							</row>
 						</rows>
