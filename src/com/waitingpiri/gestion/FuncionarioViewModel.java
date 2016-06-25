@@ -158,7 +158,7 @@ public class FuncionarioViewModel implements ABM {
 	@DependsOn({ "filterID", "filterNA", "filterAP", "filterCI" })
 	public List<Funcionario> getFuncionarios() {
 		ConnectDB conn = ConnectDB.getInstance();
-		return conn.getFuncionarios(1, this.filterNA, this.filterAP, this.filterCI);
+		return conn.getFuncionarios(this.filterID, this.filterNA, this.filterAP, this.filterCI);
 	}
 	
 	/**

@@ -34,8 +34,9 @@
 					<auxhead>
 						<auxheader>
 							<hlayout>
-								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
-								<textbox hflex="true" placeholder="Buscar.."/>
+								<toolbarbutton iconSclass="z-icon-filter" />
+								<textbox hflex="true" placeholder="Buscar.."
+									value="@bind(vm.filterID)" instant="true"/>
 							</hlayout>
 						</auxheader>
 						<auxheader>

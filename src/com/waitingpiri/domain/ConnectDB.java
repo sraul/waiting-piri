@@ -82,10 +82,12 @@ public class ConnectDB {
 	/**
 	 * @return los funcionarios..
 	 */
-	public List<Funcionario> getFuncionarios(int id, String nombre, String apellido, String cedula) {
+	public List<Funcionario> getFuncionarios(String id, String nombre, String apellido, String cedula) {
 		List<Funcionario> out = new ArrayList<Funcionario>();
-		String sql = "SELECT * FROM FUNCIONARIO WHERE NOMBRE LIKE UPPER('%" + nombre.toUpperCase() + "%')"
-				+ " AND APELLIDO LIKE UPPER('%" + apellido.toUpperCase() + "%')"+ "AND CEDULA LIKE ('%"+cedula+"%')" ;
+		String sql = "SELECT * FROM FUNCIONARIO WHERE CAST(ID AS CHAR(10)) LIKE '%" + id + "%' AND"
+				+ " NOMBRE LIKE UPPER('%" + nombre.toUpperCase() + "%')"
+				+ " AND APELLIDO LIKE UPPER('%" + apellido.toUpperCase() + "%')"
+				+ " AND CEDULA LIKE ('%" + cedula + "%')" ;
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(sql);
