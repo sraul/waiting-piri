@@ -22,12 +22,13 @@
 			<hbox vflex="true" width="100%">
 
 				<listbox vflex="true" sclass="rounded"
-					model="@load(vm.funcionarios_)"
+					model="@load(vm.funcionarios)"
 					selectedItem="@bind(vm.selectedFuncionario)"
 					visible="@load(!vm.modoEdicion)">
 					<listhead style="text-align:center">
 						<listheader label="ID" width="100px" align="right" style="text-align:center" />
 						<listheader label="NOMBRE" />
+						<listheader label="APELLIDO" />
 						<listheader label="CÉDULA" width="100px" align="right" style="text-align:center"/>
 					</listhead>
 					<auxhead>
@@ -48,6 +49,13 @@
 							<hlayout>
 								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
 								<textbox hflex="true" placeholder="Buscar.." 
+									value="@bind(vm.filterAP)" instant="true"/>
+							</hlayout>
+						</auxheader>
+						<auxheader>
+							<hlayout>
+								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
+								<textbox hflex="true" placeholder="Buscar.." 
 									value="@bind(vm.filterCI)" instant="true"/>
 							</hlayout>
 						</auxheader>
@@ -56,13 +64,14 @@
 						<listitem>
 							<listcell label="@load(each.id)"/>
 							<listcell label="@load(each.nombre)"/>
+							<listcell label="@load(each.apellido)"/>
 							<listcell label="@load(each.cedula)"/>
 						</listitem>
 					</template>					
 					<listfoot>
 						<listfooter span="3" align="left">
 							<hlayout>
-								<label value="@load(vm.funcionarios_.size())" sclass="field"/>
+								<label value="@load(vm.funcionarios.size())" sclass="field"/>
 								<label value="ítems" sclass="field"/>
 							</hlayout>
 						</listfooter>
