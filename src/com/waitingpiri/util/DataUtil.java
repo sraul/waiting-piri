@@ -17,7 +17,7 @@ public class DataUtil {
 
 		String[] nombres = new String[] { "Juan", "Luis", "Lida", "Geronimo",
 				"Hipolito", "Violeta", "Damian", "Fabian", "Kike",
-				"Dario Lezcano" };
+				"Dario" };
 
 		String[] apellidos = new String[] { "Perez", "Gimenez", "Herrera",
 				"Rojas", "Juarez", "Ruiz", "Espinola", "Caceres", "Hernandez",
