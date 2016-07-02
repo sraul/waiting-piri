@@ -23,8 +23,10 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
+import com.waitingpiri.domain.Cargo;
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Funcionario;
+import com.waitingpiri.domain.Cargo;
 
 public class FuncionarioViewModel implements ABM {
 	
@@ -97,12 +99,12 @@ public class FuncionarioViewModel implements ABM {
 		Files.copy(dst, file);
 	}
 	
-	@Command
+	/*@Command
 	@NotifyChange({ "modoEdicion", "selectedFuncionario" })
 	public void nuevo() {
 		this.modoEdicion = true;
 		this.selectedFuncionario = new Funcionario(this.getLastId(), "", "", "", "", "", Funcionario.ID_CARGO_AUXILIAR);
-	}
+	}*/
 
 	@Command
 	@NotifyChange("modoEdicion")
@@ -161,31 +163,6 @@ public class FuncionarioViewModel implements ABM {
 		return conn.getFuncionarios(this.filterID, this.filterNA, this.filterAP, this.filterCI);
 	}
 	
-	/**
-	 * @return el cargo segun el id..
-	 */
-	public String getCargo(int idCargo) {
-		return Funcionario.getCargos().get(idCargo);
-	}
-	
-	/**
-	 * @return el cargo segun el id..
-	 */
-	public String getIconCargo(String idCargo) {
-		return "/images/cargo_" + idCargo + ".png";
-	}
-	
-	/**
-	 * @return los cargos..
-	 */
-	public List<String[]> getCargos() {
-		List<String[]> out = new ArrayList<String[]>();
-		for (Integer key : Funcionario.getCargos().keySet()) {
-			String[] cargo = new String[] { key.toString(), this.getCargo(key) };
-			out.add(cargo);
-		}
-		return out;
-	}
 	
 	@Override
 	@DependsOn("modoEdicion")

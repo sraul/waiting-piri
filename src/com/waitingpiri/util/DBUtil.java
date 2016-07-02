@@ -2,6 +2,7 @@ package com.waitingpiri.util;
 
 import java.util.List;
 
+import com.waitingpiri.domain.Cargo;
 import com.waitingpiri.domain.Colectivo;
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Funcionario;
@@ -9,11 +10,14 @@ import com.waitingpiri.domain.Usuario;
 
 public class DBUtil {
 
+	static final String CREATE_TABLE_CARGO = "CREATE TABLE FUNCIONARIO (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
+						+ "DESCRIPCION VARCHAR(200),"+ "PRIMARY KEY(ID))";
+	
 	static final String CREATE_TABLE_FUNCIONARIO = "CREATE TABLE FUNCIONARIO ("
 			+ "ID INT(64) NOT NULL AUTO_INCREMENT," + "NOMBRE VARCHAR(200),"
 			+ "APELLIDO VARCHAR(200)," + "CEDULA VARCHAR(10),"
 			+ "DIRECCION VARCHAR(200)," + "TELEFONO VARCHAR(10),"
-			+ "CARGO INT(2), " + "PRIMARY KEY(ID))";
+			+ "CARGO INT(2), " + "PRIMARY KEY(ID)" + "FOREIGN KEY(ID) REFERENCE CARGO(ID))";
 
 	static final String CREATE_TABLE_USUARIO = "CREATE TABLE USUARIO ("
 			+ "ID INT(64) NOT NULL AUTO_INCREMENT," + "NICK VARCHAR(200),"
@@ -22,10 +26,11 @@ public class DBUtil {
 	static final String CREATE_TABLE_COLECTIVO = "CREATE TABLE COLECTIVO ("
 			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "NROCOLEC VARCHAR(200)," 
 			+ "NROCHASIS VARCHAR(200)," + "NROCHAPA VARCHAR(200)," + "PRIMARY KEY(ID))";
+	
+	static final String INSERT_CARGO = "INSERT INTO CARGO (DESCRIPCION) values (";
 
-	static final String INSERT_FUNCIONARIO = "INSERT INTO FUNCIONARIO (NOMBRE, APELLIDO, CEDULA, DIRECCION, TELEFONO, CARGO) values (";
+	static final String INSERT_FUNCIONARIO = "INSERT INTO FUNCIONARIO (NOMBRE, APELLIDO, CEDULA, DIRECCION, TELEFONO) values (";
 
-	// Tarea: sql insertar usuarios
 	static final String INSERT_USUARIO = "INSERT INTO USUARIO (NICK, PASSWORD) values (";
 	
 	static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS, NROCHAPA) values (";
@@ -33,10 +38,14 @@ public class DBUtil {
 	/**
 	 * pobla la base de datos..
 	 */
-	public static void poblarDB(List<Funcionario> funcionarios, List<Usuario> usuarios, List<Colectivo> colectivos) {
+	public static void poblarDB(List <Cargo> cargos,List<Funcionario> funcionarios, List<Usuario> usuarios, List<Colectivo> colectivos) {
 		try {
 
 			ConnectDB conn = ConnectDB.getInstance();
+			
+			conn.executeUpdate(CREATE_TABLE_CARGO);
+			System.out.println("Tabla [cargo] creada..");
+			
 			conn.executeUpdate(CREATE_TABLE_FUNCIONARIO);
 			System.out.println("Tabla [funcionario] creada..");
 			
@@ -46,12 +55,17 @@ public class DBUtil {
 			conn.executeUpdate(CREATE_TABLE_COLECTIVO);
 			System.out.println("Tabla [colectivo] creada..");
 
+			for (Cargo car : cargos){
+				String insert = INSERT_CARGO + "'" + car.getId() + "','" + car.getDescripcion() + ")";
+				conn.executeUpdate(insert);
+				System.out.println("Cargo insertado..");
+			}
+			
 			for (Funcionario func : funcionarios) {
 				String insert = INSERT_FUNCIONARIO + "'" + func.getNombre()
 						+ "', '" + func.getApellido() + "', '"
 						+ func.getCedula() + "', '" + func.getDireccion()
-						+ "', '" + func.getTelefono() + "', " + func.getCargo()
-						+ " )";
+						+ "', '" + func.getTelefono() + "',)";
 				conn.executeUpdate(insert);
 				System.out.println("Funcionario insertado..");
 			}
@@ -88,8 +102,8 @@ public class DBUtil {
 	}
 
 	public static void main(String[] args) {
-		DBUtil.poblarDB(DataUtil.getFuncionariosData(),
-				DataUtil.getUsuariosData(),DataUtil.getColectivos());
+		DBUtil.poblarDB(DataUtil.getCargosData(),DataUtil.getFuncionariosData(),
+				DataUtil.getUsuariosData(),DataUtil.getColectivosData());
 	}
 	
 }

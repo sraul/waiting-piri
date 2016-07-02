@@ -3,11 +3,27 @@ package com.waitingpiri.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.waitingpiri.domain.Cargo;
 import com.waitingpiri.domain.Colectivo;
 import com.waitingpiri.domain.Funcionario;
 import com.waitingpiri.domain.Usuario;
 
 public class DataUtil {
+	
+	/**
+	 * @return los datos de cargos..
+	 */
+	public static List<Cargo>getCargosData(){
+		List<Cargo> out = new ArrayList<Cargo>();
+		String[] descripcion = new String[]{
+				"GERENTE","AUXILIAR ADMINISTRATIVO","CHOFER"
+		};
+		for(int i = 0; i<3; i++){
+			Cargo car = new Cargo (i + 1, descripcion[i]);
+			out.add(car);
+		}
+		return out;
+	}
 
 	/**
 	 * @return datos de funcionarios..
@@ -35,16 +51,11 @@ public class DataUtil {
 				"Telefono3", "Telefono4", "Telefono5", "Telefono6",
 				"Telefono7", "Telefono8", "Telefono9", "Telefono10" };
 
-		Integer[] cargos = new Integer[] { Funcionario.ID_CARGO_GERENTE,
-				Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_AUXILIAR,
-				Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_CHOFER,
-				Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_AUXILIAR,
-				Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_CHOFER,
-				Funcionario.ID_CARGO_CHOFER, Funcionario.ID_CARGO_CHOFER };
+		Integer[] cargos = new Integer[] { };
 
 		for (int i = 0; i < 10; i++) {
 			Funcionario func = new Funcionario(i + 1, nombres[i], apellidos[i],
-					cedulas[i], direcciones[i], telefonos[i], cargos[i]);
+					cedulas[i], direcciones[i], telefonos[i],cargos[i]);
 			out.add(func);
 		}
 
@@ -75,7 +86,7 @@ public class DataUtil {
 	/**
 	 * @return los datos de colectivos..
 	 */
-	public static List<Colectivo> getColectivos() {
+	public static List<Colectivo> getColectivosData() {
 		List<Colectivo> out = new ArrayList<Colectivo>();
 		String[] nroColec = new String[] { "001", "025", "032", "040", "090",
 				"067", "070", "125", "090", "110" };
@@ -93,4 +104,6 @@ public class DataUtil {
 		return out;
 
 	}
+
+	
 }
