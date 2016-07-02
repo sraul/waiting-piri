@@ -158,6 +158,7 @@
 									model="@load(vm.cargos)"
 									value="@load(vm.selectedFuncionario.cargo.descripcion)"
 									selectedItem="@bind(vm.selectedFuncionario.cargo)"
+									instant="true"
 									readonly="@load(!vm.modoEdicion)">
 									<template name="model">
 										<comboitem label="@load(each.descripcion)" />
