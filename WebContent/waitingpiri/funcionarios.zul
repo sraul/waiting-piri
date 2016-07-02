@@ -4,6 +4,7 @@
 	<window border="0" width="100%" height="100%"
 		apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('com.waitingpiri.gestion.FuncionarioViewModel')">
+		
 		<!-- Cabecera -->
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
@@ -111,8 +112,7 @@
 									constraint="no empty"/>
 									</row>
 									
-									<row>
-									
+									<row>									
 									<hlayout valign="middle">
 									<label sclass="field"
 									value="APELLIDO:"/>
@@ -168,11 +168,11 @@
 								<label sclass="field" value="CARGO:" />
 								<combobox hflex="true"
 									model="@load(vm.cargos)"
-									value="@load(vm.getCargo(vm.selectedFuncionario.cargo))"
+									value="@load(vm.selectedFuncionario.cargo.descripcion)"
+									selectedItem="@bind(vm.selectedFuncionario.cargo)"
 									readonly="@load(!vm.modoEdicion)">
 									<template name="model">
-										<comboitem label="@load(each[1])"
-											image="@load(vm.getIconCargo(each[0]))"/>
+										<comboitem label="@load(each.descripcion)" />
 									</template>
 								</combobox>
 							</row>

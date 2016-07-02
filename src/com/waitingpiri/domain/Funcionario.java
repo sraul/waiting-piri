@@ -1,9 +1,5 @@
 package com.waitingpiri.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 public class Funcionario {
 	
 	private int id;
@@ -12,16 +8,17 @@ public class Funcionario {
 	private String cedula;
 	private String direccion;
 	private String telefono;
-	private int cargo;
 	
-	public Funcionario(int id, String nombre, String apellido, String cedula, String direccion, String telefono, int cargo) {
+	private Cargo cargo;
+	
+	public Funcionario(int id, String nombre, String apellido, String cedula, String direccion, String telefono, Cargo cargo) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.cedula = cedula;
 		this.direccion = direccion;
 		this.telefono = telefono;
-		this.cargo= cargo;
+		this.cargo = cargo;
 	}
 	
 
@@ -65,14 +62,6 @@ public class Funcionario {
 		this.telefono = telefono;
 	}
 
-	public int getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(int cargo) {
-		this.cargo = cargo;
-	}
-
 	public String getApellido() {
 		return apellido;
 	}
@@ -80,5 +69,14 @@ public class Funcionario {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	
+
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}	
 }

@@ -10,14 +10,14 @@ import com.waitingpiri.domain.Usuario;
 
 public class DBUtil {
 
-	static final String CREATE_TABLE_CARGO = "CREATE TABLE FUNCIONARIO (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
+	static final String CREATE_TABLE_CARGO = "CREATE TABLE CARGO (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
 						+ "DESCRIPCION VARCHAR(200),"+ "PRIMARY KEY(ID))";
 	
 	static final String CREATE_TABLE_FUNCIONARIO = "CREATE TABLE FUNCIONARIO ("
 			+ "ID INT(64) NOT NULL AUTO_INCREMENT," + "NOMBRE VARCHAR(200),"
 			+ "APELLIDO VARCHAR(200)," + "CEDULA VARCHAR(10),"
 			+ "DIRECCION VARCHAR(200)," + "TELEFONO VARCHAR(10),"
-			+ "CARGO INT(2), " + "PRIMARY KEY(ID)" + "FOREIGN KEY(ID) REFERENCE CARGO(ID))";
+			+ "IDCARGO INT(10), PRIMARY KEY(ID))";
 
 	static final String CREATE_TABLE_USUARIO = "CREATE TABLE USUARIO ("
 			+ "ID INT(64) NOT NULL AUTO_INCREMENT," + "NICK VARCHAR(200),"
@@ -29,7 +29,7 @@ public class DBUtil {
 	
 	static final String INSERT_CARGO = "INSERT INTO CARGO (DESCRIPCION) values (";
 
-	static final String INSERT_FUNCIONARIO = "INSERT INTO FUNCIONARIO (NOMBRE, APELLIDO, CEDULA, DIRECCION, TELEFONO) values (";
+	static final String INSERT_FUNCIONARIO = "INSERT INTO FUNCIONARIO (NOMBRE, APELLIDO, CEDULA, DIRECCION, TELEFONO, IDCARGO) values (";
 
 	static final String INSERT_USUARIO = "INSERT INTO USUARIO (NICK, PASSWORD) values (";
 	
@@ -38,7 +38,8 @@ public class DBUtil {
 	/**
 	 * pobla la base de datos..
 	 */
-	public static void poblarDB(List <Cargo> cargos,List<Funcionario> funcionarios, List<Usuario> usuarios, List<Colectivo> colectivos) {
+	public static void poblarDB(List<Cargo> cargos, List<Funcionario> funcionarios, List<Usuario> usuarios,
+			List<Colectivo> colectivos) {
 		try {
 
 			ConnectDB conn = ConnectDB.getInstance();
@@ -56,7 +57,7 @@ public class DBUtil {
 			System.out.println("Tabla [colectivo] creada..");
 
 			for (Cargo car : cargos){
-				String insert = INSERT_CARGO + "'" + car.getId() + "','" + car.getDescripcion() + ")";
+				String insert = INSERT_CARGO + "'" + car.getDescripcion() + "')";
 				conn.executeUpdate(insert);
 				System.out.println("Cargo insertado..");
 			}
@@ -65,11 +66,10 @@ public class DBUtil {
 				String insert = INSERT_FUNCIONARIO + "'" + func.getNombre()
 						+ "', '" + func.getApellido() + "', '"
 						+ func.getCedula() + "', '" + func.getDireccion()
-						+ "', '" + func.getTelefono() + "',)";
+						+ "', '" + func.getTelefono() + "', " + func.getCargo().getId() + ")";
 				conn.executeUpdate(insert);
 				System.out.println("Funcionario insertado..");
-			}
-			
+			}			
 					
 			for (Usuario usu :  usuarios) {
 				String insert = INSERT_USUARIO + "'" + usu.getNick() + "','" + usu.getPassword() + "')";

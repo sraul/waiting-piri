@@ -13,13 +13,11 @@ public class DataUtil {
 	/**
 	 * @return los datos de cargos..
 	 */
-	public static List<Cargo>getCargosData(){
+	public static List<Cargo> getCargosData() {
 		List<Cargo> out = new ArrayList<Cargo>();
-		String[] descripcion = new String[]{
-				"GERENTE","AUXILIAR ADMINISTRATIVO","CHOFER"
-		};
-		for(int i = 0; i<3; i++){
-			Cargo car = new Cargo (i + 1, descripcion[i]);
+		String[] descripcion = new String[] { "GERENTE", "AUXILIAR ADMINISTRATIVO", "CHOFER" };
+		for (int i = 0; i < descripcion.length; i++) {
+			Cargo car = new Cargo(i + 1, descripcion[i]);
 			out.add(car);
 		}
 		return out;
@@ -30,6 +28,7 @@ public class DataUtil {
 	 */
 	public static List<Funcionario> getFuncionariosData() {
 		List<Funcionario> out = new ArrayList<Funcionario>();
+		List<Cargo> cargos = DataUtil.getCargosData();
 
 		String[] nombres = new String[] { "Juan", "Luis", "Lida", "Geronimo",
 				"Hipolito", "Violeta", "Damian", "Fabian", "Kike",
@@ -50,12 +49,13 @@ public class DataUtil {
 		String[] telefonos = new String[] { "Telefono1", "Telefono2",
 				"Telefono3", "Telefono4", "Telefono5", "Telefono6",
 				"Telefono7", "Telefono8", "Telefono9", "Telefono10" };
-
-		Integer[] cargos = new Integer[] { };
+	
+		Cargo[] cargos_ = new Cargo[] { cargos.get(0), cargos.get(1), cargos.get(2), cargos.get(0), cargos.get(1),
+				cargos.get(2), cargos.get(0), cargos.get(1), cargos.get(2), cargos.get(0) };
 
 		for (int i = 0; i < 10; i++) {
 			Funcionario func = new Funcionario(i + 1, nombres[i], apellidos[i],
-					cedulas[i], direcciones[i], telefonos[i],cargos[i]);
+					cedulas[i], direcciones[i], telefonos[i], cargos_[i]);
 			out.add(func);
 		}
 
@@ -102,7 +102,6 @@ public class DataUtil {
 			out.add(col);
 		}
 		return out;
-
 	}
 
 	

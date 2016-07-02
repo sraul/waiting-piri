@@ -80,6 +80,52 @@ public class ConnectDB {
 	}
 	
 	/**
+	 * @return los cargos..
+	 */
+	public List<Cargo> getCargos() {
+		List<Cargo> out = new ArrayList<Cargo>();
+		String sql = "SELECT * FROM CARGO";
+		
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				int id = result.getInt("ID");
+				String desc = result.getString("DESCRIPCION");
+				Cargo cargo = new Cargo(id, desc);
+				out.add(cargo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return out;
+	}
+	
+	/**
+	 * @return el cargo segun el id..
+	 */
+	public Cargo getCargo(int id) {
+		List<Cargo> out = new ArrayList<Cargo>();
+		String sql = "SELECT * FROM CARGO WHERE ID = " + id;
+		
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				String desc = result.getString("DESCRIPCION");
+				Cargo cargo = new Cargo(id, desc);
+				out.add(cargo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return out.size() > 0 ? out.get(0) : null;
+	}
+	
+	/**
 	 * @return los funcionarios..
 	 */
 	public List<Funcionario> getFuncionarios(String id, String nombre, String apellido, String cedula) {
@@ -98,7 +144,9 @@ public class ConnectDB {
 				String cedula_ = result.getString("CEDULA");
 				String direccion = result.getString("DIRECCION");
 				String telefono = result.getString("TELEFONO");
-				Funcionario func = new Funcionario(id_, nombre_, apellido_, cedula_, direccion, telefono, 1);
+				int idCargo = result.getInt("IDCARGO");
+				Cargo cargo = this.getCargo(idCargo);
+				Funcionario func = new Funcionario(id_, nombre_, apellido_, cedula_, direccion, telefono, cargo);
 				out.add(func);
 			}
 		} catch (Exception e) {

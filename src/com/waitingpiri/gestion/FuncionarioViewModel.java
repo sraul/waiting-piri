@@ -26,7 +26,6 @@ import org.zkoss.zul.Messagebox;
 import com.waitingpiri.domain.Cargo;
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Funcionario;
-import com.waitingpiri.domain.Cargo;
 
 public class FuncionarioViewModel implements ABM {
 	
@@ -155,14 +154,12 @@ public class FuncionarioViewModel implements ABM {
 	
 	/**
 	 * GET / SET
-	 */	
-	
+	 */		
 	@DependsOn({ "filterID", "filterNA", "filterAP", "filterCI" })
 	public List<Funcionario> getFuncionarios() {
 		ConnectDB conn = ConnectDB.getInstance();
 		return conn.getFuncionarios(this.filterID, this.filterNA, this.filterAP, this.filterCI);
-	}
-	
+	}	
 	
 	@Override
 	@DependsOn("modoEdicion")
@@ -190,6 +187,14 @@ public class FuncionarioViewModel implements ABM {
 	@DependsOn({ "selectedFuncionario", "modoEdicion" })
 	public boolean isEliminarEnabled() {
 		return this.selectedFuncionario != null && !this.isModoEdicion();
+	}
+	
+	/**
+	 * @return los cargos..
+	 */
+	public List<Cargo> getCargos() {
+		ConnectDB conn = ConnectDB.getInstance();
+		return conn.getCargos();
 	}
 
 	public String getFilterID() {

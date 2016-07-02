@@ -1,6 +1,7 @@
 package com.waitingpiri.domain;
 
 public class Cargo {
+	
 	private int id;
 	private String descripcion;
 	
@@ -23,7 +24,5 @@ public class Cargo {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-	
-	
+	}	
 }
