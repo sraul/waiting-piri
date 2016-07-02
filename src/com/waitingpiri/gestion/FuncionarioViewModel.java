@@ -98,12 +98,12 @@ public class FuncionarioViewModel implements ABM {
 		Files.copy(dst, file);
 	}
 	
-	/*@Command
+	@Command
 	@NotifyChange({ "modoEdicion", "selectedFuncionario" })
 	public void nuevo() {
 		this.modoEdicion = true;
-		this.selectedFuncionario = new Funcionario(this.getLastId(), "", "", "", "", "", Funcionario.ID_CARGO_AUXILIAR);
-	}*/
+		this.selectedFuncionario = new Funcionario(0, "", "", "", "", "", new Cargo(0, ""));
+	}
 
 	@Command
 	@NotifyChange("modoEdicion")
@@ -113,14 +113,20 @@ public class FuncionarioViewModel implements ABM {
 	}
 
 	@Command
-	@NotifyChange({ "modoEdicion", "funcionariosNuevos", "selectedFuncionario", "funcionarios_" })
+	@NotifyChange({ "modoEdicion", "funcionariosNuevos", "selectedFuncionario", "funcionarios" })
 	public void guardar() {
 		if (!this.validarDatos()) {
 			Messagebox.show("Error de Datos, verifique..", "Validación de Datos..", Messagebox.OK, Messagebox.ERROR);
 			return;
 		}
 		if (!this.editando) {
-			this.getFuncionariosNuevos().add(this.selectedFuncionario);
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
+				conn.insertFuncionario(this.selectedFuncionario);
+			} catch (Exception e) {
+				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+						null, 0);
+			}			
 		}		
 		this.selectedFuncionario = null;
 		this.modoEdicion = false;

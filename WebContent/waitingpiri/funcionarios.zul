@@ -126,18 +126,6 @@
 									
 							</row>
 							<row>
-							
-								<hlayout valign="middle">
-									<label sclass="field"
-										value="APELLIDO:" />
-									<label sclass="required">*</label>								
-								</hlayout>								
-								<textbox hflex="true" 
-									value="@bind(vm.selectedFuncionario.apellido)"
-									readonly="@load(!vm.modoEdicion)"
-									constraint="no empty"/>
-							</row>
-							<row>
 								<hlayout valign="middle">
 									<label sclass="field" value="CÉDULA:" />
 									<label sclass="required">*</label>								
@@ -180,7 +168,7 @@
 							<row>
 								<label sclass="field" value="FOTOGRAFÍA:" />
 								<hlayout valign="bottom">
-									<image height="230px" width="270px"
+									<image height="150px" width="170px"
 										src="/fotos/funcionario.png" />
 									<fileupload
 										id="fotoUpload"

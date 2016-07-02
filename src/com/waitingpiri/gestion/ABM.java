@@ -5,7 +5,7 @@ public interface ABM {
 	/**
 	 * nuevo registro..
 	 */
-	//public void nuevo();
+	public void nuevo();
 	
 	/**
 	 * modificacion del registro..

@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.waitingpiri.util.DBUtil;
+
 public class ConnectDB {
 
 	static final String DB_DRIVER = "com.mysql.jdbc.Driver";
@@ -153,5 +155,16 @@ public class ConnectDB {
 			e.printStackTrace();
 		}
 		return out;
+	}
+	
+	/**
+	 * inserta un nuevo funcionario..
+	 */
+	public void insertFuncionario(Funcionario func) throws Exception {
+		String insert = DBUtil.INSERT_FUNCIONARIO + "'" + func.getNombre()
+		+ "', '" + func.getApellido() + "', '"
+		+ func.getCedula() + "', '" + func.getDireccion()
+		+ "', '" + func.getTelefono() + "', " + func.getCargo().getId() + ")";
+		this.executeUpdate(insert);
 	}
 }
