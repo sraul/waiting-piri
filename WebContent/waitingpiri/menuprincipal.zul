@@ -1,13 +1,16 @@
 <?page title="Waiting Piri - Web" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<style src="/css/style.css" />
-	<window border="0" width="100%" height="100%">
+	<window border="0" width="100%" height="100%"
+	apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.MenuprincipalViewModel.java')">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
 			<label sclass="titulo">Menú Principal</label>
 			<div hflex="true" />
 			<button sclass="btn-success" iconSclass="z-icon-sign-out"
-				style="background-color:white;color:#008080">
+				style="background-color:white;color:#008080" 
+				onClick="@Command('salir')">
 				Salir..
 			</button>
 			<div width="20px"></div>
