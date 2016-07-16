@@ -27,7 +27,7 @@ public class InicioViewModel {
 		ConnectDB conn = ConnectDB.getInstance();
 		Usuario usuario = conn.getUsuario(this.nick, this.password);
 		if (usuario == null) {
-			Clients.showNotification("No se encontró un usuario con los datos ingresados..",
+			Clients.showNotification("No se encontro un usuario con los datos ingresados..",
 					Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
 		} else {
 			// Guardar el usuario en la session..

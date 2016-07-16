@@ -3,14 +3,14 @@
 	<style src="/css/style.css" />
 	<window border="0" width="100%" height="100%"
 	apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.waitingpiri.gestion.MenuprincipalViewModel.java')">
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.MenuprincipalViewModel')">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
 			<label sclass="titulo">Menú Principal</label>
 			<div hflex="true" />
 			<button sclass="btn-success" iconSclass="z-icon-sign-out"
 				style="background-color:white;color:#008080" 
-				onClick="@Command('salir')">
+				onClick="@command('salir')">
 				Salir..
 			</button>
 			<div width="20px"></div>
