@@ -3,7 +3,7 @@
 	<style src="/css/style.css" />
 	<window border="0" width="100%" height="100%"
 	apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.waitingpiri.gestion.MenuprincipalViewModel')">
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.MainMenuViewModel')">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
 			<label sclass="titulo">Menú Principal</label>
