@@ -85,7 +85,7 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 								</hlayout>
 									<textbox hflex="true"
 									value="@bind(vm.selectedUsuario.nick)"
-									readonly="@(!vm.modoEdicion)"
+									readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 									</row>
 								<row>
@@ -95,7 +95,7 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 								</hlayout>
 									<textbox hflex="true"
 									value="@bind(vm.selectedUsuario.password)"
-									readonly="@(!vm.modoEdicion)"
+									readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 								</row>
 						</rows>
