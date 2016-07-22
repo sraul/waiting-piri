@@ -28,3 +28,23 @@
 	font-weight: bold;
 	color: red;
 }
+
+
+.uni{
+	position:absolute;
+	left:1000px;
+	padding-top:15px;
+	color:white;
+}
+
+.integ{
+	position:absolute;
+	left:550px;
+	padding-top:15px;
+	color:white;}
+.wp{
+	padding-top:15px;
+	padding-left:50px;
+	color:white;
+}
+
