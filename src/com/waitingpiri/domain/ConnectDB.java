@@ -128,6 +128,30 @@ public class ConnectDB {
 	}
 	
 	/**
+	 * @return los usuarios..
+	 */
+	public List<Usuario> getUsuarios(String id, String nick){
+		List<Usuario> out =new ArrayList<Usuario>();
+		String sql ="SELECT * FROM USUARIO WHERE CAST(ID AS CHAR(10))  LIKE '%" + id + "%' AND"
+				+ " NICK LIKE UPPER('%" + nick.toUpperCase() + "%')";
+		try{
+			Statement statement = connection.createStatement();
+			ResultSet result= statement.executeQuery(sql);
+			while(result.next()){
+				int idUsu= result.getInt("ID");
+				String nickUsu =result.getString("NICK");
+				String passUsu = result.getString("PASSWORD");
+				Usuario usu=new Usuario(idUsu,nickUsu,passUsu);
+				out.add(usu);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return out;
+	}
+	
+	/**
 	 * @return los funcionarios..
 	 */
 	public List<Funcionario> getFuncionarios(String id, String nombre, String apellido, String cedula) {
@@ -165,6 +189,14 @@ public class ConnectDB {
 		+ "', '" + func.getApellido() + "', '"
 		+ func.getCedula() + "', '" + func.getDireccion()
 		+ "', '" + func.getTelefono() + "', " + func.getCargo().getId() + ")";
+		this.executeUpdate(insert);
+	}
+	
+	/**
+	 * inserta un nuevo usuario..
+	 */
+	public void insertUsuario(Usuario usu) throws Exception{
+		String insert=DBUtil.INSERT_USUARIO+"'"+usu.getNick()+"','"+usu.getPassword()+"')";
 		this.executeUpdate(insert);
 	}
 }

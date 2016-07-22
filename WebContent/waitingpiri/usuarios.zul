@@ -1,7 +1,9 @@
 <?page title="Waiting-Piri" contentType="text/html;charset=UTF-8"?>
 <zk>
 <style src="/css/style.css" />
-<window border="0" width="100%" height="100%">
+<window border="0" width="100%" height="100%"
+apply="org.zkoss.bind.BindComposer"
+viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 	<hbox height="50px" width="100%" sclass="cabecera rounded"
 	align="center">
 		<label sclass="titulo">Administrar Usuarios</label>
@@ -15,25 +17,45 @@
 
 		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
 			<hbox width="100" vflex="true">
-			<listbox vflex="true" sclass="rounded">
+			<listbox vflex="true" sclass="rounded"
+			model="@load(vm.usuario)"
+			selectedItem="@bind(vm.selectedUsuario)"
+			visible="@load(!vm.modoEdicion)">
 				<listhead style="text-align:center">
-					<listheader  label="ID" width="100px" align="right" style="text-align:center"/>
-					<listheader label="NICK" width="100px" align="right" style="text-align:center"/>
+					<listheader label="ID" width="100px" align="right" style="text-align:center"/>
+					<listheader hflex="true" label="NICK" align="center" style="text-align:center"/>
 				</listhead>
 			<auxhead>
 				<auxheader>
 					<hlayout>
 						<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
-						<textbox hflex="true" placeholder="Buscar.."/>
+						<textbox hflex="true" placeholder="Buscar.."
+						value="@bind(vm.filterID)" instant="true"/>
 					</hlayout>		
 				</auxheader>
 				<auxheader>
 				<hlayout>
 						<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
-						<textbox hflex="true" placeholder="Buscar.."/>
+						<textbox hflex="true" placeholder="Buscar.."
+						value="@bind(vm.filterNICK)" instant="true"/>
 					</hlayout>		
 				</auxheader>
 			</auxhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.id)"/>
+					<listcell label="@load(each.nick)"/>
+				</listitem>
+			
+			</template>
+			<listfoot>
+				<listfooter span="3" align="left">
+					<hlayout>
+					<label value="@load(vm.usuario.size())" sclass="field"/>
+					<label value="item" sclass="field"/>
+					</hlayout>
+				</listfooter>
+			</listfoot>
 				</listbox>
 				
 				<space/>
@@ -52,31 +74,54 @@
 						<rows>
 								<row>
 									<label sclass="field" value="ID:" />
-									<intbox readonly="true" />
+									<intbox readonly="true"
+									value="@load(vm.selectedUsuario.id)" />
 								</row>
+								
 								<row>
+								<hlayout valign="middle">
 									<label sclass="field" value="NICK"/>
-									<textbox hflex="true"/>
+									<label sclass="required">*</label>
+								</hlayout>
+									<textbox hflex="true"
+									value="@bind(vm.selectedUsuario.nick)"
+									readonly="@(!vm.modoEdicion)"
+									constraint="no empty"/>
 									</row>
 								<row>
+								<hlayout valign="middle">
 									<label sclass="field" value="PASSWORD"/>
-									<textbox hflex="true"/>
+									<label sclass="required">*</label>
+								</hlayout>
+									<textbox hflex="true"
+									value="@bind(vm.selectedUsuario.password)"
+									readonly="@(!vm.modoEdicion)"
+									constraint="no empty"/>
 								</row>
 						</rows>
 				</grid>
 					<hlayout>
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-plus"
-							 style="background-color:#008080"> Nuevo</button>
+							 style="background-color:#008080"
+							 disabled="@load(!vm.nuevoEnabled)"
+							 onClick="@command('nuevo')"> Nuevo</button>
 						<button sclass="btn-success" width="130px"
 						iconSclass="z-icon-pencil"
-							 style="background-color:#008080">Editar </button>
+							 style="background-color:#008080"
+							 onClick="@command('editar')"
+							 label="@load(vm.modoEdicion? 'Cancelar': 'Editar')"
+							 disabled="@load(!vm.editarEnabled)"></button>
 						<button Sclass="btn-success" width="130px"
 						iconSclass="z-icon-floppy-o" 
-							style="background-color:#008080">Guardar</button>
+							style="background-color:#008080"
+							disabled="@load(!vm.guardarEnabled)"
+							 onClick="@command('guardar')">Guardar</button>
 						<button Sclass="btn-success" width="130px"
 						iconSclass="z-icon-trash-o"
-						 style="background-color:#008080">Eliminar</button>
+						 style="background-color:#008080"
+						 disabled="@load(!vm.eliminarEnabled)"
+							>Eliminar</button>
 					</hlayout>
 				
 				</vlayout>
