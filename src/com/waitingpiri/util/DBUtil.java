@@ -36,8 +36,10 @@ public class DBUtil {
 	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS, NROCHAPA) values (";
 	
 	public static final String DELETE_FUNCIONARIO = "DELETE FROM FUNCIONARIO WHERE ID = ";
-	
+
 	public static final String DELETE_COLECTIVO ="DELETE FROM COLECTIVO WHERE ID=";
+	
+	public static final String DELETE_USUARIO="DELETE FROM USUARIO WHERE ID=";
 
 	/**
 	 * pobla la base de datos..

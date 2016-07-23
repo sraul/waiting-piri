@@ -224,10 +224,20 @@ public class ConnectDB {
 		String delete = DBUtil.DELETE_FUNCIONARIO + func.getId();
 		this.executeUpdate(delete);
 	}
+
+
 	public void deleteColectivo(Colectivo col)  throws  Exception{
 		String delete=DBUtil.DELETE_COLECTIVO + col.getId();
 			this.executeUpdate(delete);
 		}
+	/** 
+	 * elimina un usuario
+	 */
+	public void deleteUsuario(Usuario usu)throws Exception{
+		String delete=DBUtil.DELETE_USUARIO+usu.getId();
+		this.executeUpdate(delete);
+	}
+
 	
 	/**
 	 * inserta un nuevo usuario..

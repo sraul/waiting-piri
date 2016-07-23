@@ -121,8 +121,8 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 						<button Sclass="btn-success" width="130px"
 						iconSclass="z-icon-trash-o"
 						 style="background-color:#008080"
-						 disabled="@load(!vm.eliminarEnabled)"
-							>Eliminar</button>
+						disabled="@load(!vm.eliminarEnabled)"
+							onClick="@command('eliminar')">Eliminar</button>
 					</hlayout>
 				
 				</vlayout>

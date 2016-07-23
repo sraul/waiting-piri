@@ -72,9 +72,22 @@ public class UsuarioViewModel implements ABM {
 	}
 	
 	@Override
+	@Command
+	@NotifyChange({ "selectedUsuario", "usuario" })
 	public void eliminar() {
-		// TODO Auto-generated method stub
-		
+		if (Messagebox.show("Desea eliminar el Registro?", "Eliminar Registro",Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION) == Messagebox.OK){
+			ConnectDB conn=ConnectDB.getInstance();
+			try{
+				conn.deleteUsuario(this.selectedUsuario);
+				this.selectedUsuario=null;
+				Clients.showNotification("Registro Eliminado..");
+				
+			}catch (Exception e) {
+				Clients.showNotification("No se pudo eliminar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+						null, 0);	
+		}}
+	
 	}
 
 	@Override
