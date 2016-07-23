@@ -194,9 +194,9 @@ public class ConnectDB {
 			while (result.next()) {
 				int idCol = result.getInt("ID");
 				String nroCol = result.getString("NROCOLEC");
-				String nroChap = result.getString("NROCHAPA");
 				String nroChas = result.getString("NROCHASIS");
-				Colectivo col = new Colectivo(idCol,nroCol,nroChap,nroChas);
+				String nroChap = result.getString("NROCHAPA");
+				Colectivo col = new Colectivo(idCol,nroCol,nroChas,nroChap);
 				out.add(col);
 			}
 		} catch (Exception e) {
