@@ -16,6 +16,7 @@ import org.zkoss.zul.Messagebox;
 
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Usuario;
+
 public class UsuarioViewModel implements ABM {
 	private String filterID="";
 	private String filterNICK="";

@@ -193,7 +193,7 @@ public class ConnectDB {
 			ResultSet result = statement.executeQuery(sql);
 			while (result.next()) {
 				int idCol = result.getInt("ID");
-				String nroCol = result.getString("NROCOL");
+				String nroCol = result.getString("NROCOLEC");
 				String nroChap = result.getString("NROCHAPA");
 				String nroChas = result.getString("NROCHASIS");
 				Colectivo col = new Colectivo(idCol,nroCol,nroChap,nroChas);
