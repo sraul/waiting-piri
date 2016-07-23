@@ -23,7 +23,7 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 			visible="@load(!vm.modoEdicion)">
 				<listhead style="text-align:center">
 					<listheader label="ID" width="100px" align="right" style="text-align:center"/>
-					<listheader hflex="true" label="NICK" align="center" style="text-align:center"/>
+					<listheader label="NICK" align="right" style="text-align:center"/>
 				</listhead>
 			<auxhead>
 				<auxheader>
@@ -49,7 +49,7 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 			
 			</template>
 			<listfoot>
-				<listfooter span="3" align="left">
+				<listfooter span="2" align="left">
 					<hlayout>
 					<label value="@load(vm.usuario.size())" sclass="field"/>
 					<label value="item" sclass="field"/>
