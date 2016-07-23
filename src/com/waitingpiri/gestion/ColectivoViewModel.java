@@ -79,10 +79,21 @@ public class ColectivoViewModel implements ABM{
 }
 
 	@Override
+	@Command
+	@NotifyChange({ "selectedColectivo", "colectivos"})
 	public void eliminar() {
-		// TODO Auto-generated method stub
+		if (Messagebox.show("Desea eliminar el registro..", "Eliminar registro..", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION) == Messagebox.OK) {
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
+				conn.deleteColectivo(this.selectedColectivo);
+				this.selectedColectivo = null;
+				Clients.showNotification("Registro eliminado..");
+			} catch (Exception e) {
+				Clients.showNotification("No se pudo eliminar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+						null, 0);
 		
-	}
+			}}}
 	@Override
 	public int getLastId() {
 		// TODO Auto-generated method stub
