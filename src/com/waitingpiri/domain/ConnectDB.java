@@ -218,6 +218,14 @@ public class ConnectDB {
 	}
 	
 	/**
+	 * elimina un funcionario..
+	 */
+	public void deleteFuncionario(Funcionario func) throws Exception {
+		String delete = DBUtil.DELETE_FUNCIONARIO + func.getId();
+		this.executeUpdate(delete);
+	}
+	
+	/**
 	 * inserta un nuevo usuario..
 	 */
 	public void insertUsuario(Usuario usu) throws Exception{

@@ -135,9 +135,21 @@ public class FuncionarioViewModel implements ABM {
 	}
 
 	@Override
+	@Command
+	@NotifyChange({ "selectedFuncionario", "funcionarios" })
 	public void eliminar() {
-		// TODO Auto-generated method stub
-		
+		if (Messagebox.show("Desea eliminar el registro..", "Eliminar registro..", Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION) == Messagebox.OK) {
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
+				conn.deleteFuncionario(this.selectedFuncionario);
+				this.selectedFuncionario = null;
+				Clients.showNotification("Registro eliminado..");
+			} catch (Exception e) {
+				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+						null, 0);
+			}
+		}
 	}
 	
 	@Override

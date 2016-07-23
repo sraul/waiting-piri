@@ -34,6 +34,8 @@ public class DBUtil {
 	public static final String INSERT_USUARIO = "INSERT INTO USUARIO (NICK, PASSWORD) values (";
 	
 	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS, NROCHAPA) values (";
+	
+	public static final String DELETE_FUNCIONARIO = "DELETE FROM FUNCIONARIO WHERE ID = ";
 
 	/**
 	 * pobla la base de datos..
