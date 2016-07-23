@@ -9,13 +9,12 @@ import com.waitingpiri.domain.Funcionario;
 import com.waitingpiri.domain.Usuario;
 
 public class DataUtil {
-	
 	/**
 	 * @return los datos de cargos..
 	 */
 	public static List<Cargo> getCargosData() {
 		List<Cargo> out = new ArrayList<Cargo>();
-		String[] descripcion = new String[] { "GERENTE", "AUXILIAR ADMINISTRATIVO", "CHOFER" };
+		String[] descripcion = new String[] { "GERENTE", "AUXILIAR ADMINISTRATIVO", "CHOFER"};
 		for (int i = 0; i < descripcion.length; i++) {
 			Cargo car = new Cargo(i + 1, descripcion[i]);
 			out.add(car);

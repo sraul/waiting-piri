@@ -180,6 +180,31 @@ public class ConnectDB {
 		}
 		return out;
 	}
+	/**
+	 * @return los colectivos..
+	 */
+	public List<Colectivo> getColectivos(String id, String nroColec, String nroChapa) {
+		List<Colectivo> out = new ArrayList<Colectivo>();
+		String sql = "SELECT * FROM COLECTIVO WHERE CAST(ID AS CHAR(10)) LIKE '%" + id + "%' AND"
+				+ " NROCOLEC LIKE UPPER('%" + nroColec.toUpperCase() + "%')"
+				+ " AND NROCHAPA LIKE UPPER('%" + nroChapa.toUpperCase() + "%')";
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				int idCol = result.getInt("ID");
+				String nroCol = result.getString("NROCOL");
+				String nroChap = result.getString("NROCHAPA");
+				String nroChas = result.getString("NROCHASIS");
+				Colectivo col = new Colectivo(idCol,nroCol,nroChap,nroChas);
+				out.add(col);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return out;
+		}
+	
 	
 	/**
 	 * inserta un nuevo funcionario..
@@ -198,5 +223,15 @@ public class ConnectDB {
 	public void insertUsuario(Usuario usu) throws Exception{
 		String insert=DBUtil.INSERT_USUARIO+"'"+usu.getNick()+"','"+usu.getPassword()+"')";
 		this.executeUpdate(insert);
+	}
+	
+	/**
+	 * inserta un nuevo colectivo..
+	 */
+	public void insertColectivo(Colectivo col)throws Exception{
+		String insert=DBUtil.INSERT_COLECTIVO+"'"+col.getNroColec()+"','"+col.getNroChapa()+"','"
+		+col.getNroChasis()+"')";
+		this.executeUpdate(insert);
+		
 	}
 }

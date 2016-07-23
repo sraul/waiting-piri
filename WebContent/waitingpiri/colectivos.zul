@@ -1,7 +1,9 @@
 <?page title="Waiting Piri- Web" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<style src="/css/style.css" />
-	<window border="0" width="100%" height="100%">
+	<window border="0" width="100%" height="100%"
+	apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.ColectivoViewModel')">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
 			<label sclass="titulo">Administrar Colectivos</label>
@@ -14,33 +16,54 @@
 		</hbox>
 		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
 			<hbox vflex="true" width="100%">
-				<listbox vflex="true" width="100%" sclass="rounded">
+				<listbox vflex="true" width="100%" sclass="rounded"
+				model="@load(vm.colectivos)"
+				selectedItem="@bind(vm.selectedColectivo)"
+				visible="@load(!vm.modoEdicion)">
 					<listhead style="text-align:center">
-						<listheader label="ID" width="100px" align="right" style="text-align:center" />
+						<listheader label="ID" width="100px" align="right" style="text-align:center"/>
 						<listheader label="NRO CHAPA"/>
 						<listheader label="NRO COLECTIVO" width="100px"	align="right" style="text-align:center"/>	
 					</listhead>
 					<auxhead>
 						<auxheader>
 							<hlayout>
-								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
-								<textbox hflex="true" placeholder="Buscar.." />
+								<toolbarbutton iconSclass="z-icon-filter"/>
+								<textbox hflex="true" placeholder="Buscar.."
+								value="@bind(vm.filterID)" instant="true"/>
 							</hlayout>
 						</auxheader>
 					
 						<auxheader>
 							<hlayout>
 								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
-								<textbox hflex="true" placeholder="Buscar.." />
+								<textbox hflex="true" placeholder="Buscar.." 
+								value="@bind(vm.filterNROCOL)" instant="true"/>
 							</hlayout>
 						</auxheader>
 						<auxheader>
 							<hlayout>
 								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
-								<textbox hflex="true" placeholder="Buscar.." />
+								<textbox hflex="true" placeholder="Buscar.."
+								value="@bind(vm.filterCHAPA)" instant="true" />
 							</hlayout>
 						</auxheader>
 					</auxhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.id)"/>
+							<listcell label="@load(each.nroColec)"/>
+							<listcell label="@load(each.nroChapa)"/>
+						</listitem>
+					</template>					
+					<listfoot>
+						<listfooter span="3" align="left">
+							<hlayout>
+								<label value="@load(vm.colectivos.size())" sclass="field"/>
+								<label value="ítems" sclass="field"/>
+							</hlayout>
+						</listfooter>
+					</listfoot>
 				</listbox>
 				<vlayout vflex="true">
 					<grid vflex="true" sclass="rounded">
@@ -56,37 +79,64 @@
 						<rows>
 							<row>
 								<label sclass="field" value="ID:" />
-								<intbox readonly="true"/>
+								<intbox readonly="true"
+								value="@load(vm.selectedColectivo.id)"/>
 							</row>
 							<row>
+							<hlayout valign="middle">
 								<label sclass="field" value="NRO COLECTIVO:"/>
-								<textbox hflex="true"/>
+								<label sclass="required">*</label>								
+								</hlayout>	
+								<textbox hflex="true"
+								value="@load(vm.selectedColectivo.nroColec)"
+								readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
+								
 							</row>
 							<row>
+							<hlayout valign="middle">
 								<label sclass="field" value="NRO CHAPA:"/>
-								<textbox hflex="true"/>
+								<label sclass="required">*</label>								
+								</hlayout>
+								<textbox hflex="true"
+								value="@load(vm.selectedColectivo.nroChapa)"
+								readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
 							</row> 
 							<row>
+							  <hlayout valign="middle">
 								<label sclass="field" value="NRO CHASIS:"/>
-								<textbox hflex="true"/>
+								<label sclass="required">*</label>								
+								</hlayout>
+								<textbox hflex="true"
+								value="@load(vm.selectedColectivo.nroChasis)"
+								readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
 							</row>
 						</rows>
 					</grid>	
 					<hlayout>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-plus">
+							iconSclass="z-icon-plus"
+							disabled="@load(!vm.nuevoEnabled)"
+							onClick="@command('nuevo')">
 							Nuevo
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-pencil">
-							Editar
+							iconSclass="@load(vm.modoEdicion? 'z-icon-times' : 'z-icon-pencil')" style="background-color:#008080"
+							onClick="@command('editar')"
+							label="@load(vm.modoEdicion? 'Cancelar' : 'Editar')"
+							disabled="@load(!vm.editarEnabled)">
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-floppy-o">
+							iconSclass="z-icon-floppy-o"
+							disabled="@load(!vm.guardarEnabled)"
+							onClick="@command('guardar')">
 							Guardar
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-trash-o">
+							iconSclass="z-icon-trash-o"
+							disabled="@load(!vm.eliminarEnabled)">
 							Eliminar
 						</button>
 					</hlayout>
