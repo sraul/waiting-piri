@@ -129,7 +129,11 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 				
 			</hbox>
 			
-		
 		</vbox>
+		<hbox height="50px" width="100%" sclass="cabecera rounded">
+				<div sclass="uni">Universidad del Norte</div>
+  				<div sclass="integ">Tesis de Grado Año 2016</div>
+  				<div sclass="wp">Waiting Piri Versión 1.0</div>
+		</hbox>
 </window>
 </zk>
