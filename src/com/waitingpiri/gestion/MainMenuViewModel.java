@@ -1,28 +1,16 @@
 package com.waitingpiri.gestion;
 
-import java.util.EventListener;
-
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.zhtml.Messagebox;
-import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.Executions;
 
 public class MainMenuViewModel {
 	
 	@Command
 	public void salir() {
-		Messagebox.show("Esta seguro que desea Salir del Menu Principal?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION);
-		new EventListener(){
-			@SuppressWarnings("unused")
-			public void onEvent(Event e){
-				if(Messagebox.ON_OK.equals(e.getName())){
-					
-									
-				}else if("onCancel".equals(e.getName())){
-					
-					 
-				}
-			}
-		
-		};	
+		if (Messagebox.show("Esta seguro que desea Salir del Menu Principal?", "Question",
+				Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION) == Messagebox.OK) {
+			Executions.sendRedirect("/");
+		}		
 	}
 }
