@@ -22,7 +22,7 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 			selectedItem="@bind(vm.selectedUsuario)"
 			visible="@load(!vm.modoEdicion)">
 				<listhead style="text-align:center">
-					<listheader label="ID" width="100px" align="right" style="text-align:center"/>
+					<listheader label="ID" align="right" style="text-align:center"/>
 					<listheader label="NICK" align="left" style="text-align:center"/>
 				</listhead>
 			<auxhead>
