@@ -14,10 +14,12 @@ public class MainMenuViewModel {
 		new EventListener(){
 			@SuppressWarnings("unused")
 			public void onEvent(Event e){
-				if("onOK".equals(e.getName())){
+				if(Messagebox.ON_OK.equals(e.getName())){
 					
+									
 				}else if("onCancel".equals(e.getName())){
 					
+					 
 				}
 			}
 		
