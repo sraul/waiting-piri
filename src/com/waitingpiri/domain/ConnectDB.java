@@ -222,6 +222,17 @@ public class ConnectDB {
 	}
 	
 	/**
+	 * update funcionario..
+	 */
+	public void updateFuncionario(Funcionario func) throws Exception {
+		String update = DBUtil.UPDATE_FUNCIONARIO + "NOMBRE = '" + func.getNombre() 
+		+ "', APELLIDO = '" + func.getApellido() + "', CEDULA = '" + func.getCedula() + "', "
+		+ "DIRECCION = '" + func.getDireccion() + "', TELEFONO = '" + func.getTelefono() 
+		+ "', IDCARGO = " + func.getCargo().getId() + " WHERE ID = " + func.getId();
+		this.executeUpdate(update);
+	}
+	
+	/**
 	 * elimina un funcionario..
 	 */
 	public void deleteFuncionario(Funcionario func) throws Exception {

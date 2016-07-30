@@ -134,7 +134,13 @@ public class FuncionarioViewModel implements ABM {
 			}			
 		}		
 		if(this.editando){
-			//aca va a atuuakizar el registro,,crear metodo en ConnectDB 
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
+				conn.updateFuncionario(this.selectedFuncionario);
+			} catch (Exception e) {
+				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+						null, 0);
+			}
 		}
 		this.selectedFuncionario = null;
 		this.modoEdicion = false;

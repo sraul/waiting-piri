@@ -42,6 +42,8 @@ public class DBUtil {
 	public static final String DELETE_USUARIO="DELETE FROM USUARIO WHERE ID=";
 	
 	public static final String DELETE_CARGO= "DELETE FROM CARGO WHERE ID=";
+	
+	public static final String UPDATE_FUNCIONARIO = "UPDATE FUNCIONARIO SET ";
 
 	/**
 	 * pobla la base de datos..
