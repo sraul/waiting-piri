@@ -106,10 +106,15 @@ public class FuncionarioViewModel implements ABM {
 	}
 
 	@Command
-	@NotifyChange("modoEdicion")
+	@NotifyChange({ "modoEdicion", "selectedFuncionario" })
 	public void editar() {
 		this.modoEdicion = !this.modoEdicion;	
-		this.editando = true;
+		if (this.modoEdicion) {
+			this.editando = true;
+		} else {
+			this.selectedFuncionario = null;
+			this.editando = false;
+		}		
 	}
 
 	@Command
