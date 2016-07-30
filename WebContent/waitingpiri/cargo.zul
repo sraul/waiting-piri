@@ -7,12 +7,13 @@ apply="org.zkoss.bind.BindComposer"
 viewModel="@id('vm') @init('com.waitingpiri.gestion.CargoViewModel')">
 	<hbox height="50px" width="100%" sclass="cabecera rounded"
 	align="center">
-		<label sclass="titulo">Administrar Cargos</label>
-		<div hflex="true" />
+		
 			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
-				href="menuprincipal.zul" style="background-color:White; color:#008080">
+				href="menuprincipal.zul" style="background-color:White; color:#008080; margin-left: 15px">
 				Atrás..
 				</button>
+				<label sclass="titulo">Administrar Cargos</label>
+		<div hflex="true" />
 			<div width="20px"></div>
 	</hbox>
 	<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">

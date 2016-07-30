@@ -7,12 +7,13 @@
 		viewModel="@id('vm') @init('com.waitingpiri.gestion.MainMenuViewModel')">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
-			<label sclass="titulo">Menú Principal</label>
-			<div hflex="true"/>
+			
 			<button sclass="btn-success" iconSclass="z-icon-sign-out"
-				style="background-color:white;color:#008080" onClick="@command('salir')">
+				style="background-color:white;color:#008080; margin-left 15px" onClick="@command('salir')">
 				Salir..
 			</button>
+			<label sclass="titulo">Menú Principal</label>
+			<div hflex="true"/>
 			<div width="20px"></div>
 		</hbox>
 

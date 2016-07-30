@@ -12,9 +12,11 @@
 			<label sclass="titulo">Administrar Funcionarios</label>
 			<div hflex="true" />
 			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
-				href="menuprincipal.zul" style="background-color:White; color:#008080">
+				href="menuprincipal.zul" style="background-color:White; color:#008080; margin-left: 15px">
 				Atrás..
 			</button>
+			<label sclass="titulo">Administrar Funcionarios</label>
+			<div hflex="true" />
 			<div width="20px"></div>
 		</hbox>
 

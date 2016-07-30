@@ -7,12 +7,13 @@
 		viewModel="@id('vm') @init('com.waitingpiri.gestion.ColectivoViewModel')">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
-			<label sclass="titulo">Administrar Colectivos</label>
-			<div hflex="true"/>
+			
 			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
-				href="menuprincipal.zul" style="background-color:White; color:#008080">
+				href="menuprincipal.zul" style="background-color:White; color:#008080; margin-left: 15px" >
 				Atrás..
 			</button>
+			<label sclass="titulo">Administrar Colectivos</label>
+			<div hflex="true"/>
 			
 		</hbox>
 		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
@@ -89,7 +90,7 @@
 								<label sclass="required">*</label>								
 								</hlayout>	
 								<textbox hflex="true"
-								value="@load(vm.selectedColectivo.nroColec)"
+								value="@bind(vm.selectedColectivo.nroColec)"
 								readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 								
@@ -100,7 +101,7 @@
 								<label sclass="required">*</label>								
 								</hlayout>
 								<textbox hflex="true"
-								value="@load(vm.selectedColectivo.nroChapa)"
+								value="@bind(vm.selectedColectivo.nroChapa)"
 								readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 							</row> 
@@ -110,7 +111,7 @@
 								<label sclass="required">*</label>								
 								</hlayout>
 								<textbox hflex="true"
-								value="@load(vm.selectedColectivo.nroChasis)"
+								value="@bind(vm.selectedColectivo.nroChasis)"
 								readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 							</row>
