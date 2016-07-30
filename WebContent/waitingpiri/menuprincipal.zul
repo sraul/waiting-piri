@@ -36,6 +36,12 @@
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="300px"
+				height="60px"  href="cargo.zul"
+				style="background-color:#008080">
+				Administrar Cargos
+			</button>
+			<div height="10px" />
+			<button sclass="btn-success btn-lg" width="300px"
 				height="60px" style="background-color:#008080">
 				Monitorear Colectivos
 			</button>

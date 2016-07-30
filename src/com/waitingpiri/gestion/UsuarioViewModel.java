@@ -68,7 +68,7 @@ public class UsuarioViewModel implements ABM {
 		this.selectedUsuario=null;
 		this.modoEdicion=false;
 		this.editando=false;
-		Clients.showNotification("Registro Agregado..");
+		Clients.showNotification("Registro Guardado..");
 	}
 	
 	@Override

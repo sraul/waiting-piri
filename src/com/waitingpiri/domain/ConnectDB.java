@@ -84,25 +84,27 @@ public class ConnectDB {
 	/**
 	 * @return los cargos..
 	 */
-	public List<Cargo> getCargos() {
+	public List<Cargo> getCargos(String id, String descripcion){
 		List<Cargo> out = new ArrayList<Cargo>();
-		String sql = "SELECT * FROM CARGO";
+		String sql = "SELECT * FROM CARGO WHERE CAST(ID AS CHAR(10))  LIKE '%" + id + "%' AND"
+				+ " DESCRIPCION LIKE UPPER('%" + descripcion.toUpperCase() + "%')";
 		
-		try {
+		try{
 			Statement statement = connection.createStatement();
-			ResultSet result = statement.executeQuery(sql);
-			while (result.next()) {
-				int id = result.getInt("ID");
-				String desc = result.getString("DESCRIPCION");
-				Cargo cargo = new Cargo(id, desc);
-				out.add(cargo);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+			ResultSet result=statement.executeQuery(sql);
+		 while (result.next()){
+			 int id_= result.getInt("ID");
+			 String desc=result.getString("descripcion");
+			 Cargo car =new Cargo (id_, desc);
+			 out.add(car);
+		 }
 		}
+		catch (Exception e){
+			 e.printStackTrace();
+		 }
+		 return out;
+		 
 		
-		return out;
 	}
 	
 	/**
@@ -116,8 +118,9 @@ public class ConnectDB {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(sql);
 			while (result.next()) {
+				int id_= result.getInt("ID");
 				String desc = result.getString("DESCRIPCION");
-				Cargo cargo = new Cargo(id, desc);
+				Cargo cargo = new Cargo(id_, desc);
 				out.add(cargo);
 			}
 			
@@ -125,7 +128,7 @@ public class ConnectDB {
 			e.printStackTrace();
 		}		
 		return out.size() > 0 ? out.get(0) : null;
-	}
+	} 
 	
 	/**
 	 * @return los usuarios..
@@ -150,6 +153,7 @@ public class ConnectDB {
 		}
 		return out;
 	}
+	
 	
 	/**
 	 * @return los funcionarios..
@@ -225,19 +229,6 @@ public class ConnectDB {
 		this.executeUpdate(delete);
 	}
 
-
-	public void deleteColectivo(Colectivo col)  throws  Exception{
-		String delete=DBUtil.DELETE_COLECTIVO + col.getId();
-			this.executeUpdate(delete);
-		}
-	/** 
-	 * elimina un usuario
-	 */
-	public void deleteUsuario(Usuario usu)throws Exception{
-		String delete=DBUtil.DELETE_USUARIO+usu.getId();
-		this.executeUpdate(delete);
-	}
-
 	
 	/**
 	 * inserta un nuevo usuario..
@@ -245,6 +236,14 @@ public class ConnectDB {
 	public void insertUsuario(Usuario usu) throws Exception{
 		String insert=DBUtil.INSERT_USUARIO+"'"+usu.getNick()+"','"+usu.getPassword()+"')";
 		this.executeUpdate(insert);
+		
+	}
+	/** 
+	 * elimina un usuario
+	 */
+	public void deleteUsuario(Usuario usu)throws Exception{
+		String delete=DBUtil.DELETE_USUARIO+usu.getId();
+		this.executeUpdate(delete);
 	}
 	
 	/**
@@ -256,4 +255,27 @@ public class ConnectDB {
 		this.executeUpdate(insert);
 		
 	}
+	/** 
+	 * elimina un colectivo
+	 */
+	public void deleteColectivo(Colectivo col)  throws  Exception{
+		String delete=DBUtil.DELETE_COLECTIVO + col.getId();
+			this.executeUpdate(delete);
+		}
+	/**
+	 * inserta un nuevo cargo..
+	 */
+
+  public void insertCargo(Cargo car ) throws Exception{
+	  String insert= DBUtil.INSERT_CARGO+ "'"+car.getDescripcion()+"')";
+	  this.executeUpdate(insert);
+	  
+  }
+  /** 
+	 * elimina un colectivo
+	 */
+  public void deleteCargo(Cargo car)  throws  Exception{
+		String delete=DBUtil.DELETE_CARGO + car.getId();
+			this.executeUpdate(delete);
+		}
 }

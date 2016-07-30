@@ -10,7 +10,7 @@
 			<label sclass="titulo">Administrar Colectivos</label>
 			<div hflex="true"/>
 			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
-				href="menuprincipal.zul">
+				href="menuprincipal.zul" style="background-color:White; color:#008080">
 				Atrás..
 			</button>
 			
@@ -119,24 +119,28 @@
 					<hlayout>
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-plus"
+							style="background-color:#008080"
 							disabled="@load(!vm.nuevoEnabled)"
 							onClick="@command('nuevo')">
 							Nuevo
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="@load(vm.modoEdicion? 'z-icon-times' : 'z-icon-pencil')" style="background-color:#008080"
+							iconSclass="@load(vm.modoEdicion? 'z-icon-times' : 'z-icon-pencil')" 
+							style="background-color:#008080"
 							onClick="@command('editar')"
 							label="@load(vm.modoEdicion? 'Cancelar' : 'Editar')"
 							disabled="@load(!vm.editarEnabled)">
 						</button>
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-floppy-o"
+							style="background-color:#008080"
 							disabled="@load(!vm.guardarEnabled)"
 							onClick="@command('guardar')">
 							Guardar
 						</button>
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-trash-o"
+							style="background-color:#008080"
 							disabled="@load(!vm.eliminarEnabled)"
 							onClick="@command('eliminar')">
 							Eliminar

@@ -75,7 +75,7 @@ public class ColectivoViewModel implements ABM{
 	this.selectedColectivo = null;
 	this.modoEdicion = false;
 	this.editando = false;
-	Clients.showNotification("Registro Agregado..");
+	Clients.showNotification("Registro Guardado..");
 }
 
 	@Override

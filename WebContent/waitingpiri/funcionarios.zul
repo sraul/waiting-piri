@@ -156,7 +156,7 @@
 							<row>
 								<label sclass="field" value="CARGO:" />
 								<combobox hflex="true"
-									model="@load(vm.cargos)"
+									model="@load(vm.cargo)"
 									value="@load(vm.selectedFuncionario.cargo.descripcion)"
 									selectedItem="@bind(vm.selectedFuncionario.cargo)"
 									instant="true"

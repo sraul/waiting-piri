@@ -27,7 +27,7 @@ public class DBUtil {
 			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "NROCOLEC VARCHAR(200)," 
 			+ "NROCHASIS VARCHAR(200)," + "NROCHAPA VARCHAR(200)," + "PRIMARY KEY(ID))";
 	
-	static final String INSERT_CARGO = "INSERT INTO CARGO (DESCRIPCION) values (";
+	public static final String INSERT_CARGO = "INSERT INTO CARGO (DESCRIPCION) values (";
 
 	public static final String INSERT_FUNCIONARIO = "INSERT INTO FUNCIONARIO (NOMBRE, APELLIDO, CEDULA, DIRECCION, TELEFONO, IDCARGO) values (";
 
@@ -40,6 +40,8 @@ public class DBUtil {
 	public static final String DELETE_COLECTIVO ="DELETE FROM COLECTIVO WHERE ID=";
 	
 	public static final String DELETE_USUARIO="DELETE FROM USUARIO WHERE ID=";
+	
+	public static final String DELETE_CARGO= "DELETE FROM CARGO WHERE ID=";
 
 	/**
 	 * pobla la base de datos..

@@ -1,13 +1,13 @@
-<?page title="Waiting-Piri" contentType="text/html;charset=UTF-8"?>
+<?page title="Waiting Piri" contentType="text/html;charset=UTF-8"?>
 <?link rel="icon" type="image/x-icon" href="/images/logo.ico"?>
 <zk>
 <style src="/css/style.css" />
 <window border="0" width="100%" height="100%"
 apply="org.zkoss.bind.BindComposer"
-viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
+viewModel="@id('vm') @init('com.waitingpiri.gestion.CargoViewModel')">
 	<hbox height="50px" width="100%" sclass="cabecera rounded"
 	align="center">
-		<label sclass="titulo">Administrar Usuarios</label>
+		<label sclass="titulo">Administrar Cargos</label>
 		<div hflex="true" />
 			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
 				href="menuprincipal.zul" style="background-color:White; color:#008080">
@@ -15,59 +15,60 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 				</button>
 			<div width="20px"></div>
 	</hbox>
-
 	<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
 			<hbox width="100" vflex="true">
 			<listbox vflex="true" sclass="rounded"
-			model="@load(vm.usuario)"
-			selectedItem="@bind(vm.selectedUsuario)"
+			model="@load(vm.cargo)"
+			selectedItem="@bind(vm.selectedCargo)"
 			visible="@load(!vm.modoEdicion)">
 				<listhead style="text-align:center">
 					<listheader label="ID" align="right" style="text-align:center"/>
-					<listheader label="NICK" align="left" style="text-align:center"/>
+					<listheader label="DESCRIPCION" align="left" style="text-align:center"/>
 				</listhead>
 			<auxhead>
 				<auxheader>
 					<hlayout>
 						<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
 						<textbox hflex="true" placeholder="Buscar.."
-						value="@bind(vm.filterID)" instant="true"/>
+						value="@bind(vm.filterID)" instant="true"/>					
 					</hlayout>		
 				</auxheader>
 				<auxheader>
 				<hlayout>
 						<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
 						<textbox hflex="true" placeholder="Buscar.."
-						value="@bind(vm.filterNICK)" instant="true"/>
+						value="@bind(vm.filterDESCRIPCION)" instant="true"/>
 					</hlayout>		
 				</auxheader>
 			</auxhead>
 			<template name="model">
 				<listitem>
 					<listcell label="@load(each.id)"/>
-					<listcell label="@load(each.nick)"/>
+					<listcell label="@load(each.descripcion)" />
 				</listitem>
 			
 			</template>
+			
 			<listfoot>
-				<listfooter span="2" align="left">
+				<listfooter span="3" align="left">
 					<hlayout>
-					<label value="@load(vm.usuario.size())" sclass="field"/>
+					<label value="@load(vm.cargo.size ())" sclass="field"/>
 					<label value="item" sclass="field"/>
 					</hlayout>
 				</listfooter>
 			</listfoot>
 				</listbox>
-				
-				<space/>
-				
+								
+					<space />
+										
 				<vlayout vflex="true">
 					<grid vflex="true" sclass="rounded">
 						<auxhead>
 							<auxheader colspan="2"
-								label="Ficha Usuario" style="text-align:center">
+								label="Ficha Cargo" style="text-align:center">
 							</auxheader>
 						</auxhead>
+						
 						<columns>
 							<column width="30%" />
 							<column />
@@ -75,30 +76,23 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.UsuarioViewModel')">
 						<rows>
 								<row>
 									<label sclass="field" value="ID:" />
-									<intbox readonly="true"
-									value="@load(vm.selectedUsuario.id)" />
+								    <intbox readonly="true"
+								    value="@load(vm.selectedCargo.id)" />									
 								</row>
 								
 								<row>
 								<hlayout valign="middle">
-									<label sclass="field" value="NICK"/>
+									<label sclass="field" value="DESCRIPCION"/>
 									<label sclass="required">*</label>
 								</hlayout>
 									<textbox hflex="true"
-									value="@bind(vm.selectedUsuario.nick)"
+									value="@bind(vm.selectedCargo.descripcion)"
 									readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
-									</row>
-								<row>
-								<hlayout valign="middle">
-									<label sclass="field" value="PASSWORD"/>
-									<label sclass="required">*</label>
-								</hlayout>
-									<textbox hflex="true"
-									value="@bind(vm.selectedUsuario.password)"
-									readonly="@load(!vm.modoEdicion)"
-									constraint="no empty"/>
+
 								</row>
+							
+								
 						</rows>
 				</grid>
 					<hlayout>

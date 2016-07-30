@@ -42,7 +42,7 @@ public class FuncionarioViewModel implements ABM {
 	private Funcionario selectedFuncionario;
 	
 	private boolean modoEdicion = false;
-	private boolean editando = false;
+	private boolean editando = true;
 
 	@Init
 	public void init() {
@@ -128,10 +128,13 @@ public class FuncionarioViewModel implements ABM {
 						null, 0);
 			}			
 		}		
+		if(this.editando){
+			//aca va a atuuakizar el registro,,crear metodo en ConnectDB 
+		}
 		this.selectedFuncionario = null;
 		this.modoEdicion = false;
 		this.editando = false;
-		Clients.showNotification("Registro Agregado..");
+		Clients.showNotification("Registro Guardado..");
 	}
 
 	@Override
@@ -210,9 +213,11 @@ public class FuncionarioViewModel implements ABM {
 	/**
 	 * @return los cargos..
 	 */
-	public List<Cargo> getCargos() {
+	
+	
+	public List<Cargo>  getCargo() {
 		ConnectDB conn = ConnectDB.getInstance();
-		return conn.getCargos();
+		return conn.getCargos(filterAP,filterNA);
 	}
 
 	public String getFilterID() {
