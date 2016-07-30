@@ -9,7 +9,7 @@
 			align="center">
 			
 			<button sclass="btn-success" iconSclass="z-icon-sign-out"
-				style="background-color:white;color:#008080; margin-left 15px" onClick="@command('salir')">
+				style="background-color:white;color:#008080; margin-left: 15px" onClick="@command('salir')">
 				Salir..
 			</button>
 			<label sclass="titulo">Menú Principal</label>
