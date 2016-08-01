@@ -33,7 +33,7 @@ public class DBUtil {
 
 	public static final String INSERT_USUARIO = "INSERT INTO USUARIO (NICK, PASSWORD) values (";
 	
-	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS, NROCHAPA) values (";
+	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS , NROCHAPA) values (";
 	
 	public static final String DELETE_FUNCIONARIO = "DELETE FROM FUNCIONARIO WHERE ID = ";
 
@@ -44,6 +44,9 @@ public class DBUtil {
 	public static final String DELETE_CARGO= "DELETE FROM CARGO WHERE ID=";
 	
 	public static final String UPDATE_FUNCIONARIO = "UPDATE FUNCIONARIO SET ";
+	
+	public static final String UPDATE_COLECTIVO = "UPDATE COLECTIVO SET ";
+
 
 	/**
 	 * pobla la base de datos..

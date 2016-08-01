@@ -97,21 +97,21 @@
 							</row>
 							<row>
 							<hlayout valign="middle">
-								<label sclass="field" value="NRO CHAPA:"/>
+								<label sclass="field" value="NRO CHASIS:"/>
 								<label sclass="required">*</label>								
 								</hlayout>
-								<textbox hflex="true"
-								value="@bind(vm.selectedColectivo.nroChapa)"
+								<textbox  hflex="true"
+								value="@bind(vm.selectedColectivo.nroChasis)"
 								readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 							</row> 
 							<row>
 							  <hlayout valign="middle">
-								<label sclass="field" value="NRO CHASIS:"/>
+								<label sclass="field" value="NRO CHAPA:"/>
 								<label sclass="required">*</label>								
 								</hlayout>
 								<textbox hflex="true"
-								value="@bind(vm.selectedColectivo.nroChasis)"
+								value="@bind(vm.selectedColectivo.nroChapa)"
 								readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 							</row>
@@ -126,8 +126,7 @@
 							Nuevo
 						</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="@load(vm.modoEdicion? 'z-icon-times' : 'z-icon-pencil')" 
-							style="background-color:#008080"
+							iconSclass="@load(vm.modoEdicion? 'z-icon-times' : 'z-icon-pencil')" style="background-color:#008080"
 							onClick="@command('editar')"
 							label="@load(vm.modoEdicion? 'Cancelar' : 'Editar')"
 							disabled="@load(!vm.editarEnabled)">

@@ -50,11 +50,17 @@ public class ColectivoViewModel implements ABM{
 	}
 
 	@Command
-	@NotifyChange("modoEdicion")
+	@NotifyChange({"modoEdicion", "selectedColectivo"})
 	public void editar() {
 		this.modoEdicion=!this.modoEdicion;
-		this.editando=true;		
-	}
+		if (this.modoEdicion) {
+			this.editando = true;
+		} else {
+			this.selectedColectivo = null;
+			this.editando = false;
+		}		
+	}	
+	
 
 	@Command
 	@NotifyChange({"modoEdicion","colectivosNuevos", "selectedColectivo", "colectivos"})
@@ -62,20 +68,29 @@ public class ColectivoViewModel implements ABM{
 		if (!this.validarDatos()) {
 			Messagebox.show("Error de Datos, verifique..", "Validación de Datos..", Messagebox.OK, Messagebox.ERROR);
 			return;
-	}
-	if (!this.editando) {
-		ConnectDB conn = ConnectDB.getInstance();
-		try {
-			conn.insertColectivo(this.selectedColectivo);
-		} catch (Exception e) {
-			Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
-					null, 0);
-		}			
-	}		
-	this.selectedColectivo = null;
-	this.modoEdicion = false;
-	this.editando = false;
-	Clients.showNotification("Registro Guardado..");
+		}
+		if (!this.editando) {
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
+				conn.insertColectivo(this.selectedColectivo);
+			} catch (Exception e) {
+				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+						null, 0);
+			}			
+		}		
+		if(this.editando){
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
+				conn.updateColectivo(this.selectedColectivo);
+			} catch (Exception e) {
+				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+						null, 0);
+			}
+		}
+		this.selectedColectivo = null;
+		this.modoEdicion = false;
+		this.editando = false;
+		Clients.showNotification("Registro Guardado..");
 }
 
 	@Override
@@ -104,8 +119,8 @@ public class ColectivoViewModel implements ABM{
 	public boolean validarDatos() {
 		boolean out=true;
 		// campos obligatorios..
-	if(this.selectedColectivo.getNroColec().trim().isEmpty()|| this.selectedColectivo.getNroChapa().trim().isEmpty()|| 
-			this.selectedColectivo.getNroChasis().trim().isEmpty());{
+	if(this.selectedColectivo.getNroColec().trim().isEmpty()|| this.selectedColectivo.getNroChasis().trim().isEmpty()|| 
+			this.selectedColectivo.getNroChapa().trim().isEmpty()){
 		out=false;
 		}	
 		return out;

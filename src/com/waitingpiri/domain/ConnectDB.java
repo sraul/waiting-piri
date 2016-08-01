@@ -261,8 +261,8 @@ public class ConnectDB {
 	 * inserta un nuevo colectivo..
 	 */
 	public void insertColectivo(Colectivo col)throws Exception{
-		String insert=DBUtil.INSERT_COLECTIVO+"'"+col.getNroColec()+"','"+col.getNroChapa()+"','"
-		+col.getNroChasis()+"')";
+		String insert=DBUtil.INSERT_COLECTIVO+"'"+col.getNroColec()+"','"+col.getNroChasis()+"','"
+		+col.getNroChapa()+"')";
 		this.executeUpdate(insert);
 		
 	}
@@ -273,6 +273,16 @@ public class ConnectDB {
 		String delete=DBUtil.DELETE_COLECTIVO + col.getId();
 			this.executeUpdate(delete);
 		}
+	
+	/**
+	 * update colectivo
+	 */
+	
+	public void updateColectivo(Colectivo col) throws Exception{
+		String update=DBUtil.UPDATE_COLECTIVO + "NROCOLEC = '"+col.getNroColec()+"', NROCHASIS = '"
+		+col.getNroChasis()+"', NROCHAPA ='"+col.getNroChapa()+"'"+ "WHERE ID= "+col.getId();
+		this.executeUpdate(update);
+	}
 	/**
 	 * inserta un nuevo cargo..
 	 */
@@ -283,7 +293,7 @@ public class ConnectDB {
 	  
   }
   /** 
-	 * elimina un colectivo
+	 * elimina un cargo
 	 */
   public void deleteCargo(Cargo car)  throws  Exception{
 		String delete=DBUtil.DELETE_CARGO + car.getId();
