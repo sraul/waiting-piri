@@ -42,7 +42,7 @@ public class FuncionarioViewModel implements ABM {
 	private Funcionario selectedFuncionario;
 	
 	private boolean modoEdicion = false;
-	private boolean editando = true;
+	private boolean editando = false;
 
 	@Init
 	public void init() {
@@ -67,7 +67,7 @@ public class FuncionarioViewModel implements ABM {
 	 * upload de la imagen..
 	 */
 	private void subirImagen(UploadEvent event) throws IOException {
-		String fileName = "funcionario";
+		String fileName = this.selectedFuncionario.getId() + "";
 		String folder = PATH_FOTOS_FUNCIONARIOS;
 		this.uploadFile(folder, fileName, event);
 		Clients.showNotification("Imagen correctamente subida..");
@@ -225,12 +225,15 @@ public class FuncionarioViewModel implements ABM {
 	
 	/**
 	 * @return los cargos..
-	 */
-	
-	
+	 */	
 	public List<Cargo>  getCargo() {
 		ConnectDB conn = ConnectDB.getInstance();
 		return conn.getCargos(filterAP,filterNA);
+	}
+	
+	public String getImageSrc() {
+		return this.selectedFuncionario == null ? "/fotos/funcionario.png"
+				: "/fotos/" + this.selectedFuncionario.getId() + ".jpg";
 	}
 
 	public String getFilterID() {
