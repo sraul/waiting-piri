@@ -172,7 +172,7 @@
 								<label sclass="field" value="FOTOGRAFÍA:" />
 								<hlayout valign="bottom">
 									<image height="150px" width="170px"
-										src="/fotos/funcionario.png" />
+										src="@load(vm.imageSrc)" />
 									<fileupload
 										id="fotoUpload"
 										width="130px" iconSclass="z-icon-upload"

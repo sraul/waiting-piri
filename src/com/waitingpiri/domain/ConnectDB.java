@@ -228,7 +228,7 @@ public class ConnectDB {
 		String update = DBUtil.UPDATE_FUNCIONARIO + "NOMBRE = '" + func.getNombre() 
 		+ "', APELLIDO = '" + func.getApellido() + "', CEDULA = '" + func.getCedula() + "', "
 		+ "DIRECCION = '" + func.getDireccion() + "', TELEFONO = '" + func.getTelefono() 
-		+ "', IDCARGO = " + func.getCargo().getId() + "WHERE ID = " + func.getId();
+		+ "', IDCARGO = " + func.getCargo().getId() + " WHERE ID = " + func.getId();
 		this.executeUpdate(update);
 	}
 	
