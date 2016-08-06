@@ -85,6 +85,7 @@ public class FuncionarioViewModel implements ABM {
 		String format = event.getMedia().getFormat().toLowerCase();
 		InputStream file = event.getMedia().getStreamData();
 		String destino = folder + fileName + "." + format;
+		System.out.println("destino:" + destino);
 		
 		this.copiarArchivo(file, destino);
 	}
@@ -230,11 +231,6 @@ public class FuncionarioViewModel implements ABM {
 	public List<Cargo>  getCargo() {
 		ConnectDB conn = ConnectDB.getInstance();
 		return conn.getCargos(filterAP,filterNA);
-	}
-	
-	public String getImageSrc() {
-		return this.selectedFuncionario == null ? "/fotos/funcionario.png"
-				: "/fotos/" + this.selectedFuncionario.getId() + ".jpg";
 	}
 
 	public String getFilterID() {
