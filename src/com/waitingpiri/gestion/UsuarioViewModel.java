@@ -11,6 +11,7 @@ import org.zkoss.bind.annotation.DependsOn;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
@@ -34,8 +35,9 @@ public class UsuarioViewModel implements ABM {
 	}
 	@AfterCompose
 	public void afterCompose(@ContextParam(ContextType.VIEW)Component view){
-		
+		Selectors.wireEventListeners(view, this);
 	}
+	
 	
 	@Command
 	@NotifyChange({"modoEdicion", "selectedUsuario"})
@@ -44,33 +46,51 @@ public class UsuarioViewModel implements ABM {
 		this.selectedUsuario=new Usuario(0,"","");
 	}
 	
+
 	@Command
-	@NotifyChange("modoEdicion")
-	public void editar(){
+	@NotifyChange({"modoEdicion", "selectedUsuario"})
+	public void editar() {
 		this.modoEdicion=!this.modoEdicion;
-		this.editando=true;
-	}
+		if (this.modoEdicion) {
+			this.editando = true;
+		} else {
+		this.selectedUsuario = null;
+		this.editando = false;
+		}		
+	}	
+	
+
 	@Command
-	@NotifyChange({"modoEdicion","usuariosNuevos","selectedUsuario","usuario"})
-	public void guardar(){
-		if(!this.validarDatos()){
-			Messagebox.show("Error de datos, Verifique..","Validación de datos..",Messagebox.OK,Messagebox.ERROR);
-		return;
-				}
-		if (!this.editando){
-			ConnectDB conn=ConnectDB.getInstance();
-			try{
+	@NotifyChange({"modoEdicion","usuariosNuevos", "selectedUsuario", "usuario"})
+	public void guardar() {
+		if (!this.validarDatos()) {
+			Messagebox.show("Error de Datos, verifique..", "Validación de Datos..", Messagebox.OK, Messagebox.ERROR);
+			return;
+		}
+		if (!this.editando) {
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
 				conn.insertUsuario(this.selectedUsuario);
-			} catch (Exception e){
-				Clients.showNotification("No se pudo guardar,hubo un error..",Clients.NOTIFICATION_TYPE_ERROR,null,null,0);
+			} catch (Exception e) {
+				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+						null, 0);
+			}			
+		}		
+		if(this.editando){
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
+				conn.updateUsuario(this.selectedUsuario);
+			} catch (Exception e) {
+				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+						null, 0);
 			}
 		}
-		this.selectedUsuario=null;
-		this.modoEdicion=false;
-		this.editando=false;
+		this.selectedUsuario = null;
+		this.modoEdicion = false;
+		this.editando = false;
 		Clients.showNotification("Registro Guardado..");
-	}
-	
+}
+
 	@Override
 	@Command
 	@NotifyChange({ "selectedUsuario", "usuario" })

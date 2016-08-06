@@ -228,7 +228,7 @@ public class ConnectDB {
 		String update = DBUtil.UPDATE_FUNCIONARIO + "NOMBRE = '" + func.getNombre() 
 		+ "', APELLIDO = '" + func.getApellido() + "', CEDULA = '" + func.getCedula() + "', "
 		+ "DIRECCION = '" + func.getDireccion() + "', TELEFONO = '" + func.getTelefono() 
-		+ "', IDCARGO = " + func.getCargo().getId() + " WHERE ID = " + func.getId();
+		+ "', IDCARGO = " + func.getCargo().getId() + "WHERE ID = " + func.getId();
 		this.executeUpdate(update);
 	}
 	
@@ -248,6 +248,14 @@ public class ConnectDB {
 		String insert=DBUtil.INSERT_USUARIO+"'"+usu.getNick()+"','"+usu.getPassword()+"')";
 		this.executeUpdate(insert);
 		
+	}
+	/**
+	 * update usuario..
+	 */
+	public void updateUsuario(Usuario usu) throws Exception{
+		String update=DBUtil.UPDATE_USUARIO + "NICK = '"+usu.getNick()+"', PASSWORD = '"
+		+usu.getPassword()+"'"+ "WHERE ID= "+usu.getId();
+		this.executeUpdate(update);
 	}
 	/** 
 	 * elimina un usuario
@@ -292,6 +300,15 @@ public class ConnectDB {
 	  this.executeUpdate(insert);
 	  
   }
+  
+  /**
+	 * update cargo..
+	 */
+	public void updateCargo(Cargo car) throws Exception {
+		String update = DBUtil.UPDATE_CARGO + "DESCRIPCION = '" + car.getDescripcion() 
+		+"'"+ "WHERE ID= "+ car.getId();
+		this.executeUpdate(update);
+	}
   /** 
 	 * elimina un cargo
 	 */

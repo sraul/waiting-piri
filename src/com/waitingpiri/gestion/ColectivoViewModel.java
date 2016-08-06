@@ -56,8 +56,8 @@ public class ColectivoViewModel implements ABM{
 		if (this.modoEdicion) {
 			this.editando = true;
 		} else {
-			this.selectedColectivo = null;
-			this.editando = false;
+		this.selectedColectivo = null;
+		this.editando = false;
 		}		
 	}	
 	

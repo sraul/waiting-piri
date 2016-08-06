@@ -2,6 +2,7 @@ package com.waitingpiri.gestion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
@@ -53,14 +54,23 @@ public class CargoViewModel implements ABM {
 			this.selectedCargo=new Cargo(0,"");
 			
 		}
+
+
 		@Command
-		@NotifyChange("modoEdicion")
+		@NotifyChange({"modoEdicion", "selectedCargo"})
 		public void editar() {
 			this.modoEdicion=!this.modoEdicion;
-			this.editando=true;	
-}
+			if (this.modoEdicion) {
+				this.editando = true;
+			} else {
+			this.selectedCargo = null;
+			this.editando = false;
+			}		
+		}	
+		
+
 		@Command
-		@NotifyChange({"modoEdicion","cargosNuevos", "selectedCargo", "cargo"})
+		@NotifyChange({"modoEdicion","cargosNuevos", "selectedCargo", " cargos"})
 		public void guardar() {
 			if (!this.validarDatos()) {
 				Messagebox.show("Error de Datos, verifique..", "Validación de Datos..", Messagebox.OK, Messagebox.ERROR);
@@ -74,12 +84,22 @@ public class CargoViewModel implements ABM {
 					Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
 							null, 0);
 				}			
-}
+			}		
+			if(this.editando){
+				ConnectDB conn = ConnectDB.getInstance();
+				try {
+					conn.updateCargo(this.selectedCargo);
+				} catch (Exception e) {
+					Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
+							null, 0);
+				}
+			}
 			this.selectedCargo = null;
 			this.modoEdicion = false;
 			this.editando = false;
 			Clients.showNotification("Registro Guardado..");
-		}
+	}
+
 		@Override
 		@Command
 		@NotifyChange({ "selectedCargo", "cargo"})

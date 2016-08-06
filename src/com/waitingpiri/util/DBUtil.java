@@ -43,11 +43,16 @@ public class DBUtil {
 	
 	public static final String DELETE_CARGO= "DELETE FROM CARGO WHERE ID=";
 	
+	public static final String UPDATE_CARGO= "UPDATE CARGO SET ";
+	
 	public static final String UPDATE_FUNCIONARIO = "UPDATE FUNCIONARIO SET ";
 	
+	public static final String UPDATE_USUARIO = "UPDATE USUARIO SET ";
+	
 	public static final String UPDATE_COLECTIVO = "UPDATE COLECTIVO SET ";
-
-
+	
+	
+	
 	/**
 	 * pobla la base de datos..
 	 */
