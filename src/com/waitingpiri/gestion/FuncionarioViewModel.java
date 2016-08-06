@@ -102,6 +102,7 @@ public class FuncionarioViewModel implements ABM {
 	@NotifyChange({ "modoEdicion", "selectedFuncionario" })
 	public void nuevo() {
 		this.modoEdicion = true;
+		this.editando = false;
 		this.selectedFuncionario = new Funcionario(0, "", "", "", "", "", new Cargo(0, ""));
 	}
 
@@ -140,6 +141,7 @@ public class FuncionarioViewModel implements ABM {
 			} catch (Exception e) {
 				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
 						null, 0);
+				return;
 			}
 		}
 		this.selectedFuncionario = null;
