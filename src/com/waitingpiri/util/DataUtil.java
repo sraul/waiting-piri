@@ -6,6 +6,7 @@ import java.util.List;
 import com.waitingpiri.domain.Cargo;
 import com.waitingpiri.domain.Colectivo;
 import com.waitingpiri.domain.Funcionario;
+import com.waitingpiri.domain.Sugerencia;
 import com.waitingpiri.domain.Usuario;
 
 public class DataUtil {
@@ -106,5 +107,18 @@ public class DataUtil {
 		return out;
 	}
 
-	
+	/**
+	 * @return los datos de sugerencias..
+	 */
+	public static List<Sugerencia> getSugerenciasData() {
+		List<Sugerencia> out = new ArrayList<Sugerencia>();
+		String[] fechas = new String[] { "01-09-2016", "02-09-2016", "03-09-2016" };
+		String[] descripciones = new String[] { "Sugerencia 1", "Sugerencia 2", "Sugerencia 3" };
+		
+		for (int i = 0; i < 10; i++) {
+			Sugerencia sug = new Sugerencia(i + 1, fechas[i], descripciones[i]);
+			out.add(sug);
+		}
+		return out;
+	}
 }

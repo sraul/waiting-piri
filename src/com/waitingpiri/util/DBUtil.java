@@ -6,6 +6,7 @@ import com.waitingpiri.domain.Cargo;
 import com.waitingpiri.domain.Colectivo;
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Funcionario;
+import com.waitingpiri.domain.Sugerencia;
 import com.waitingpiri.domain.Usuario;
 
 public class DBUtil {
@@ -27,6 +28,10 @@ public class DBUtil {
 			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "NROCOLEC VARCHAR(200)," 
 			+ "NROCHASIS VARCHAR(200)," + "NROCHAPA VARCHAR(200),"+"IMEI VARCHAR(25)," + "PRIMARY KEY(ID))";
 	
+	static final String CREATE_TABLE_SUGERENCIA = "CREATE TABLE SUGERENCIA (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
+			+ "FECHA VARCHAR(100), "
+			+ "DESCRIPCION VARCHAR(200),"+ "PRIMARY KEY(ID))";
+	
 	public static final String INSERT_CARGO = "INSERT INTO CARGO (DESCRIPCION) values (";
 
 	public static final String INSERT_FUNCIONARIO = "INSERT INTO FUNCIONARIO (NOMBRE, APELLIDO, CEDULA, DIRECCION, TELEFONO, IDCARGO) values (";
@@ -34,6 +39,8 @@ public class DBUtil {
 	public static final String INSERT_USUARIO = "INSERT INTO USUARIO (NICK, PASSWORD) values (";
 	
 	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS , NROCHAPA, IMEI) values (";
+	
+	public static final String INSERT_SUGERENCIA = "INSERT INTO SUGERENCIA (FECHA, DESCRIPCION) values (";
 	
 	public static final String DELETE_FUNCIONARIO = "DELETE FROM FUNCIONARIO WHERE ID = ";
 
@@ -57,7 +64,7 @@ public class DBUtil {
 	 * pobla la base de datos..
 	 */
 	public static void poblarDB(List<Cargo> cargos, List<Funcionario> funcionarios, List<Usuario> usuarios,
-			List<Colectivo> colectivos) {
+			List<Colectivo> colectivos, List<Sugerencia> sugerencias) {
 		try {
 
 			ConnectDB conn = ConnectDB.getInstance();
@@ -73,6 +80,9 @@ public class DBUtil {
 			
 			conn.executeUpdate(CREATE_TABLE_COLECTIVO);
 			System.out.println("Tabla [colectivo] creada..");
+			
+			conn.executeUpdate(CREATE_TABLE_SUGERENCIA);
+			System.out.println("Tabla [sugerencia] creada..");
 
 			for (Cargo car : cargos){
 				String insert = INSERT_CARGO + "'" + car.getDescripcion() + "')";
@@ -100,6 +110,13 @@ public class DBUtil {
 				conn.executeUpdate(insert);
 				System.out.println("Colectivo insertado..");
 			}
+			
+			for (Sugerencia sug : sugerencias) {
+				String insert = INSERT_SUGERENCIA + "'" + sug.getFecha() + "','" + sug.getDescripcion() + "')";
+				conn.executeUpdate(insert);
+				System.out.println("Sugerencia insertado..");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,7 +138,7 @@ public class DBUtil {
 
 	public static void main(String[] args) {
 		DBUtil.poblarDB(DataUtil.getCargosData(),DataUtil.getFuncionariosData(),
-				DataUtil.getUsuariosData(),DataUtil.getColectivosData());
+				DataUtil.getUsuariosData(),DataUtil.getColectivosData(), DataUtil.getSugerenciasData());
 	}
 	
 }
