@@ -115,7 +115,7 @@ public class DataUtil {
 		String[] fechas = new String[] { "01-09-2016", "02-09-2016", "03-09-2016" };
 		String[] descripciones = new String[] { "Sugerencia 1", "Sugerencia 2", "Sugerencia 3" };
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i <= 2; i++) {
 			Sugerencia sug = new Sugerencia(i + 1, fechas[i], descripciones[i]);
 			out.add(sug);
 		}
