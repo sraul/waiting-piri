@@ -45,7 +45,7 @@ public class ColectivoViewModel implements ABM{
 	@NotifyChange({"modoEdicion","selectedColectivo"})
 	public void nuevo() {
 		this.modoEdicion=true;
-		this.selectedColectivo=new Colectivo(0,"","","");
+		this.selectedColectivo=new Colectivo(0,"","","","");
 		
 	}
 

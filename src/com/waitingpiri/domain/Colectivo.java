@@ -5,12 +5,14 @@ public class Colectivo {
 	private String nroColec;
 	private String nroChasis;
 	private String nroChapa;
+	private String imei;
 
-	public Colectivo(int id, String nroColec, String nroChasis, String nroChapa) {
+	public Colectivo(int id, String nroColec, String nroChasis, String nroChapa, String imei) {
 		this.id = id;
 		this.nroColec = nroColec;
 		this.nroChasis = nroChasis;
 		this.nroChapa = nroChapa;
+		this.imei=imei;
 	}
 
 	public int getId() {
@@ -43,5 +45,12 @@ public class Colectivo {
 
 	public void setNroChapa(String nroChapa) {
 		this.nroChapa = nroChapa;
+	}
+	public String getImei() {
+		return imei;
+	}
+
+	public void setImei(String imei) {
+		this.imei = imei;
 	}
 }

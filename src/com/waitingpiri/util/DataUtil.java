@@ -95,9 +95,12 @@ public class DataUtil {
 		String[] nroChapa = new String[] { "AKA 047", "BOB 963", "LIZ 968",
 				"GAB 425", "ANA 965", "JES 789", "GHJ 456", "ASD 456",
 				"VBN 654", "SDF 987" };
+		String[] imei=new String[]{"12365478941236587","12589633255","2326595230","789456123","1548310311","7894002232",
+				"4512369874","78456311222","554557412","458255221"};
+		
 		for (int i = 0; i < 10; i++) {
 			Colectivo col = new Colectivo(i + 1, nroColec[i], nroChasis[i],
-					nroChapa[i]);
+					nroChapa[i],imei[i]);
 			out.add(col);
 		}
 		return out;

@@ -200,7 +200,8 @@ public class ConnectDB {
 				String nroCol = result.getString("NROCOLEC");
 				String nroChas = result.getString("NROCHASIS");
 				String nroChap = result.getString("NROCHAPA");
-				Colectivo col = new Colectivo(idCol,nroCol,nroChas,nroChap);
+				String imei=result.getString("IMEI");
+				Colectivo col = new Colectivo(idCol,nroCol,nroChas,nroChap,imei);
 				out.add(col);
 			}
 		} catch (Exception e) {
@@ -270,7 +271,7 @@ public class ConnectDB {
 	 */
 	public void insertColectivo(Colectivo col)throws Exception{
 		String insert=DBUtil.INSERT_COLECTIVO+"'"+col.getNroColec()+"','"+col.getNroChasis()+"','"
-		+col.getNroChapa()+"')";
+		+col.getNroChapa()+"','"+col.getImei()+"')";
 		this.executeUpdate(insert);
 		
 	}
@@ -288,7 +289,7 @@ public class ConnectDB {
 	
 	public void updateColectivo(Colectivo col) throws Exception{
 		String update=DBUtil.UPDATE_COLECTIVO + "NROCOLEC = '"+col.getNroColec()+"', NROCHASIS = '"
-		+col.getNroChasis()+"', NROCHAPA ='"+col.getNroChapa()+"'"+ "WHERE ID= "+col.getId();
+		+col.getNroChasis()+"', NROCHAPA ='"+col.getNroChapa()+"', IMEI ='"+col.getImei()+"'"+"WHERE ID= "+col.getId();
 		this.executeUpdate(update);
 	}
 	/**
@@ -315,5 +316,5 @@ public class ConnectDB {
   public void deleteCargo(Cargo car)  throws  Exception{
 		String delete=DBUtil.DELETE_CARGO + car.getId();
 			this.executeUpdate(delete);
-		}
-}
+		}}
+  
