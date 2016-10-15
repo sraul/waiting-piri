@@ -4,7 +4,8 @@
 	<style src="/css/style.css"/>
 	<window border="0" width="100%" height="100%"
 	apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.waitingpiri.gestion.MainMenuViewModel')">
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.MainMenuViewModel')"
+		style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
 			
@@ -32,7 +33,7 @@
 				Administrar Usuarios
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-glyphicon-bus"
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-check-circle "
 				height="100px" href="colectivos.zul"
 				style="background-color:#008080;font-size:15px">
 				Administrar Colectivos
@@ -41,7 +42,7 @@
 			</hbox>
 			<hbox vflex="true" width="100%" pack="center" align="center">
 			<hlayout>
-			<button sclass="btn-success btn-lg" width="200px"
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-male"
 				height="100px"  href="cargo.zul"
 				style="background-color:#008080;font-size:15px">
 				Administrar Cargos
@@ -66,7 +67,7 @@
 			<vlayout>
 			<label sclass="pie">Aplicación móvil/web de Geolocalización de unidades</label>
 			 <label sclass="pie"> del transporte público de la Empresa Piribebuy S.A</label>
-			 <label sclass="pie">Año 2016</label>
+			 <label sclass="pie"> Año 2016</label>
 			</vlayout>
 			<div hflex="true"/>
 		</hbox>

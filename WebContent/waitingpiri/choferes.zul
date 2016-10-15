@@ -3,7 +3,8 @@
 <zk>
 
 <style src="/css/style.css" />
-<window border="0" width="100%" height="100%">
+<window border="0" width="100%" height="100%"
+style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 	<hbox height="50px" width="100%" sclass="cabecera rounded"
 	align="center">
 		<label sclass="titulo">Administrar Choferes</label>

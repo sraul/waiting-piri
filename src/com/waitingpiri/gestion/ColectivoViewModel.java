@@ -85,6 +85,7 @@ public class ColectivoViewModel implements ABM{
 			} catch (Exception e) {
 				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
 						null, 0);
+				return;
 			}
 		}
 		this.selectedColectivo = null;
