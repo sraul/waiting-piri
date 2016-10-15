@@ -1,5 +1,5 @@
 <?page title="Waiting Piri - Web" contentType="text/html;charset=UTF-8"?>
-<?link rel="icon" type="image/x-icon" href="/images/logo.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/icon_logo.ico"?>
 <zk>
 	<style src="/css/style.css"/>
 	<window border="0" width="100%" height="100%"
@@ -15,43 +15,61 @@
 			<label sclass="titulo">Menú Principal</label>
 			<div hflex="true"/>
 			<div width="20px"></div>
-		</hbox>
-
-		<vbox width="100%" vflex="true" pack="center" align="center">
-			<button sclass="btn-success btn-lg" width="300px"
-				height="60px" href="funcionarios.zul"
-				style="background-color:#008080">
+			</hbox>
+			<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
+			
+			<hbox vflex="true" width="100%" pack="center" align="center">
+			<hlayout>
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-briefcase"
+				height="100px" href="funcionarios.zul"
+				style="background-color:#008080;font-size:14px">
 				Administrar Funcionarios
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="300px"
-				height="60px" href="usuarios.zul"
-				style="background-color:#008080">
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-user"
+				height="100px" href="usuarios.zul"
+				style="background-color:#008080;font-size:15px">
 				Administrar Usuarios
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="300px"
-				height="60px" href="colectivos.zul"
-				style="background-color:#008080">
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-glyphicon-bus"
+				height="100px" href="colectivos.zul"
+				style="background-color:#008080;font-size:15px">
 				Administrar Colectivos
 			</button>
-			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="300px"
-				height="60px"  href="cargo.zul"
-				style="background-color:#008080">
+			</hlayout>
+			</hbox>
+			<hbox vflex="true" width="100%" pack="center" align="center">
+			<hlayout>
+			<button sclass="btn-success btn-lg" width="200px"
+				height="100px"  href="cargo.zul"
+				style="background-color:#008080;font-size:15px">
 				Administrar Cargos
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="300px"
-				height="60px" style="background-color:#008080">
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-file-o" 
+				height="100px"
+				style="background-color:#008080;font-size:15px">
+				Informes
+			</button>
+			<div height="10px" />
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-map-marker" 
+				height="100px" style="background-color:#008080;font-size:15px">
 				Monitorear Colectivos
 			</button>
-		</vbox>
-
-		<hbox height="50px" width="100%" sclass="cabecera rounded" >
-  				<div sclass="uni">Universidad del Norte</div>
-  				<div sclass="integ">Tesis de Grado Año 2016</div>
-  				<div sclass="wp">Waiting Piri Versión 1.0</div>
+		</hlayout>
 		</hbox>
+	</vbox>
+	<space></space>
+			<hbox height="100px" width="100%" sclass="cabecera rounded" align="center">
+			<div sclass="titulo" width="100%" style="align:center;padding:5px"><image src="/images/logo_chico.png" height="80px"></image></div>
+			<vlayout>
+			<label sclass="pie">Aplicación móvil/web de Geolocalización de unidades</label>
+			 <label sclass="pie"> del transporte público de la Empresa Piribebuy S.A</label>
+			 <label sclass="pie">Año 2016</label>
+			</vlayout>
+			<div hflex="true"/>
+		</hbox>
+		
 	</window>
 </zk>

@@ -1,5 +1,5 @@
 <?page title="Waiting Piri" contentType="text/html;charset=UTF-8"?>
-<?link rel="icon" type="image/x-icon" href="/images/logo.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/icon_logo.ico"?>
 <zk>
 <style src="/css/style.css" />
 <window border="0" width="100%" height="100%"
@@ -126,12 +126,16 @@ viewModel="@id('vm') @init('com.waitingpiri.gestion.CargoViewModel')">
 				</vlayout>
 				
 			</hbox>
-			
+			<space></space>
 		</vbox>
 		<hbox height="50px" width="100%" sclass="cabecera rounded">
-				<div sclass="uni">Universidad del Norte</div>
-  				<div sclass="integ">Tesis de Grado Año 2016</div>
-  				<div sclass="wp">Waiting Piri Versión 1.0</div>
+				<div sclass="titulo" width="100%" style="align:center;padding:5px"><image src="/images/logo_chico.png" height="80px"></image></div>
+			<vlayout>
+			<label sclass="pie">Aplicación móvil/web de Geolocalización de unidades</label>
+			 <label sclass="pie"> del transporte público de la Empresa Piribebuy S.A</label>
+			 <label sclass="pie">Año 2016</label>
+			</vlayout>
+			<div hflex="true"/>
 		</hbox>
 </window>
 </zk>
