@@ -1,5 +1,5 @@
 <?page title="Waiting Piri" contentType="text/html;charset=UTF-8"?>
-<?link rel="icon" type="image/x-icon" href="/images/icon_logo.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/icono.ico"?>
 <zk>
 <style src="/css/style.css" />
 <window border="0" width="100%" height="100%"
