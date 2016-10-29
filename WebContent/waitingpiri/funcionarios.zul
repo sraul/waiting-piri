@@ -222,7 +222,7 @@
 	<space></space>
 		<hbox height="80px" width="100%" sclass="cabecera rounded" align="center">
 			<div sclass="titulo" width="100%" style="align:center; padding:5px;">
-			<image src="/images/logo_pie de página.png" height="70px"></image>
+			<image src="/images/logo_pie de página.png" width="65px" height="70px"></image>
 			</div>
 			<vlayout>
 		<label sclass="pie"> Aplicación móvil/web de Geolocalización de unidades</label>
