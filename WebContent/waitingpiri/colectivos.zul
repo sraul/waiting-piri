@@ -4,8 +4,7 @@
 	<style src="/css/style.css" />
 	<window border="0" width="100%" height="100%"
 	apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.waitingpiri.gestion.ColectivoViewModel')"
-		style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.ColectivoViewModel')" style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
 			
@@ -162,14 +161,13 @@
 				</hbox>
 			</vbox>
 			<space></space>
-			<hbox height="100px" width="100%" sclass="cabecera rounded" align="center">
+			<hbox height="80px" width="100%" sclass="cabecera rounded" align="center">
 			<div sclass="titulo" width="100%" style="align:center; padding:5px;">
-			<image src="/images/logo_chico.png" height="80px"></image>
+			<image src="/images/logo_pie de página.png" height="70px"></image>
 			</div>
 			<vlayout>
-			<label sclass="pie">Aplicación móvil/web de Geolocalización de unidades</label>
-			 <label sclass="pie"> del transporte público de la Empresa Piribebuy S.A</label>
-			 <label sclass="pie">Año 2016</label>
+		<label sclass="pie"> Aplicación móvil/web de Geolocalización de unidades</label>
+			<label sclass="pie"> del transporte público de la Empresa Piribebuy S.A  Año 2016</label>
 			</vlayout>
 		</hbox>
 </window>

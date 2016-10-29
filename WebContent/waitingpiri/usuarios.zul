@@ -138,14 +138,14 @@ style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 			
 		</vbox>
 		<space></space>
-		<hbox height="50px" width="100%" sclass="cabecera rounded">
-				<div sclass="titulo" width="100%" style="align:center;padding:5px"><image src="/images/logo_chico.png" height="80px"></image></div>
+		<hbox height="80px" width="100%" sclass="cabecera rounded" align="center">
+			<div sclass="titulo" width="100%" style="align:center; padding:5px;">
+			<image src="/images/logo_pie de página.png" height="70px"></image>
+			</div>
 			<vlayout>
-			<label sclass="pie">Aplicación móvil/web de Geolocalización de unidades</label>
-			 <label sclass="pie"> del transporte público de la Empresa Piribebuy S.A</label>
-			 <label sclass="pie">Año 2016</label>
+		<label sclass="pie"> Aplicación móvil/web de Geolocalización de unidades</label>
+			<label sclass="pie"> del transporte público de la Empresa Piribebuy S.A  Año 2016</label>
 			</vlayout>
-			<div hflex="true"/>
 		</hbox>
 </window>
 </zk>

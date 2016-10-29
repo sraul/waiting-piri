@@ -6,8 +6,7 @@
 	apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('com.waitingpiri.gestion.MainMenuViewModel')"
 		style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
-		<hbox height="50px" width="100%" sclass="cabecera rounded"
-			align="center">
+		<hbox height="50px" width="100%" sclass="cabecera rounded" align="center">
 			
 			<button sclass="btn-success" iconSclass="z-icon-sign-out"
 				style="background-color:white;color:#008080; margin-left: 15px" onClick="@command('salir')">
@@ -27,13 +26,13 @@
 				Administrar Funcionarios
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-user"
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-group"
 				height="100px" href="usuarios.zul"
 				style="background-color:#008080;font-size:15px">
 				Administrar Usuarios
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-check-circle "
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-check-circle"
 				height="100px" href="colectivos.zul"
 				style="background-color:#008080;font-size:15px">
 				Administrar Colectivos
@@ -48,7 +47,7 @@
 				Administrar Cargos
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-file-o" 
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-file-text" 
 				height="100px"
 				style="background-color:#008080;font-size:15px">
 				Informes
@@ -62,12 +61,11 @@
 		</hbox>
 	</vbox>
 	<space></space>
-			<hbox height="100px" width="100%" sclass="cabecera rounded" align="center">
-			<div sclass="titulo" width="100%" style="align:center;padding:5px"><image src="/images/logo_chico.png" height="80px"></image></div>
+			<hbox height="80px" width="100%" sclass="cabecera rounded" align="center">
+			<div sclass="titulo" width="100%" style="align:center;padding:5px"><image src="/images/logo_pie de página.png" height="70px"></image></div>
 			<vlayout>
-			<label sclass="pie">Aplicación móvil/web de Geolocalización de unidades</label>
-			 <label sclass="pie"> del transporte público de la Empresa Piribebuy S.A</label>
-			 <label sclass="pie"> Año 2016</label>
+			<label sclass="pie"> Aplicación móvil/web de Geolocalización de unidades</label>
+			<label sclass="pie"> del transporte público de la Empresa Piribebuy S.A  Año 2016</label>
 			</vlayout>
 			<div hflex="true"/>
 		</hbox>
