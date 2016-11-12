@@ -27,7 +27,7 @@
 				onOK="@command('login')"></textbox>
 			<div height="5px"></div>
 			<button sclass="btn-success" hflex="true" style="font-size:12pt; background-color:#008080"
-				onClick="@command('login')">Ingresar..</button>
+				onClick="@command('login')">Iniciar Sesión</button>
 		</vbox>
 	</hbox>
 </window>
