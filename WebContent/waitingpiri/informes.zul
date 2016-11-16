@@ -1,0 +1,82 @@
+<?page title="Waiting Piri - Web" contentType="text/html;charset=UTF-8"?>
+<?link rel="icon" type="image/x-icon" href="/images/icono.ico"?>
+<zk>
+	<style src="/css/style.css" />
+	<window border="0" width="100%" height="100%"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.InformesViewModel')"
+		style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;"
+		id="win">
+		
+		<!-- Cabecera -->
+		<hbox height="50px" width="100%" sclass="cabecera rounded"
+			align="center">
+			
+			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
+				href="menuprincipal.zul" style="background-color:White; color:#008080; margin-left: 15px">
+				Atrás..
+			</button>
+			<label sclass="titulo">Panel de Informes</label>
+			<div hflex="true" />
+			<div width="20px"></div>
+		</hbox>
+
+		<hbox vflex="true" width="100%" pack="center" align="center">
+			<groupbox title="INFORMES" mold="3d" sclass="rounded"
+				style="background:white; margin-left:20px; margin-right:20px; margin-top:20px; margin-bottom: 20px"
+				hflex="true" vflex="true">
+				<hlayout height="100%">
+				<vlayout sclass="button-container" width="220px" vflex="true" style="padding:10px">
+					<label value="Informe:"/>
+					<combobox model="@load(vm.reportes)"
+						placeholder="Seleccione el Informe.." 
+						selectedItem="@bind(vm.selectedReporte)"
+						instant="true" hflex="true">
+						<template name="model">
+							<comboitem label="@load(each[1])" disabled="@load(!each[2])"
+								style="@load(each[2]? '':'color:#bbb')"
+								image="/images/report.png"/>
+						</template>
+					</combobox>
+					<label value="Formato:"/>
+					<combobox model="@load(vm.formatos)"
+						placeholder="Seleccione el Formato.." 
+						selectedItem="@bind(vm.selectedFormato)"
+						hflex="true">
+						<template name="model">
+							<comboitem label="@load(each[0])"/>
+						</template>
+					</combobox>
+					<space/>
+					<button id="verInfo" label="Ver Informe" hflex="true"
+						iconSclass="z-icon-check" dir="normal"
+						onClick="@command('showReport')"
+						disabled="@load((vm.selectedFormato eq null) or (vm.selectedReporte eq null))"
+						sclass="btn-success"
+						style="background-color:#008080">						
+					</button>
+				</vlayout>
+
+				<jasperreport id="report" hflex="true" vflex="true"
+					src="@load(vm.reportConfig.source, after='showReport')"
+					parameters="@load(vm.reportConfig.parameters, after='showReport')"
+					type="@load(vm.selectedFormato[1], after='showReport')"
+					datasource="@load(vm.reportConfig.dataSource, after='showReport')"
+					onLater="@command('clearProgress')">	
+				</jasperreport>
+				<space/>
+				</hlayout>
+			</groupbox>
+		</hbox>
+	<space></space>
+		<hbox height="80px" width="100%" sclass="cabecera rounded" align="center">
+			<div sclass="titulo" width="100%" style="align:center; padding:5px;">
+			<image src="/images/logo_pie_de_pagina.png" width="65px" height="70px"></image>
+			</div>
+			<vlayout>
+		<label sclass="pie"> Aplicación móvil/web de Geolocalización de unidades</label>
+			<label sclass="pie"> del transporte público de la Empresa Piribebuy S.A  Año 2016</label>
+			</vlayout>
+		</hbox>
+	</window>
+</zk>

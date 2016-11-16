@@ -173,14 +173,18 @@
 								<label sclass="field" value="FOTOGRAFÍA:" />
 								<hlayout valign="bottom">
 									<image height="150px" width="170px"
-										src="/fotos/funcionario.png" />
-									<fileupload
-										id="fotoUpload"
-										width="130px" iconSclass="z-icon-upload"
-										upload="true"
-										disabled="@load(!vm.modoEdicion)">
-										Subir Foto..
-									</fileupload>
+										src="@load(vm.selectedFuncionario.foto)" 
+										sclass="rounded"
+										visible="@load(vm.selectedFuncionario eq null? 'false' : 'true' or 
+											!vm.modoEdicion)"/>
+									<toolbarbutton
+										label=" Subir Foto.."
+										style="font-weight:bold" upload="true"
+										iconSclass="z-icon-upload"
+										onUpload="@command('uploadImage', event=event)"
+										disabled="@load(!vm.modoEdicion)"
+										width="130px">
+									</toolbarbutton>
 								</hlayout>
 							</row>
 						</rows>
@@ -222,7 +226,7 @@
 	<space></space>
 		<hbox height="80px" width="100%" sclass="cabecera rounded" align="center">
 			<div sclass="titulo" width="100%" style="align:center; padding:5px;">
-			<image src="/images/logo_pie de página.png" width="65px" height="70px"></image>
+			<image src="/images/logo_pie_de_pagina.png" width="65px" height="70px"></image>
 			</div>
 			<vlayout>
 		<label sclass="pie"> Aplicación móvil/web de Geolocalización de unidades</label>

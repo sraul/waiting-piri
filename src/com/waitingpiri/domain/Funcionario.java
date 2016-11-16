@@ -21,6 +21,10 @@ public class Funcionario {
 		this.cargo = cargo;
 	}
 	
+	public String getFoto() {
+		return "/fotos/" + this.id + ".jpg";
+	}
+	
 
 	public int getId() {
 		return id;

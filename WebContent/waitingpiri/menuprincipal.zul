@@ -49,12 +49,14 @@
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-file-text" 
 				height="100px"
-				style="background-color:#008080;font-size:15px">
+				style="background-color:#008080;font-size:15px"
+				href="informes.zul">
 				Informes
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-map-marker" 
-				height="100px" style="background-color:#008080;font-size:15px">
+				height="100px" style="background-color:#008080;font-size:15px"
+				href="monitoreo.zul">
 				Monitorear Colectivos
 			</button>
 		</hlayout>
@@ -63,7 +65,7 @@
 	<space></space>
 			<hbox height="80px" width="100%" sclass="cabecera rounded" align="center">
 			<div sclass="titulo" width="100%" style="align:center;padding:5px">
-			<image src="/images/logo_pie de página.png" width="65px" height="70px"></image></div>
+			<image src="/images/logo_pie_de_pagina.png" width="65px" height="70px"></image></div>
 			<vlayout>
 			<label sclass="pie"> Aplicación móvil/web de Geolocalización de unidades</label>
 			<label sclass="pie"> del transporte público de la Empresa Piribebuy S.A  Año 2016</label>

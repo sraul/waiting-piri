@@ -1,0 +1,66 @@
+<?page title="Waiting-Piri" contentType="text/html;charset=UTF-8"?>
+<?link rel="icon" type="image/x-icon" href="images/ic_alpasa.ico"?>
+<zk>
+	<style src="/css/style.css" />
+	<window border="0" width="100%" height="100%"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.MapaViewModel')"
+		style="background-color:#E6E6E6;"
+		contentStyle="background-color:#E6E6E6;" id="win">
+
+		<!-- Cabecera -->
+		<hbox height="50px" width="100%" sclass="cabecera rounded"
+			align="center">
+
+			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
+				href="menuprincipal.zul"
+				style="background-color:White; color:#008080; margin-left: 15px">
+				Atrás..
+			</button>
+			<label sclass="titulo">Monitoreo de Colectivos</label>
+			<div hflex="true" />
+			<div width="20px"></div>
+		</hbox>
+		<vbox width="100%" vflex="true" style="padding:20px"
+			pack="center" align="center">
+			<radiogroup>
+				<radio  label=" DE ASUNCION A PIRIBEBUY" style="font-weight:bold; margin-right:20px"
+					selected="true"></radio>
+				<radio label=" DE PIRIBEBUY A ASUNCION" style="font-weight:bold; margin-right:10px"></radio>
+			</radiogroup>
+			<borderlayout width="1000px" vflex="true">
+				<center fulfill="self.onCreate">
+					<div height="100%" width="100%">
+						<gmaps height="100%" hflex="true"
+							lat="-25.3054494" lng="-57.5351386"
+							children="@load(vm.localizaciones)" zoom="13">
+							<template name="children">
+								<gmarker lat="@load(each.latitud)"
+									lng="@load(each.longitud)"
+									content="@load(each.colectivo.nroChasis)" open="true" />
+							</template>
+						</gmaps>
+					</div>
+				</center>
+			</borderlayout>
+		</vbox>
+		<hbox height="80px" width="100%" sclass="cabecera rounded"
+			align="center">
+			<div sclass="titulo" width="100%"
+				style="align:center; padding:5px;">
+				<image src="/images/logo_pie_de_pagina.png" width="65px"
+					height="70px">
+				</image>
+			</div>
+			<vlayout>
+				<label sclass="pie">
+					Aplicación móvil/web de Geolocalización de unidades
+				</label>
+				<label sclass="pie">
+					del transporte público de la Empresa Piribebuy S.A
+					Año 2016
+				</label>
+			</vlayout>
+		</hbox>
+	</window>
+</zk>

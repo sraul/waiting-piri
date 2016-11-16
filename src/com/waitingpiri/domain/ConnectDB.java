@@ -8,14 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.waitingpiri.gestion.Localizacion;
 import com.waitingpiri.util.DBUtil;
 
 public class ConnectDB {
 
 	static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/waitingpiri";
-	static final String DB_USER = "admin";
-	static final String DB_PASS = "admin";
+	static final String DB_USER = "root";
+	static final String DB_PASS = "qwerty";
 	
 	private static ConnectDB instance = new ConnectDB();
 	private static Connection connection = null;
@@ -190,8 +191,8 @@ public class ConnectDB {
 	public List<Colectivo> getColectivos(String id, String nroColec, String nroChapa) {
 		List<Colectivo> out = new ArrayList<Colectivo>();
 		String sql = "SELECT * FROM COLECTIVO WHERE CAST(ID AS CHAR(10)) LIKE '%" + id + "%' AND"
-				+ " NROCOLEC LIKE UPPER('%" + nroColec.toUpperCase() + "%')"
-				+ " AND NROCHAPA LIKE UPPER('%" + nroChapa.toUpperCase() + "%')";
+				+ " NROCOLEC LIKE UPPER('%" + nroColec.toUpperCase() + "%')" + " AND NROCHAPA LIKE UPPER('%"
+				+ nroChapa.toUpperCase() + "%')";
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -200,15 +201,39 @@ public class ConnectDB {
 				String nroCol = result.getString("NROCOLEC");
 				String nroChas = result.getString("NROCHASIS");
 				String nroChap = result.getString("NROCHAPA");
-				String imei=result.getString("IMEI");
-				Colectivo col = new Colectivo(idCol,nroCol,nroChas,nroChap,imei);
+				String imei = result.getString("IMEI");
+				Colectivo col = new Colectivo(idCol, nroCol, nroChas, nroChap, imei);
 				out.add(col);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return out;
+	}
+	
+	/**
+	 * @return las localizaciones..
+	 */
+	public List<Localizacion> getLocalizaciones(Colectivo colectivo) {
+		List<Localizacion> out = new ArrayList<Localizacion>();
+		String sql = "SELECT * FROM LOCALIZACIONES WHERE NROCHASIS = '"
+				+ colectivo.getNroChasis() + "' ORDER BY FECHA DESC";
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				Localizacion loc = new Localizacion();
+				loc.setLatitud(result.getDouble("LATITUD"));
+				loc.setLongitud(result.getDouble("LONGITUD"));
+				loc.setColectivo(colectivo);
+				out.add(loc);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return out;
+	}
 	
 	
 	/**
