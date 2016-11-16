@@ -41,6 +41,20 @@
 			</hbox>
 			<hbox vflex="true" width="100%" pack="center" align="center">
 			<hlayout>
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-money"
+				height="100px" href="informaciones.zul"
+				style="background-color:#008080;font-size:14px">
+				Informaciones Tarifas
+			</button>
+			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-clock-o"
+				height="100px" href="informaciones.zul"
+				style="background-color:#008080;font-size:14px">
+				Informaciones Horarios
+			</button>
+			</hlayout>
+			</hbox>
+			<hbox vflex="true" width="100%" pack="center" align="center">
+			<hlayout>
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-male"
 				height="100px"  href="cargo.zul"
 				style="background-color:#008080;font-size:15px">

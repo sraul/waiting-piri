@@ -28,8 +28,7 @@ public class DBUtil {
 			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "NROCOLEC VARCHAR(200)," 
 			+ "NROCHASIS VARCHAR(200)," + "NROCHAPA VARCHAR(200),"+"IMEI VARCHAR(25)," + "PRIMARY KEY(ID))";
 	
-	static final String CREATE_TABLE_SUGERENCIA = "CREATE TABLE SUGERENCIA (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
-			+ "FECHA VARCHAR(100), "
+	static final String CREATE_TABLE_HORARIO = "CREATE TABLE HORARIO (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
 			+ "DESCRIPCION VARCHAR(200),"+ "PRIMARY KEY(ID))";
 	
 	public static final String INSERT_CARGO = "INSERT INTO CARGO (DESCRIPCION) values (";
@@ -40,7 +39,7 @@ public class DBUtil {
 	
 	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS , NROCHAPA, IMEI) values (";
 	
-	public static final String INSERT_SUGERENCIA = "INSERT INTO SUGERENCIA (FECHA, DESCRIPCION) values (";
+	public static final String INSERT_HORARIO = "INSERT INTO SUGERENCIA (FECHA, DESCRIPCION) values (";
 	
 	public static final String DELETE_FUNCIONARIO = "DELETE FROM FUNCIONARIO WHERE ID = ";
 
@@ -81,7 +80,7 @@ public class DBUtil {
 			conn.executeUpdate(CREATE_TABLE_COLECTIVO);
 			System.out.println("Tabla [colectivo] creada..");
 			
-			conn.executeUpdate(CREATE_TABLE_SUGERENCIA);
+			conn.executeUpdate(CREATE_TABLE_HORARIO);
 			System.out.println("Tabla [sugerencia] creada..");
 
 			for (Cargo car : cargos){
@@ -112,7 +111,7 @@ public class DBUtil {
 			}
 			
 			for (Sugerencia sug : sugerencias) {
-				String insert = INSERT_SUGERENCIA + "'" + sug.getFecha() + "','" + sug.getDescripcion() + "')";
+				String insert = INSERT_HORARIO + "'" + sug.getFecha() + "','" + sug.getDescripcion() + "')";
 				conn.executeUpdate(insert);
 				System.out.println("Sugerencia insertado..");
 			}
