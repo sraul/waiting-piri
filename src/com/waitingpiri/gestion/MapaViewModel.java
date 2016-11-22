@@ -42,11 +42,26 @@ public class MapaViewModel {
 	/**
 	 * @return las localizaciones de los colectivos..
 	 */
-	public List<Localizacion> getLocalizaciones() {
+	public List<Localizacion> getLocalizacionesIda() {
 		ConnectDB conn = ConnectDB.getInstance();
 		List<Localizacion> out = new ArrayList<Localizacion>();
 		for (Colectivo colectivo : this.getColectivos()) {
-			List<Localizacion> locs = conn.getLocalizaciones(colectivo);
+			List<Localizacion> locs = conn.getLocalizaciones(colectivo, 0);
+			if (locs.size() > 0) {
+				out.add(locs.get(0));
+			}			
+		}
+		return out;
+	}
+	
+	/**
+	 * @return las localizaciones de los colectivos..
+	 */
+	public List<Localizacion> getLocalizacionesVuelta() {
+		ConnectDB conn = ConnectDB.getInstance();
+		List<Localizacion> out = new ArrayList<Localizacion>();
+		for (Colectivo colectivo : this.getColectivos()) {
+			List<Localizacion> locs = conn.getLocalizaciones(colectivo, 1);
 			if (locs.size() > 0) {
 				out.add(locs.get(0));
 			}			

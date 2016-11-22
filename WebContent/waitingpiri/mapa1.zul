@@ -15,11 +15,11 @@
 			<div height="100%" width="100%">
 				<gmaps id="mp2" height="100%" hflex="true"
 					lat="-25.3054494" lng="-57.5351386"
-					children="@load(vm.localizaciones)"
+					children="@load(vm.localizacionesIda)"
 					zoom="13">
 					<template name="children">
 						<gmarker lat="@load(each.latitud)"
-							lng="@load(each.longitud)" content="@load(each.colectivo.nroChasis)"
+							lng="@load(each.longitud)" content="@load(each.colectivo.nroColec)"
 							open="true" />
 					</template>
 				</gmaps>
