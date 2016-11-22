@@ -1,0 +1,37 @@
+<?page title="Waiting Piri- Web" contentType="text/html;charset=UTF-8"?>
+<?link rel="icon" type="image/x-icon" href="/images/icono.ico"?>
+<zk>
+	<style src="/css/style.css" />
+	<window border="0" width="100%" height="100%"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.TarifasViewModel')" style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
+		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
+				<listbox vflex="true" width="100%" sclass="rounded"
+				model="@load(vm.tarifas)"
+				selectedItem="@bind(vm.selectedTarifa)"
+				visible="@load(!vm.modoEdicion)">
+					<listhead style="text-align:center">
+						<listheader label="DESDE" style="text-align:center" />
+						<listheader label="HASTA" style="text-align:center" />
+						<listheader label="PRECIO" style="text-align:center" width="100px" 
+							align="right"/>
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.desde)" />
+							<listcell label="@load(each.hasta)" />
+							<listcell label="@load(each.precio) @converter('formattedNumber', format='###,###,##0')" />
+						</listitem>
+					</template>					
+					<listfoot>
+						<listfooter span="4" align="left">
+							<hlayout>
+								<label value="@load(vm.tarifas.size())" sclass="field" />
+								<label value="ítems" sclass="field"/>
+							</hlayout>
+						</listfooter>
+					</listfoot>
+				</listbox>
+			</vbox>
+</window>
+</zk>
