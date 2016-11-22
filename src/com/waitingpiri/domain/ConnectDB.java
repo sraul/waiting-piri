@@ -185,6 +185,7 @@ public class ConnectDB {
 		}
 		return out;
 	}
+	
 	/**
 	 * @return los colectivos..
 	 */
@@ -214,10 +215,10 @@ public class ConnectDB {
 	/**
 	 * @return las localizaciones..
 	 */
-	public List<Localizacion> getLocalizaciones(Colectivo colectivo) {
+	public List<Localizacion> getLocalizaciones(Colectivo colectivo, int flag) {
 		List<Localizacion> out = new ArrayList<Localizacion>();
 		String sql = "SELECT * FROM LOCALIZACIONES WHERE NROCHASIS = '"
-				+ colectivo.getNroChasis() + "' ORDER BY FECHA DESC";
+				+ colectivo.getNroColec() + "' AND FLAG = " + flag + "  ORDER BY FECHA DESC";
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -235,6 +236,51 @@ public class ConnectDB {
 		return out;
 	}
 	
+	/**
+	 * @return los horarios..
+	 */
+	public List<Horario> getHorarios(String id, String descripcion) {
+		List<Horario> out = new ArrayList<Horario>();
+		String sql = "SELECT * FROM HORARIO WHERE CAST(ID AS CHAR(10)) LIKE '%" + id + "%' AND"
+				+ " DESCRIPCION LIKE UPPER('%" + descripcion.toUpperCase() + "%')";
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				int idCol = result.getInt("ID");
+				String descripcion_ = result.getString("DESCRIPCION");
+				Horario horario = new Horario(idCol, descripcion_);
+				out.add(horario);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return out;
+	}
+	
+	/**
+	 * @return las tarifas..
+	 */
+	public List<Tarifa> getTarifas(String id, String desde, String hasta) {
+		List<Tarifa> out = new ArrayList<Tarifa>();
+		String sql = "SELECT * FROM TARIFA WHERE CAST(ID AS CHAR(10)) LIKE '%" + id + "%' AND" + " DESDE LIKE UPPER('%"
+				+ desde.toUpperCase() + "%')" + " AND HASTA LIKE UPPER('%" + hasta.toUpperCase() + "%')";
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				int idCol = result.getInt("ID");
+				String desdeCol = result.getString("DESDE");
+				String hastaCol = result.getString("HASTA");
+				Double precio = result.getDouble("PRECIO");
+				Tarifa tarifa = new Tarifa(idCol, desdeCol, hastaCol, precio);
+				out.add(tarifa);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return out;
+	}
 	
 	/**
 	 * inserta un nuevo funcionario..
@@ -300,46 +346,97 @@ public class ConnectDB {
 		this.executeUpdate(insert);
 		
 	}
-	/** 
+	
+	/**
 	 * elimina un colectivo
 	 */
-	public void deleteColectivo(Colectivo col)  throws  Exception{
-		String delete=DBUtil.DELETE_COLECTIVO + col.getId();
-			this.executeUpdate(delete);
-		}
+	public void deleteColectivo(Colectivo col) throws Exception {
+		String delete = DBUtil.DELETE_COLECTIVO + col.getId();
+		this.executeUpdate(delete);
+	}
+	
+	/**
+	 * elimina un horario
+	 */
+	public void deleteHorario(Horario hor) throws Exception {
+		String delete = DBUtil.DELETE_HORARIO + hor.getId();
+		this.executeUpdate(delete);
+	}
+	
+	/**
+	 * elimina una tarifa
+	 */
+	public void deleteTarifa(Tarifa tarifa) throws Exception {
+		String delete = DBUtil.DELETE_TARIFA + tarifa.getId();
+		this.executeUpdate(delete);
+	}
 	
 	/**
 	 * update colectivo
-	 */
-	
+	 */	
 	public void updateColectivo(Colectivo col) throws Exception{
 		String update=DBUtil.UPDATE_COLECTIVO + "NROCOLEC = '"+col.getNroColec()+"', NROCHASIS = '"
 		+col.getNroChasis()+"', NROCHAPA ='"+col.getNroChapa()+"', IMEI ='"+col.getImei()+"'"+"WHERE ID= "+col.getId();
 		this.executeUpdate(update);
 	}
+
 	/**
 	 * inserta un nuevo cargo..
 	 */
+	public void insertCargo(Cargo car) throws Exception {
+		String insert = DBUtil.INSERT_CARGO + "'" + car.getDescripcion() + "')";
+		this.executeUpdate(insert);
 
-  public void insertCargo(Cargo car ) throws Exception{
-	  String insert= DBUtil.INSERT_CARGO+ "'"+car.getDescripcion()+"')";
-	  this.executeUpdate(insert);
-	  
-  }
-  
-  /**
+	}
+  	
+	/**
+	 * inserta un nuevo horario..
+	 */
+	public void insertHorario(Horario hor) throws Exception {
+		String insert = DBUtil.INSERT_HORARIO + "'" + hor.getDescripcion() + "')";
+		this.executeUpdate(insert);
+	}
+	
+	/**
+	 * inserta una nueva tarifa..
+	 */
+	public void insertTarifa(Tarifa tarifa) throws Exception {
+		String insert = DBUtil.INSERT_TARIFA + "'" + tarifa.getDesde() + "', '" + tarifa.getHasta() + "'," + tarifa.getPrecio() + ")";
+		this.executeUpdate(insert);
+	}
+	
+	/**
+	 * update de un horario..
+	 */
+	public void updateHorario(Horario hor) throws Exception{
+		String update = DBUtil.UPDATE_HORARIO + "DESCRIPCION = '" + hor.getDescripcion() + "'" + "WHERE ID= " + hor.getId();
+		this.executeUpdate(update);
+	}
+	
+	/**
+	 * update de una tarifa..
+	 */
+	public void updateTarifa(Tarifa tarifa) throws Exception {
+		String update = DBUtil.UPDATE_TARIFA + "DESDE = '" + tarifa.getDesde() + "', HASTA = '" + tarifa.getHasta()
+				+ "', PRECIO = " + tarifa.getPrecio() + " WHERE ID= " + tarifa.getId();
+		this.executeUpdate(update);
+	}
+
+	/**
 	 * update cargo..
 	 */
 	public void updateCargo(Cargo car) throws Exception {
-		String update = DBUtil.UPDATE_CARGO + "DESCRIPCION = '" + car.getDescripcion() 
-		+"'"+ "WHERE ID= "+ car.getId();
+		String update = DBUtil.UPDATE_CARGO + "DESCRIPCION = '" + car.getDescripcion() + "'" + "WHERE ID= "
+				+ car.getId();
 		this.executeUpdate(update);
 	}
-  /** 
+
+	/**
 	 * elimina un cargo
 	 */
-  public void deleteCargo(Cargo car)  throws  Exception{
-		String delete=DBUtil.DELETE_CARGO + car.getId();
-			this.executeUpdate(delete);
-		}}
+	public void deleteCargo(Cargo car) throws Exception {
+		String delete = DBUtil.DELETE_CARGO + car.getId();
+		this.executeUpdate(delete);
+	}
+}
   
