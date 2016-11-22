@@ -3,6 +3,7 @@ package com.waitingpiri.gestion;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -16,17 +17,16 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
 import com.waitingpiri.domain.ConnectDB;
-import com.waitingpiri.domain.Colectivo;
+import com.waitingpiri.domain.Horario;
 
 public class InformacionesViewModel implements ABM {
 	
-	private String filterID="";
-	private String filterNROCOL="";
-	private String filterCHAPA="";
+	private String filterID = "";
+	private String filterDescripcion = "";
 	
-	private List<Colectivo> colectivosNuevos = new ArrayList<Colectivo>();
+	private List<Horario> horariosNuevos = new ArrayList<Horario>();
 	
-	private Colectivo selectedColectivo;
+	private Horario selectedHorario;
 	private boolean modoEdicion=false;
 	private boolean editando=false;
 	
@@ -38,78 +38,79 @@ public class InformacionesViewModel implements ABM {
 	public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
 		Selectors.wireEventListeners(view, this);
 	}
+	
 	/**
 	 * FUNCIONES
 	 */
 	@Command
-	@NotifyChange({"modoEdicion","selectedColectivo"})
+	@NotifyChange({ "modoEdicion", "selectedHorario" })
 	public void nuevo() {
 		this.modoEdicion=true;
-		this.selectedColectivo=new Colectivo(0,"","","","");
-		
+		this.selectedHorario = new Horario( 0, "" );		
 	}
 
 	@Command
-	@NotifyChange({"modoEdicion", "selectedColectivo"})
+	@NotifyChange({ "modoEdicion", "selectedHorario" })
 	public void editar() {
 		this.modoEdicion=!this.modoEdicion;
 		if (this.modoEdicion) {
 			this.editando = true;
 		} else {
-		this.selectedColectivo = null;
+		this.selectedHorario = null;
 		this.editando = false;
 		}		
 	}	
-	
 
 	@Command
-	@NotifyChange({"modoEdicion","colectivosNuevos", "selectedColectivo", "colectivos"})
+	@NotifyChange({"modoEdicion","horariosNuevos", "selectedHorario", "horarios"})
 	public void guardar() {
 		if (!this.validarDatos()) {
-			Messagebox.show("Error de Datos, verifique..", "Validaci�n de Datos..", Messagebox.OK, Messagebox.ERROR);
+			Messagebox.show("Error de Datos, verifique..", "Validacion de Datos..", Messagebox.OK, Messagebox.ERROR);
 			return;
 		}
 		if (!this.editando) {
 			ConnectDB conn = ConnectDB.getInstance();
 			try {
-				conn.insertColectivo(this.selectedColectivo);
+				conn.insertHorario(this.selectedHorario);
 			} catch (Exception e) {
 				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
 						null, 0);
-			}			
-		}		
-		if(this.editando){
+			}
+		}
+		if (this.editando) {
 			ConnectDB conn = ConnectDB.getInstance();
 			try {
-				conn.updateColectivo(this.selectedColectivo);
+				conn.updateHorario(this.selectedHorario);
 			} catch (Exception e) {
 				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
 						null, 0);
 				return;
 			}
 		}
-		this.selectedColectivo = null;
+		this.selectedHorario = null;
 		this.modoEdicion = false;
 		this.editando = false;
 		Clients.showNotification("Registro Guardado..");
-}
+	}
 
 	@Override
 	@Command
-	@NotifyChange({ "selectedColectivo", "colectivos"})
+	@NotifyChange({ "selectedHorario", "horarios" })
 	public void eliminar() {
 		if (Messagebox.show("Desea eliminar el registro..", "Eliminar registro..", Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION) == Messagebox.OK) {
 			ConnectDB conn = ConnectDB.getInstance();
 			try {
-				conn.deleteColectivo(this.selectedColectivo);
-				this.selectedColectivo = null;
+				conn.deleteHorario(this.selectedHorario);
+				this.selectedHorario = null;
 				Clients.showNotification("Registro eliminado..");
 			} catch (Exception e) {
 				Clients.showNotification("No se pudo eliminar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
 						null, 0);
-		
-			}}}
+			}
+		}
+	}
+	
 	@Override
 	public int getLastId() {
 		// TODO Auto-generated method stub
@@ -118,24 +119,24 @@ public class InformacionesViewModel implements ABM {
 
 	@Override
 	public boolean validarDatos() {
-		boolean out=true;
+		boolean out = true;
 		// campos obligatorios..
-	if(this.selectedColectivo.getNroColec().trim().isEmpty()|| this.selectedColectivo.getNroChasis().trim().isEmpty()|| 
-			this.selectedColectivo.getNroChapa().trim().isEmpty()){
-		out=false;
-		}	
+		if (this.selectedHorario.getDescripcion().trim().isEmpty()) {
+			out = false;
+		}
 		return out;
 	}
+	
+	
 	/**
 	 * GET / SET
 	 */		
-	@DependsOn({ "filterID", "filterNROCOL", "filterCHAPA" })
-	public List<Colectivo> getColectivos() {
+	@DependsOn({ "filterID", "filterDescripcion" })
+	public List<Horario> getHorarios() {
 		ConnectDB conn = ConnectDB.getInstance();
-		return conn.getColectivos(this.filterID, this.filterNROCOL, this.filterCHAPA);
+		return conn.getHorarios(this.filterID, this.filterDescripcion);
 	}	
 	
-
 	@Override
 	@DependsOn("modoEdicion")
 	public boolean isNuevoEnabled() {
@@ -146,12 +147,11 @@ public class InformacionesViewModel implements ABM {
 	}
 	
 	@Override
-	@DependsOn("selectedColectivo")
+	@DependsOn("selectedHorario")
 	public boolean isEditarEnabled() {
-		return this.selectedColectivo != null;
+		return this.selectedHorario != null;
 	}
-	
-	
+
 	@Override
 	@DependsOn("modoEdicion")
 	public boolean isGuardarEnabled() {
@@ -159,55 +159,57 @@ public class InformacionesViewModel implements ABM {
 	}
 
 	@Override
-	@DependsOn({ "selectedColectivo", "modoEdicion" })
+	@DependsOn({ "selectedHorario", "modoEdicion" })
 	public boolean isEliminarEnabled() {
-		return this.selectedColectivo != null && !this.isModoEdicion();
+		return this.selectedHorario != null && !this.isModoEdicion();
 	}
 
 	public String getFilterID() {
 		return filterID;
 	}
+
 	public void setFilterID(String filterID) {
 		this.filterID = filterID;
 	}
-	public String getFilterNROCOL() {
-		return filterNROCOL;
+
+	public String getFilterDescripcion() {
+		return filterDescripcion;
 	}
-	public void setFilterNROCOL(String filterNROCOL) {
-		this.filterNROCOL = filterNROCOL;
+
+	public void setFilterDescripcion(String filterNROCOL) {
+		this.filterDescripcion = filterNROCOL;
 	}
-	public String getFilterCHAPA() {
-		return filterCHAPA;
-	}
-	public void setFilterCHAPA(String filterCHAPA) {
-		this.filterCHAPA = filterCHAPA;
-	}
-	public List<Colectivo> getColectivosNuevos() {
-		return colectivosNuevos;
-	}
-	public void setColectivosNuevos(List<Colectivo> colectivosNuevos) {
-		this.colectivosNuevos = colectivosNuevos;
-	}
-	public Colectivo getSelectedColectivo() {
-		return selectedColectivo;
-	}
-	public void setSelectedColectivo(Colectivo selectedColectivo) {
-		this.selectedColectivo = selectedColectivo;
-	}
+
 	public boolean isModoEdicion() {
 		return modoEdicion;
 	}
+
 	public void setModoEdicion(boolean modoEdicion) {
 		this.modoEdicion = modoEdicion;
 	}
+
 	public boolean isEditando() {
 		return editando;
 	}
+
 	public void setEditando(boolean editando) {
 		this.editando = editando;
 	}
-	
-	
 
+	public List<Horario> getHorariosNuevos() {
+		return horariosNuevos;
+	}
+
+	public void setHorariosNuevos(List<Horario> horariosNuevos) {
+		this.horariosNuevos = horariosNuevos;
+	}
+
+	public Horario getSelectedHorario() {
+		return selectedHorario;
+	}
+
+	public void setSelectedHorario(Horario selectedHorario) {
+		this.selectedHorario = selectedHorario;
+	}
 }
 

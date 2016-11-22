@@ -3,8 +3,8 @@
 <zk>
 	<style src="/css/style.css" />
 	<window border="0" width="100%" height="100%"
-	apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.waitingpiri.gestion.ColectivoViewModel')" style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.InformacionesViewModel')" style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 		<hbox height="50px" width="100%" sclass="cabecera rounded"
 			align="center">
 			
@@ -12,56 +12,46 @@
 				href="menuprincipal.zul" style="background-color:White; color:#008080; margin-left: 15px" >
 				Atrás..
 			</button>
-			<label sclass="titulo">Informaciones</label>
+			<label sclass="titulo">Horarios</label>
 			<div hflex="true"/>
 			
 		</hbox>
 		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
 			<hbox vflex="true" width="100%">
 				<listbox vflex="true" width="100%" sclass="rounded"
-				model="@load(vm.colectivos)"
-				selectedItem="@bind(vm.selectedColectivo)"
+				model="@load(vm.horarios)"
+				selectedItem="@bind(vm.selectedHorario)"
 				visible="@load(!vm.modoEdicion)">
 					<listhead style="text-align:center">
-						<listheader label="ID" align="right" style="text-align:center" />
-						<listheader label="NRO COLECTIVO" align="right" style="text-align:center" />
-						<listheader label="NRO CHAPA" align="left" style="text-align:center"/>	
+						<listheader label="ID" align="right" style="text-align:center" width="100px" />
+						<listheader label="DESCRIPCION" style="text-align:center" />
 					</listhead>
 					<auxhead>
 						<auxheader>
 							<hlayout>
-								<toolbarbutton iconSclass="z-icon-filter"/>
+								<toolbarbutton iconSclass="z-icon-filter" />
 								<textbox hflex="true" placeholder="Buscar.."
-								value="@bind(vm.filterID)" instant="true"/>
+									value="@bind(vm.filterID)" instant="true" />
 							</hlayout>
-						</auxheader>
-					
+						</auxheader>					
 						<auxheader>
 							<hlayout>
 								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
 								<textbox hflex="true" placeholder="Buscar.." 
-								value="@bind(vm.filterNROCOL)" instant="true"/>
-							</hlayout>
-						</auxheader>
-						<auxheader>
-							<hlayout>
-								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
-								<textbox hflex="true" placeholder="Buscar.."
-								value="@bind(vm.filterCHAPA)" instant="true" />
+								value="@bind(vm.filterDescripcion)" instant="true" />
 							</hlayout>
 						</auxheader>
 					</auxhead>
 					<template name="model">
 						<listitem>
 							<listcell label="@load(each.id)"/>
-							<listcell label="@load(each.nroColec)"/>
-							<listcell label="@load(each.nroChapa)"/>
+							<listcell label="@load(each.descripcion)"/>
 						</listitem>
 					</template>					
 					<listfoot>
 						<listfooter span="3" align="left">
 							<hlayout>
-								<label value="@load(vm.colectivos.size())" sclass="field"/>
+								<label value="@load(vm.horarios.size())" sclass="field" />
 								<label value="ítems" sclass="field"/>
 							</hlayout>
 						</listfooter>
@@ -71,7 +61,7 @@
 					<grid vflex="true" sclass="rounded">
 						<auxhead>
 							<auxheader colspan="2"
-								label="Ficha Colectivo" style="text-align:center">
+								label="Ficha Horarios" style="text-align:center">
 							</auxheader>
 						</auxhead>
 						<columns>
@@ -82,50 +72,18 @@
 							<row>
 								<label sclass="field" value="ID:" />
 								<intbox readonly="true"
-								value="@load(vm.selectedColectivo.id)"/>
+								value="@load(vm.selectedHorario.id)"/>
 							</row>
 							<row>
-							<hlayout valign="middle">
-								<label sclass="field" value="NRO COLECTIVO:"/>
-								<label sclass="required">*</label>								
-								</hlayout>	
-								<textbox hflex="true"
-								value="@bind(vm.selectedColectivo.nroColec)"
-								readonly="@load(!vm.modoEdicion)"
-									constraint="no empty"/>
-								
-							</row>
-							<row>
-							<hlayout valign="middle">
-								<label sclass="field" value="NRO CHASIS:"/>
-								<label sclass="required">*</label>								
+								<hlayout valign="middle">
+									<label sclass="field"
+										value="DESCRIPCION:" />
+									<label sclass="required">*</label>
 								</hlayout>
-								<textbox  hflex="true"
-								value="@bind(vm.selectedColectivo.nroChasis)"
-								readonly="@load(!vm.modoEdicion)"
-									constraint="no empty"/>
+								<textbox hflex="true"
+									value="@bind(vm.selectedHorario.descripcion)"
+									readonly="@load(!vm.modoEdicion)" constraint="no empty" />
 							</row> 
-							<row>
-							  <hlayout valign="middle">
-								<label sclass="field" value="NRO CHAPA:"/>
-								<label sclass="required">*</label>								
-								</hlayout>
-								<textbox hflex="true"
-								value="@bind(vm.selectedColectivo.nroChapa)"
-								readonly="@load(!vm.modoEdicion)"
-									constraint="no empty"/>
-							</row>
-							<row>
-							  <hlayout valign="middle">
-								<label sclass="field" value="IMEI:"/>
-								<label sclass="required">*</label>								
-								</hlayout>
-								<textbox hflex="true"
-								value="@bind(vm.selectedColectivo.imei)"
-								readonly="@load(!vm.modoEdicion)"
-									constraint="no empty"/>
-								
-								</row>
 						</rows>
 					</grid>	
 					<hlayout>
