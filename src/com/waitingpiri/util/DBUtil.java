@@ -6,7 +6,8 @@ import com.waitingpiri.domain.Cargo;
 import com.waitingpiri.domain.Colectivo;
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Funcionario;
-import com.waitingpiri.domain.Sugerencia;
+import com.waitingpiri.domain.Horario;
+import com.waitingpiri.domain.Tarifa;
 import com.waitingpiri.domain.Usuario;
 
 public class DBUtil {
@@ -31,6 +32,10 @@ public class DBUtil {
 	static final String CREATE_TABLE_HORARIO = "CREATE TABLE HORARIO (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
 			+ "DESCRIPCION VARCHAR(200),"+ "PRIMARY KEY(ID))";
 	
+	static final String CREATE_TABLE_TARIFA = "CREATE TABLE TARIFA ("
+			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "DESDE VARCHAR(200)," 
+			+ "HASTA VARCHAR(200)," + "PRECIO DOUBLE," + "PRIMARY KEY(ID))";
+	
 	public static final String INSERT_CARGO = "INSERT INTO CARGO (DESCRIPCION) values (";
 
 	public static final String INSERT_FUNCIONARIO = "INSERT INTO FUNCIONARIO (NOMBRE, APELLIDO, CEDULA, DIRECCION, TELEFONO, IDCARGO) values (";
@@ -39,15 +44,21 @@ public class DBUtil {
 	
 	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS , NROCHAPA, IMEI) values (";
 	
-	public static final String INSERT_HORARIO = "INSERT INTO SUGERENCIA (FECHA, DESCRIPCION) values (";
+	public static final String INSERT_HORARIO = "INSERT INTO HORARIO (DESCRIPCION) values (";
+	
+	public static final String INSERT_TARIFA = "INSERT INTO TARIFA (DESDE, HASTA, PRECIO) values (";
 	
 	public static final String DELETE_FUNCIONARIO = "DELETE FROM FUNCIONARIO WHERE ID = ";
 
-	public static final String DELETE_COLECTIVO ="DELETE FROM COLECTIVO WHERE ID=";
+	public static final String DELETE_COLECTIVO ="DELETE FROM COLECTIVO WHERE ID =";
 	
-	public static final String DELETE_USUARIO="DELETE FROM USUARIO WHERE ID=";
+	public static final String DELETE_USUARIO="DELETE FROM USUARIO WHERE ID =";
 	
-	public static final String DELETE_CARGO= "DELETE FROM CARGO WHERE ID=";
+	public static final String DELETE_CARGO= "DELETE FROM CARGO WHERE ID =";
+	
+	public static final String DELETE_HORARIO ="DELETE FROM HORARIO WHERE ID =";
+	
+	public static final String DELETE_TARIFA ="DELETE FROM TARIFA WHERE ID =";
 	
 	public static final String UPDATE_CARGO= "UPDATE CARGO SET ";
 	
@@ -57,13 +68,15 @@ public class DBUtil {
 	
 	public static final String UPDATE_COLECTIVO = "UPDATE COLECTIVO SET ";
 	
+	public static final String UPDATE_HORARIO = "UPDATE HORARIO SET ";
 	
+	public static final String UPDATE_TARIFA = "UPDATE TARIFA SET ";
 	
 	/**
 	 * pobla la base de datos..
 	 */
 	public static void poblarDB(List<Cargo> cargos, List<Funcionario> funcionarios, List<Usuario> usuarios,
-			List<Colectivo> colectivos, List<Sugerencia> sugerencias) {
+			List<Colectivo> colectivos, List<Horario> horarios, List<Tarifa> tarifas) {
 		try {
 
 			ConnectDB conn = ConnectDB.getInstance();
@@ -81,7 +94,10 @@ public class DBUtil {
 			System.out.println("Tabla [colectivo] creada..");
 			
 			conn.executeUpdate(CREATE_TABLE_HORARIO);
-			System.out.println("Tabla [sugerencia] creada..");
+			System.out.println("Tabla [horario] creada..");
+			
+			conn.executeUpdate(CREATE_TABLE_TARIFA);
+			System.out.println("Tabla [tarifa] creada..");
 
 			for (Cargo car : cargos){
 				String insert = INSERT_CARGO + "'" + car.getDescripcion() + "')";
@@ -110,10 +126,16 @@ public class DBUtil {
 				System.out.println("Colectivo insertado..");
 			}
 			
-			for (Sugerencia sug : sugerencias) {
-				String insert = INSERT_HORARIO + "'" + sug.getFecha() + "','" + sug.getDescripcion() + "')";
+			for (Horario horario : horarios) {
+				String insert = INSERT_HORARIO + "'" + horario.getDescripcion() + "')";
 				conn.executeUpdate(insert);
-				System.out.println("Sugerencia insertado..");
+				System.out.println("Horario insertado..");
+			}
+			
+			for (Tarifa tarifa : tarifas) {
+				String insert = INSERT_TARIFA + "'" + tarifa.getDesde() + "','" + tarifa.getHasta() + "', " + tarifa.getPrecio() + ")";
+				conn.executeUpdate(insert);
+				System.out.println("Tarifa insertada..");
 			}
 			
 		} catch (Exception e) {
@@ -136,8 +158,8 @@ public class DBUtil {
 	}
 
 	public static void main(String[] args) {
-		DBUtil.poblarDB(DataUtil.getCargosData(),DataUtil.getFuncionariosData(),
-				DataUtil.getUsuariosData(),DataUtil.getColectivosData(), DataUtil.getSugerenciasData());
+		DBUtil.poblarDB(DataUtil.getCargosData(), DataUtil.getFuncionariosData(), DataUtil.getUsuariosData(),
+				DataUtil.getColectivosData(), DataUtil.getHorariosData(), DataUtil.getTarifasData());
 	}
 	
 }
