@@ -42,7 +42,7 @@
 			<hbox vflex="true" width="100%" pack="center" align="center">
 			<hlayout>
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-money"
-				height="100px" href="informaciones.zul"
+				height="100px" href="tarifas.zul"
 				style="background-color:#008080;font-size:14px">
 				Informaciones Tarifas
 			</button>
