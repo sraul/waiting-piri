@@ -21,8 +21,7 @@ import com.waitingpiri.domain.Tarifa;
 public class TarifasViewModel implements ABM {
 
 	private String filterID = "";
-	private String filterDesde = "";
-	private String filterHasta = "";
+	private String filterDESCRIPCION = "";
 
 	private List<Tarifa> tarifasNuevas = new ArrayList<Tarifa>();
 
@@ -47,7 +46,7 @@ public class TarifasViewModel implements ABM {
 	@NotifyChange({ "modoEdicion", "selectedTarifa" })
 	public void nuevo() {
 		this.modoEdicion = true;
-		this.selectedTarifa = new Tarifa(0, "", "", 0.0);
+		this.selectedTarifa = new Tarifa(0, "", 0.0);
 	}
 
 	@Command
@@ -122,8 +121,8 @@ public class TarifasViewModel implements ABM {
 	public boolean validarDatos() {
 		boolean out = true;
 		// campos obligatorios..
-		if (this.selectedTarifa.getDesde().trim().isEmpty() || this.selectedTarifa.getHasta().trim().isEmpty()) {
-			out = false;
+		if (this.selectedTarifa.getDescripcion().trim().isEmpty()){
+			out=false;
 		}
 		return out;
 	}
@@ -131,10 +130,10 @@ public class TarifasViewModel implements ABM {
 	/**
 	 * GET / SET
 	 */
-	@DependsOn({ "filterID", "filterHasta", "filterDesde" })
+	@DependsOn({ "filterID", "filterDESCRIPCION" })
 	public List<Tarifa> getTarifas() {
 		ConnectDB conn = ConnectDB.getInstance();
-		return conn.getTarifas(this.filterID, this.filterDesde, this.filterHasta);
+		return conn.getTarifas(this.filterID, this.filterDESCRIPCION);
 	}
 
 	@Override
@@ -173,12 +172,12 @@ public class TarifasViewModel implements ABM {
 		this.filterID = filterID;
 	}
 
-	public String getFilterDesde() {
-		return filterDesde;
+	public String getfilterDESCRIPCION() {
+		return filterDESCRIPCION;
 	}
 
-	public void setFilterDesde(String filterNROCOL) {
-		this.filterDesde = filterNROCOL;
+	public void setfilterDESCRIPCION(String filterDESCRIPCION) {
+		this.filterDESCRIPCION = filterDESCRIPCION;
 	}
 
 	public boolean isModoEdicion() {
@@ -197,13 +196,6 @@ public class TarifasViewModel implements ABM {
 		this.editando = editando;
 	}
 
-	public String getFilterHasta() {
-		return filterHasta;
-	}
-
-	public void setFilterHasta(String filterHasta) {
-		this.filterHasta = filterHasta;
-	}
 
 	public List<Tarifa> getTarifasNuevas() {
 		return tarifasNuevas;

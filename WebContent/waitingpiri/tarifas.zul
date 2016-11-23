@@ -1,76 +1,68 @@
-<?page title="Waiting Piri- Web" contentType="text/html;charset=UTF-8"?>
+<?page title="Waiting Piri" contentType="text/html;charset=UTF-8"?>
 <?link rel="icon" type="image/x-icon" href="/images/icono.ico"?>
 <zk>
-	<style src="/css/style.css" />
-	<window border="0" width="100%" height="100%"
-		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.waitingpiri.gestion.TarifasViewModel')" style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
-		<hbox height="50px" width="100%" sclass="cabecera rounded"
-			align="center">
-			
+<style src="/css/style.css" />
+<window border="0" width="100%" height="100%"
+apply="org.zkoss.bind.BindComposer"
+viewModel="@id('vm') @init('com.waitingpiri.gestion.TarifasViewModel')"
+style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
+	<hbox height="50px" width="100%" sclass="cabecera rounded"
+	align="center">
+		
 			<button sclass="btn-success" iconSclass="z-icon-arrow-left"
-				href="menuprincipal.zul" style="background-color:White; color:#008080; margin-left: 15px" >
+				href="menuprincipal.zul" style="background-color:White; color:#008080; margin-left: 15px">
 				Atrás..
-			</button>
-			<label sclass="titulo">Tarifas</label>
-			<div hflex="true"/>
+				</button>
+				<label sclass="titulo">Administrar Cargos</label>
+		<div hflex="true" />
+			<div width="20px"></div>
+	</hbox>
+	<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
+			<hbox width="100" vflex="true">
+			<listbox vflex="true" sclass="rounded"
+			model="@load(vm.tarifas)"
+			selectedItem="@bind(vm.selectedTarifa)"
+			visible="@load(!vm.modoEdicion)">
+				<listhead style="text-align:center">
+					<listheader label="ID" align="right" style="text-align:center"/>
+					<listheader label="DESCRIPCION" align="left" style="text-align:center"/>
+				</listhead>
+			<auxhead>
+				<auxheader>
+					<hlayout>
+						<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
+						<textbox hflex="true" placeholder="Buscar.."
+						value="@bind(vm.filterID)" instant="true"/>					
+					</hlayout>		
+				</auxheader>
+				<auxheader>
+				<hlayout>
+						<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
+						<textbox hflex="true" placeholder="Buscar.."
+						value="@bind(vm.filterDESCRIPCION)" instant="true"/>
+					</hlayout>		
+				</auxheader>
+			</auxhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.id)"/>
+					<listcell label="@load(each.descripcion)" />
+				</listitem>
 			
-		</hbox>
-		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
-			<hbox vflex="true" width="100%">
-				<listbox vflex="true" width="100%" sclass="rounded"
-				model="@load(vm.tarifas)"
-				selectedItem="@bind(vm.selectedTarifa)"
-				visible="@load(!vm.modoEdicion)">
-					<listhead style="text-align:center">
-						<listheader label="ID" align="right" style="text-align:center" width="100px" />
-						<listheader label="DESDE" style="text-align:center" />
-						<listheader label="HASTA" style="text-align:center" />
-						<listheader label="PRECIO" style="text-align:center" width="100px" 
-							align="right"/>
-					</listhead>
-					<auxhead>
-						<auxheader>
-							<hlayout>
-								<toolbarbutton iconSclass="z-icon-filter" />
-								<textbox hflex="true" placeholder="Buscar.."
-									value="@bind(vm.filterID)" instant="true" />
-							</hlayout>
-						</auxheader>					
-						<auxheader>
-							<hlayout>
-								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
-								<textbox hflex="true" placeholder="Buscar.." 
-								value="@bind(vm.filterDesde)" instant="true" />
-							</hlayout>
-						</auxheader>
-						<auxheader>
-							<hlayout>
-								<toolbarbutton iconSclass="z-icon-filter" disabled="true"/>
-								<textbox hflex="true" placeholder="Buscar.." 
-								value="@bind(vm.filterHasta)" instant="true" />
-							</hlayout>
-						</auxheader>
-						<auxheader>
-						</auxheader>
-					</auxhead>
-					<template name="model">
-						<listitem>
-							<listcell label="@load(each.id)" />
-							<listcell label="@load(each.desde)" />
-							<listcell label="@load(each.hasta)" />
-							<listcell label="@load(each.precio) @converter('formattedNumber', format='###,###,##0')" />
-						</listitem>
-					</template>					
-					<listfoot>
-						<listfooter span="4" align="left">
-							<hlayout>
-								<label value="@load(vm.tarifas.size())" sclass="field" />
-								<label value="ítems" sclass="field"/>
-							</hlayout>
-						</listfooter>
-					</listfoot>
+			</template>
+			
+			<listfoot>
+				<listfooter span="2" align="left">
+					<hlayout>
+					<label value="@load(vm.tarifas.size ())" sclass="field"/>
+					<label value="item" sclass="field"/>
+					</hlayout>
+				</listfooter>
+			</listfoot>
 				</listbox>
+								
+					<space />
+										
 				<vlayout vflex="true">
 					<grid vflex="true" sclass="rounded">
 						<auxhead>
@@ -78,84 +70,79 @@
 								label="Ficha Tarifa" style="text-align:center">
 							</auxheader>
 						</auxhead>
+						
 						<columns>
 							<column width="30%" />
 							<column />
 						</columns>
 						<rows>
-							<row>
-								<label sclass="field" value="ID:" />
-								<intbox readonly="true"
-								value="@load(vm.selectedTarifa.id)"/>
-							</row>
-							<row>
+								<row>
+									<label sclass="field" value="ID:" />
+								    <intbox readonly="true"
+								    value="@load(vm.selectedTarifa.id)" />									
+								</row>
+								
+								<row>
 								<hlayout valign="middle">
-									<label sclass="field"
-										value="DESDE:" />
+									<label sclass="field" value="DESCRIPCION"/>
 									<label sclass="required">*</label>
 								</hlayout>
-								<textbox hflex="true"
-									value="@bind(vm.selectedTarifa.desde)"
-									readonly="@load(!vm.modoEdicion)" constraint="no empty" />
-							</row> 
-							<row>
+									<textbox hflex="true"
+									value="@bind(vm.selectedTarifa.descripcion)"
+									readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
+
+								</row>
+									<row>
 								<hlayout valign="middle">
-									<label sclass="field"
-										value="HASTA:" />
+									<label sclass="field" value="PRECIO"/>
 									<label sclass="required">*</label>
 								</hlayout>
-								<textbox hflex="true"
-									value="@bind(vm.selectedTarifa.hasta)"
-									readonly="@load(!vm.modoEdicion)" constraint="no empty" />
-							</row>
-							<row>
-								<hlayout valign="middle">
-									<label sclass="field"
-										value="PRECIO:" />
-									<label sclass="required">*</label>
-								</hlayout>
-								<doublebox hflex="true"
+									<textbox hflex="true"
 									value="@bind(vm.selectedTarifa.precio)"
-									format="###,###,##0"
-									readonly="@load(!vm.modoEdicion)" />
-							</row>
+									readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
+
+								</row>
+							
+								
 						</rows>
-					</grid>	
+				</grid>
 					<hlayout>
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-plus"
-							style="background-color:#008080"
-							disabled="@load(!vm.nuevoEnabled)"
-							onClick="@command('nuevo')">
-							Nuevo
-						</button>
+							 style="background-color:#008080"
+							 disabled="@load(!vm.nuevoEnabled)"
+							 onClick="@command('nuevo')">
+							  Nuevo</button>
 						<button sclass="btn-success" width="130px"
-							iconSclass="@load(vm.modoEdicion? 'z-icon-times' : 'z-icon-pencil')" style="background-color:#008080"
-							onClick="@command('editar')"
-							label="@load(vm.modoEdicion? 'Cancelar' : 'Editar')"
-							disabled="@load(!vm.editarEnabled)">
-						</button>
-						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-floppy-o"
+						iconSclass="z-icon-pencil"
+							 style="background-color:#008080"
+							 onClick="@command('editar')"
+							 label="@load(vm.modoEdicion? 'Cancelar': 'Editar')"
+							 disabled="@load(!vm.editarEnabled)"></button>
+						<button Sclass="btn-success" width="130px"
+						iconSclass="z-icon-floppy-o" 
 							style="background-color:#008080"
 							disabled="@load(!vm.guardarEnabled)"
-							onClick="@command('guardar')">
-							Guardar
-						</button>
-						<button sclass="btn-success" width="130px"
-							iconSclass="z-icon-trash-o"
-							style="background-color:#008080"
-							disabled="@load(!vm.eliminarEnabled)"
+							 onClick="@command('guardar')">
+							 Guardar</button>
+						<button Sclass="btn-success" width="130px"
+						iconSclass="z-icon-trash-o"
+						 style="background-color:#008080"
+						disabled="@load(!vm.eliminarEnabled)"
 							onClick="@command('eliminar')">
-							Eliminar
-						</button>
+							Eliminar</button>
 					</hlayout>
+				
 				</vlayout>
-				</hbox>
-			</vbox>
+				
+			</hbox>
+		</vbox>
 			<space></space>
-			<hbox height="80px" width="100%" sclass="cabecera rounded" align="center">
+		<hbox height="80px" width="100%" sclass="cabecera rounded" align="center">
 			<div sclass="titulo" width="100%" style="align:center; padding:5px;">
+
 			<image src="/images/logo_pie_de_pagina.png" width="65px" height="70px"></image>
 			</div>
 			<vlayout>

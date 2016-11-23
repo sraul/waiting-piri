@@ -21,13 +21,16 @@
 		</hbox>
 		<vbox width="100%" vflex="true" pack="center" align="center"
 			style="padding:10px">
+			<hbox width="100" vflex="true">
 			<listbox vflex="true" width="100%" sclass="rounded"
 				model="@load(vm.horarios)" selectedItem="@bind(vm.selectedHorario)"
 				visible="@load(!vm.modoEdicion)">
 				<listhead style="text-align:center">
 					<listheader label="ID" align="right"
 						style="text-align:center" width="100px" />
-					<listheader label="DESCRIPCION"
+					<listheader label="SALIDA"
+						style="text-align:center" />
+					<listheader label="LLEGADA"
 						style="text-align:center" />
 				</listhead>
 				<auxhead>
@@ -43,14 +46,23 @@
 							<toolbarbutton iconSclass="z-icon-filter"
 								disabled="true" />
 							<textbox hflex="true" placeholder="Buscar.."
-								value="@bind(vm.filterDescripcion)" instant="true" />
+								value="@bind(vm.filterSalida)" instant="true" />
+						</hlayout>
+					</auxheader>
+					<auxheader>
+						<hlayout>
+							<toolbarbutton iconSclass="z-icon-filter"
+								disabled="true" />
+							<textbox hflex="true" placeholder="Buscar.."
+								value="@bind(vm.filterLlegada)" instant="true" />
 						</hlayout>
 					</auxheader>
 				</auxhead>
 				<template name="model">
 					<listitem>
 						<listcell label="@load(each.id)" />
-						<listcell label="@load(each.descripcion)" />
+						<listcell label="@load(each.salida)" />
+						<listcell label="@load(each.llegada)" />
 					</listitem>
 				</template>
 				<listfoot>
@@ -63,6 +75,81 @@
 					</listfooter>
 				</listfoot>
 			</listbox>
+			<space> </space>
+										
+				<vlayout vflex="true">
+					<grid vflex="true" sclass="rounded">
+						<auxhead>
+							<auxheader colspan="2"
+								label="Ficha Horario" style="text-align:center">
+							</auxheader>
+						</auxhead>
+						
+						<columns>
+							<column width="30%" />
+							<column />
+						</columns>
+						<rows>
+								<row>
+									<label sclass="field" value="ID:" />
+								    <intbox readonly="true"
+								    value="@load(vm.selectedHorario.id)" />									
+								</row>
+								
+								<row>
+								<hlayout valign="middle">
+									<label sclass="field" value="SALIDA"/>
+									<label sclass="required">*</label>
+								</hlayout>
+									<textbox hflex="true"
+									value="@bind(vm.selectedHorario.salida)"
+									readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
+
+								</row>
+									<row>
+								<hlayout valign="middle">
+									<label sclass="field" value="LLEGADA"/>
+									<label sclass="required">*</label>
+								</hlayout>
+									<textbox hflex="true"
+									value="@bind(vm.selectedHorario.llegada)"
+									readonly="@load(!vm.modoEdicion)"
+									constraint="no empty"/>
+
+								</row>
+							
+								
+						</rows>
+				</grid>
+					<hlayout>
+						<button sclass="btn-success" width="130px"
+							iconSclass="z-icon-plus"
+							 style="background-color:#008080"
+							 disabled="@load(!vm.nuevoEnabled)"
+							 onClick="@command('nuevo')">
+							  Nuevo</button>
+						<button sclass="btn-success" width="130px"
+						iconSclass="z-icon-pencil"
+							 style="background-color:#008080"
+							 onClick="@command('editar')"
+							 label="@load(vm.modoEdicion? 'Cancelar': 'Editar')"
+							 disabled="@load(!vm.editarEnabled)"></button>
+						<button Sclass="btn-success" width="130px"
+						iconSclass="z-icon-floppy-o" 
+							style="background-color:#008080"
+							disabled="@load(!vm.guardarEnabled)"
+							 onClick="@command('guardar')">
+							 Guardar</button>
+						<button Sclass="btn-success" width="130px"
+						iconSclass="z-icon-trash-o"
+						 style="background-color:#008080"
+						disabled="@load(!vm.eliminarEnabled)"
+							onClick="@command('eliminar')">
+							Eliminar</button>
+					</hlayout>
+				</vlayout>
+			</hbox>
 		</vbox>
 		<space></space>
 		<hbox height="80px" width="100%" sclass="cabecera rounded"

@@ -6,8 +6,9 @@ import java.util.List;
 import com.waitingpiri.domain.Cargo;
 import com.waitingpiri.domain.Colectivo;
 import com.waitingpiri.domain.Funcionario;
-import com.waitingpiri.domain.Sugerencia;
 import com.waitingpiri.domain.Usuario;
+import com.waitingpiri.domain.Horario;
+import com.waitingpiri.domain.Tarifa;
 
 public class DataUtil {
 	/**
@@ -106,10 +107,38 @@ public class DataUtil {
 		}
 		return out;
 	}
-
+	/**
+	 * @return los datos de horarios 
+	 */
+	public static List<Horario> getHorarioData(){
+		List<Horario> out = new ArrayList<Horario>();
+		String[] salida=new String[]{"03.00","03.30","04.00"};
+		String[] llegada=new String[] {"07.00","07.30","08.00"};
+		
+		for(int i=0; i<3;i++){
+			Horario hora = new Horario(i + 1, salida[i], llegada[i]);
+			out.add(hora);
+		}
+		return out;
+	}
+	/**
+	 * @return los datos de Tarifas 
+	 */
+	public static List<Tarifa> getTarifaData(){
+		List<Tarifa> out = new ArrayList<Tarifa>();
+		String[] descripcion=new String[]{"Piribebuy-Asuncion","Piribebuy-Fernando de la Mora","Piribebuy-San Lorenzo"};
+		Double[] Precio=new Double[] {7000.00,6200.00,5700.00};
+		
+		for(int i=0; i<3;i++){
+			Tarifa tarifa =new Tarifa(i + 1,descripcion[i], Precio[i]);
+			out.add(tarifa);
+		}
+		return out;
+	}
 	/**
 	 * @return los datos de sugerencias..
 	 */
+	/**
 	public static List<Sugerencia> getSugerenciasData() {
 		List<Sugerencia> out = new ArrayList<Sugerencia>();
 		String[] fechas = new String[] { "01-09-2016", "02-09-2016", "03-09-2016" };
@@ -120,5 +149,5 @@ public class DataUtil {
 			out.add(sug);
 		}
 		return out;
-	}
+	}*/
 }

@@ -15,8 +15,8 @@ public class ConnectDB {
 
 	static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/waitingpiri";
-	static final String DB_USER = "root";
-	static final String DB_PASS = "qwerty";
+	static final String DB_USER = "admin";
+	static final String DB_PASS = "admin";
 	
 	private static ConnectDB instance = new ConnectDB();
 	private static Connection connection = null;
@@ -211,6 +211,28 @@ public class ConnectDB {
 		}
 		return out;
 	}
+	/**
+	 * @return los horarios..
+	 */
+	public List<Horario> getHorarios(String id, String salida,String llegada) {
+		List<Horario> out = new ArrayList<Horario>();
+		String sql = "SELECT * FROM HORARIO WHERE CAST(ID AS CHAR(10)) LIKE '%" + id + "%' AND"
+				+ " SALIDA LIKE UPPER('%" + salida.toUpperCase() + "%')"+ "AND LLEGADA LIKE UPPER('%" + llegada.toUpperCase() + "%')";
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				int idCol = result.getInt("ID");
+				String salida_ = result.getString("SALIDA");
+				String llegada_=result.getString("LLEGADA");
+				Horario horario = new Horario(idCol, salida_,llegada_);
+				out.add(horario);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return out;
+	}
 	
 	/**
 	 * @return las localizaciones..
@@ -236,12 +258,14 @@ public class ConnectDB {
 		return out;
 	}
 	
+	
+	
 	/**
-	 * @return los horarios..
+	 * @return las tarifas..
 	 */
-	public List<Horario> getHorarios(String id, String descripcion) {
-		List<Horario> out = new ArrayList<Horario>();
-		String sql = "SELECT * FROM HORARIO WHERE CAST(ID AS CHAR(10)) LIKE '%" + id + "%' AND"
+	public List<Tarifa> getTarifas(String id, String descripcion) {
+		List<Tarifa> out = new ArrayList<Tarifa>();
+		String sql = "SELECT * FROM TARIFA WHERE CAST(ID AS CHAR(10))  LIKE '%" + id + "%' AND"
 				+ " DESCRIPCION LIKE UPPER('%" + descripcion.toUpperCase() + "%')";
 		try {
 			Statement statement = connection.createStatement();
@@ -249,31 +273,8 @@ public class ConnectDB {
 			while (result.next()) {
 				int idCol = result.getInt("ID");
 				String descripcion_ = result.getString("DESCRIPCION");
-				Horario horario = new Horario(idCol, descripcion_);
-				out.add(horario);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return out;
-	}
-	
-	/**
-	 * @return las tarifas..
-	 */
-	public List<Tarifa> getTarifas(String id, String desde, String hasta) {
-		List<Tarifa> out = new ArrayList<Tarifa>();
-		String sql = "SELECT * FROM TARIFA WHERE CAST(ID AS CHAR(10)) LIKE '%" + id + "%' AND" + " DESDE LIKE UPPER('%"
-				+ desde.toUpperCase() + "%')" + " AND HASTA LIKE UPPER('%" + hasta.toUpperCase() + "%')";
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet result = statement.executeQuery(sql);
-			while (result.next()) {
-				int idCol = result.getInt("ID");
-				String desdeCol = result.getString("DESDE");
-				String hastaCol = result.getString("HASTA");
 				Double precio = result.getDouble("PRECIO");
-				Tarifa tarifa = new Tarifa(idCol, desdeCol, hastaCol, precio);
+				Tarifa tarifa = new Tarifa(idCol,descripcion_, precio);
 				out.add(tarifa);
 			}
 		} catch (Exception e) {
@@ -343,8 +344,7 @@ public class ConnectDB {
 	public void insertColectivo(Colectivo col)throws Exception{
 		String insert=DBUtil.INSERT_COLECTIVO+"'"+col.getNroColec()+"','"+col.getNroChasis()+"','"
 		+col.getNroChapa()+"','"+col.getImei()+"')";
-		this.executeUpdate(insert);
-		
+		this.executeUpdate(insert);	
 	}
 	
 	/**
@@ -393,7 +393,7 @@ public class ConnectDB {
 	 * inserta un nuevo horario..
 	 */
 	public void insertHorario(Horario hor) throws Exception {
-		String insert = DBUtil.INSERT_HORARIO + "'" + hor.getDescripcion() + "')";
+		String insert = DBUtil.INSERT_HORARIO + "'" + hor.getSalida() +"','" + hor.getLlegada()+ "')";
 		this.executeUpdate(insert);
 	}
 	
@@ -401,7 +401,7 @@ public class ConnectDB {
 	 * inserta una nueva tarifa..
 	 */
 	public void insertTarifa(Tarifa tarifa) throws Exception {
-		String insert = DBUtil.INSERT_TARIFA + "'" + tarifa.getDesde() + "', '" + tarifa.getHasta() + "'," + tarifa.getPrecio() + ")";
+		String insert = DBUtil.INSERT_TARIFA + " '" + tarifa.getDescripcion()+ "'," + tarifa.getPrecio() + ")";
 		this.executeUpdate(insert);
 	}
 	
@@ -409,7 +409,7 @@ public class ConnectDB {
 	 * update de un horario..
 	 */
 	public void updateHorario(Horario hor) throws Exception{
-		String update = DBUtil.UPDATE_HORARIO + "DESCRIPCION = '" + hor.getDescripcion() + "'" + "WHERE ID= " + hor.getId();
+		String update = DBUtil.UPDATE_HORARIO + "SALIDA = '" + hor.getSalida() + "'," + "LLEGADA = '" + hor.getLlegada() + "'"+ "WHERE ID= " + hor.getId();
 		this.executeUpdate(update);
 	}
 	
@@ -417,8 +417,8 @@ public class ConnectDB {
 	 * update de una tarifa..
 	 */
 	public void updateTarifa(Tarifa tarifa) throws Exception {
-		String update = DBUtil.UPDATE_TARIFA + "DESDE = '" + tarifa.getDesde() + "', HASTA = '" + tarifa.getHasta()
-				+ "', PRECIO = " + tarifa.getPrecio() + " WHERE ID= " + tarifa.getId();
+		String update = DBUtil.UPDATE_TARIFA + "DESCRIPCION = '" + tarifa.getDescripcion()+ "', PRECIO = " +
+				tarifa.getPrecio() + " WHERE ID= " + tarifa.getId();
 		this.executeUpdate(update);
 	}
 

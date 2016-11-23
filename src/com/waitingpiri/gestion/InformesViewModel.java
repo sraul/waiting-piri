@@ -92,7 +92,7 @@ public class InformesViewModel {
 	public void showReport() {
 		
 		this.verInfo.setDisabled(true);
-		Clients.showBusy(this.report, "Procesando InformaciÃ³n..");
+		Clients.showBusy(this.report, "Procesando Información..");
 		
 		String source = null;
 		JRDataSource dataSource = null;
@@ -176,13 +176,19 @@ public class InformesViewModel {
 	        Object value = null;
 	        String fieldName = field.getName();
 	        Funcionario funcionario = this.funcionarios.get(index);
-	         
-	        if ("Nombre".equals(fieldName)) {
+	        
+	        if("Cedula".equals(fieldName)) {
+	            value = funcionario.getCedula();
+	        } else if("Nombre".equals(fieldName)) {
 	            value = funcionario.getNombre();
 	        } else if ("Apellido".equals(fieldName)) {
 				value = funcionario.getApellido();
-			}          
+			} else if ("Telefono".equals(fieldName)) {
+				value = funcionario.getTelefono();
+			} else if ("Direccion".equals(fieldName)) {
+					value = funcionario.getDireccion();}
 	        return value;
+	        
 	    }
 
 		@Override
@@ -272,12 +278,14 @@ public class InformesViewModel {
 	        Object value = null;
 	        String fieldName = field.getName();
 	        Colectivo colectivo = this.colectivos.get(index);
-	         
+	        
 	        if ("Numero".equals(fieldName)) {
 	            value = colectivo.getNroColec();
 	        } else if ("Chapa".equals(fieldName)) {
 				value = colectivo.getNroChapa();
-			}          
+			}  else if ("Chasis".equals(fieldName)) {
+				value = colectivo.getNroChasis();
+			}  
 	        return value;
 	    }
 

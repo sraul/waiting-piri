@@ -22,7 +22,8 @@ import com.waitingpiri.domain.Horario;
 public class InformacionesViewModel implements ABM {
 	
 	private String filterID = "";
-	private String filterDescripcion = "";
+	private String filterSalida= "";
+	private String filterLlegada= "";
 	
 	private List<Horario> horariosNuevos = new ArrayList<Horario>();
 	
@@ -46,7 +47,7 @@ public class InformacionesViewModel implements ABM {
 	@NotifyChange({ "modoEdicion", "selectedHorario" })
 	public void nuevo() {
 		this.modoEdicion=true;
-		this.selectedHorario = new Horario( 0, "" );		
+		this.selectedHorario = new Horario( 0, "","" );		
 	}
 
 	@Command
@@ -121,7 +122,7 @@ public class InformacionesViewModel implements ABM {
 	public boolean validarDatos() {
 		boolean out = true;
 		// campos obligatorios..
-		if (this.selectedHorario.getDescripcion().trim().isEmpty()) {
+		if (this.selectedHorario.getSalida().trim().isEmpty()|| this.selectedHorario.getLlegada().trim().isEmpty()) {
 			out = false;
 		}
 		return out;
@@ -131,10 +132,10 @@ public class InformacionesViewModel implements ABM {
 	/**
 	 * GET / SET
 	 */		
-	@DependsOn({ "filterID", "filterDescripcion" })
+	@DependsOn({ "filterID", "filterSalida", "filterLlegada" })
 	public List<Horario> getHorarios() {
 		ConnectDB conn = ConnectDB.getInstance();
-		return conn.getHorarios(this.filterID, this.filterDescripcion);
+		return conn.getHorarios(this.filterID, this.filterSalida, this.filterLlegada);
 	}	
 	
 	@Override
@@ -146,6 +147,12 @@ public class InformacionesViewModel implements ABM {
 		return out;
 	}
 	
+	public String getFilterLlegada() {
+		return filterLlegada;
+	}
+	public void setFilterLlegada(String filterLlegada) {
+		this.filterLlegada = filterLlegada;
+	}
 	@Override
 	@DependsOn("selectedHorario")
 	public boolean isEditarEnabled() {
@@ -172,12 +179,12 @@ public class InformacionesViewModel implements ABM {
 		this.filterID = filterID;
 	}
 
-	public String getFilterDescripcion() {
-		return filterDescripcion;
+	public String getFilterSalida() {
+		return filterSalida;
 	}
 
-	public void setFilterDescripcion(String filterNROCOL) {
-		this.filterDescripcion = filterNROCOL;
+	public void setFiltersalida(String Filtersalida) {
+		this.filterSalida = Filtersalida;
 	}
 
 	public boolean isModoEdicion() {

@@ -30,11 +30,10 @@ public class DBUtil {
 			+ "NROCHASIS VARCHAR(200)," + "NROCHAPA VARCHAR(200),"+"IMEI VARCHAR(25)," + "PRIMARY KEY(ID))";
 	
 	static final String CREATE_TABLE_HORARIO = "CREATE TABLE HORARIO (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
-			+ "DESCRIPCION VARCHAR(200),"+ "PRIMARY KEY(ID))";
+			+ "SALIDA VARCHAR(6),"+ " LLEGADA VARCHAR(6),"+ "PRIMARY KEY(ID))";
 	
 	static final String CREATE_TABLE_TARIFA = "CREATE TABLE TARIFA ("
-			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "DESDE VARCHAR(200)," 
-			+ "HASTA VARCHAR(200)," + "PRECIO DOUBLE," + "PRIMARY KEY(ID))";
+			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "DESCRIPCION VARCHAR(200)," + "PRECIO DOUBLE," + "PRIMARY KEY(ID))";
 	
 	public static final String INSERT_CARGO = "INSERT INTO CARGO (DESCRIPCION) values (";
 
@@ -44,9 +43,9 @@ public class DBUtil {
 	
 	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS , NROCHAPA, IMEI) values (";
 	
-	public static final String INSERT_HORARIO = "INSERT INTO HORARIO (DESCRIPCION) values (";
+	public static final String INSERT_HORARIO = "INSERT INTO HORARIO (SALIDA, LLEGADA) values (";
 	
-	public static final String INSERT_TARIFA = "INSERT INTO TARIFA (DESDE, HASTA, PRECIO) values (";
+	public static final String INSERT_TARIFA = "INSERT INTO TARIFA (DESCRIPCION, PRECIO) values (";
 	
 	public static final String DELETE_FUNCIONARIO = "DELETE FROM FUNCIONARIO WHERE ID = ";
 
@@ -127,13 +126,13 @@ public class DBUtil {
 			}
 			
 			for (Horario horario : horarios) {
-				String insert = INSERT_HORARIO + "'" + horario.getDescripcion() + "')";
+				String insert = INSERT_HORARIO + "'" + horario.getSalida()+ "','" + horario.getLlegada() + "')";
 				conn.executeUpdate(insert);
 				System.out.println("Horario insertado..");
 			}
 			
 			for (Tarifa tarifa : tarifas) {
-				String insert = INSERT_TARIFA + "'" + tarifa.getDesde() + "','" + tarifa.getHasta() + "', " + tarifa.getPrecio() + ")";
+				String insert = INSERT_TARIFA + "'" + tarifa.getDescripcion()  + "', " + tarifa.getPrecio() + ")";
 				conn.executeUpdate(insert);
 				System.out.println("Tarifa insertada..");
 			}
@@ -159,7 +158,7 @@ public class DBUtil {
 
 	public static void main(String[] args) {
 		DBUtil.poblarDB(DataUtil.getCargosData(), DataUtil.getFuncionariosData(), DataUtil.getUsuariosData(),
-				DataUtil.getColectivosData(), DataUtil.getHorariosData(), DataUtil.getTarifasData());
+				DataUtil.getColectivosData(), DataUtil.getHorarioData(),DataUtil.getTarifaData());
 	}
 	
 }

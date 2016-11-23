@@ -3,23 +3,21 @@ package com.waitingpiri.domain;
 public class Tarifa {
 
 	private int id;
-	private String desde;
-	private String hasta;
+	private String descripcion;
 	private double precio;
 	
-	public Tarifa(int id, String desde, String hasta, double precio) {
+	public Tarifa(int id, String descripcion, double precio) {
 		this.id = id;
-		this.desde = desde;
-		this.hasta = hasta;
+		this.descripcion = descripcion;
 		this.precio = precio;
 	}
 
-	public String getDesde() {
-		return desde;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDesde(String descripcion) {
-		this.desde = descripcion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public int getId() {
@@ -28,14 +26,6 @@ public class Tarifa {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getHasta() {
-		return hasta;
-	}
-
-	public void setHasta(String hasta) {
-		this.hasta = hasta;
 	}
 
 	public double getPrecio() {
