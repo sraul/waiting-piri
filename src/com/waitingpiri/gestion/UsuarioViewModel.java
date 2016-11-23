@@ -1,6 +1,7 @@
 package com.waitingpiri.gestion;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.zkoss.bind.annotation.AfterCompose;
@@ -17,14 +18,17 @@ import org.zkoss.zul.Messagebox;
 
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Usuario;
+import com.waitingpiri.util.DataUtil;
 
 public class UsuarioViewModel implements ABM {
-	private String filterID="";
-	private String filterNICK="";
+	
+	private String filterID = "";
+	private String filterNICK = "";
 	
 	private List<Usuario>usuariosNuevos=new ArrayList<Usuario>();
 	
 	private Usuario selectedUsuario;
+	private String selectedPerfil;
 	
 	private boolean modoEdicion=false;
 	private boolean editando=false;
@@ -38,12 +42,26 @@ public class UsuarioViewModel implements ABM {
 		Selectors.wireEventListeners(view, this);
 	}
 	
+	@Command
+	@NotifyChange({"selectedPerfil", "selectedUsuario"})
+	public void addPerfil() {
+		if (Messagebox.show("Desea agregar el Perfil?", "Agregar Perfil",Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION) == Messagebox.OK) {
+			String old = this.selectedUsuario.getPerfil();
+			if (!old.isEmpty()) {
+				old += ";";
+			}
+			this.selectedUsuario.setPerfil(old + this.selectedPerfil);
+			this.selectedPerfil = null;
+		}
+	}
+	
 	
 	@Command
 	@NotifyChange({"modoEdicion", "selectedUsuario"})
-	public void nuevo(){
-		this.modoEdicion=true;
-		this.selectedUsuario=new Usuario(0,"","");
+	public void nuevo() {
+		this.modoEdicion = true;
+		this.selectedUsuario = new Usuario(0,"","", "", "");
 	}
 	
 
@@ -64,7 +82,7 @@ public class UsuarioViewModel implements ABM {
 	@NotifyChange({"modoEdicion","usuariosNuevos", "selectedUsuario", "usuario"})
 	public void guardar() {
 		if (!this.validarDatos()) {
-			Messagebox.show("Error de Datos, verifique..", "Validación de Datos..", Messagebox.OK, Messagebox.ERROR);
+			Messagebox.show("Error de Datos, verifique..", "Validacion de Datos..", Messagebox.OK, Messagebox.ERROR);
 			return;
 		}
 		if (!this.editando) {
@@ -85,6 +103,13 @@ public class UsuarioViewModel implements ABM {
 						null, 0);
 			}
 		}
+		
+		InicioViewModel.rol = this.selectedUsuario.getRol();
+		InicioViewModel.perfiles = new HashMap<String, String>();
+		for (String perfil : this.selectedUsuario.getPerfiles()) {
+			InicioViewModel.perfiles.put(perfil, perfil);
+		}
+		
 		this.selectedUsuario = null;
 		this.modoEdicion = false;
 		this.editando = false;
@@ -129,79 +154,109 @@ public class UsuarioViewModel implements ABM {
 	/**
 	 * GET / SET
 	 */
-	@DependsOn({"filterID","filterNICK"})
-	public List<Usuario> getUsuario(){
+	@DependsOn({ "filterID", "filterNICK" })
+	public List<Usuario> getUsuario() {
 		ConnectDB conn = ConnectDB.getInstance();
-		return conn.getUsuarios(this.filterID,this.filterNICK);
-		
-		}
+		return conn.getUsuarios(this.filterID, this.filterNICK);
+
+	}
+
 	@Override
 	@DependsOn("modoEdicion")
 	public boolean isGuardarEnabled() {
 		return this.isModoEdicion();
 	}
+
 	@Override
 	@DependsOn("selectedUsuario")
 	public boolean isEditarEnabled() {
 
-		return this.selectedUsuario !=null;
+		return this.selectedUsuario != null;
 	}
+
 	@Override
 	@DependsOn("modoEdicion")
 	public boolean isNuevoEnabled() {
-		boolean out= true;
-			if(this.isModoEdicion()){
-				out=false;
-			}
+		boolean out = true;
+		if (this.isModoEdicion()) {
+			out = false;
+		}
 		return out;
+	}
+
+	@Override
+	@DependsOn({ "selectedUsuario", "modoEdicion" })
+	public boolean isEliminarEnabled() {
+		return this.selectedUsuario != null && !this.isModoEdicion();
 	}
 	
 	@Override
-	@DependsOn({"selectedUsuario","modoEdicion"})
-	public boolean isEliminarEnabled() {
-		
-		return this.selectedUsuario !=null && !this.isModoEdicion();
+	public boolean isConsulta() {
+		return InicioViewModel.rol.equals(DataUtil.ROL_CONSULTA);
 	}
 	
+	public List<String> getRoles() {
+		return DataUtil.getRoles();
+	}
 	
+	public List<String> getPerfiles() {
+		return DataUtil.getPerfiles();
+	}
+
 	public String getFilterID() {
 		return filterID;
 	}
+
 	public void setFilterID(String filterID) {
 		this.filterID = filterID;
 	}
+
 	public String getFilterNICK() {
 		return filterNICK;
 	}
+
 	public void setFilterNICK(String filterNICK) {
 		this.filterNICK = filterNICK;
 	}
+
 	public List<Usuario> getUsuariosNuevos() {
 		return usuariosNuevos;
 	}
+
 	public void setUsuariosNuevos(List<Usuario> usuariosNuevos) {
 		this.usuariosNuevos = usuariosNuevos;
 	}
+
 	public Usuario getSelectedUsuario() {
 		return selectedUsuario;
 	}
+
 	public void setSelectedUsuario(Usuario selectedUsuario) {
 		this.selectedUsuario = selectedUsuario;
 	}
+
 	public boolean isModoEdicion() {
 		return modoEdicion;
 	}
+
 	public void setModoEdicion(boolean modoEdicion) {
 		this.modoEdicion = modoEdicion;
 	}
+
 	public boolean isEditando() {
 		return editando;
 	}
+
 	public void setEditando(boolean editando) {
 		this.editando = editando;
 	}
-		
+	public String getSelectedPerfil() {
+		return selectedPerfil;
 	}
+	public void setSelectedPerfil(String selectedPerfil) {
+		this.selectedPerfil = selectedPerfil;
+	}		
+}
 	
 
 

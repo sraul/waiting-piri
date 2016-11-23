@@ -51,4 +51,9 @@ public interface ABM {
 	 * @return true si son datos validos..
 	 */
 	public boolean validarDatos();
+	
+	/**
+	 * @return true si es solo consulta..
+	 */
+	public boolean isConsulta();
 }

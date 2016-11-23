@@ -25,6 +25,7 @@ import org.zkoss.zul.Messagebox;
 import com.waitingpiri.domain.Cargo;
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Funcionario;
+import com.waitingpiri.util.DataUtil;
 
 public class FuncionarioViewModel implements ABM {
 	
@@ -170,6 +171,11 @@ public class FuncionarioViewModel implements ABM {
 	@Override
 	public int getLastId() {
 		return 100;
+	}
+	
+	@Override
+	public boolean isConsulta() {
+		return InicioViewModel.rol.equals(DataUtil.ROL_CONSULTA);
 	}
 	
 	@Override

@@ -17,6 +17,7 @@ import org.zkoss.zul.Messagebox;
 
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Tarifa;
+import com.waitingpiri.util.DataUtil;
 
 public class TarifasViewModel implements ABM {
 
@@ -115,6 +116,11 @@ public class TarifasViewModel implements ABM {
 	public int getLastId() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public boolean isConsulta() {
+		return InicioViewModel.rol.equals(DataUtil.ROL_CONSULTA);
 	}
 
 	@Override

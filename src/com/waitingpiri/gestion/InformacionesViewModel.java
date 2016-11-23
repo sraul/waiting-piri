@@ -18,6 +18,7 @@ import org.zkoss.zul.Messagebox;
 
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Horario;
+import com.waitingpiri.util.DataUtil;
 
 public class InformacionesViewModel implements ABM {
 	
@@ -169,6 +170,11 @@ public class InformacionesViewModel implements ABM {
 	@DependsOn({ "selectedHorario", "modoEdicion" })
 	public boolean isEliminarEnabled() {
 		return this.selectedHorario != null && !this.isModoEdicion();
+	}
+	
+	@Override
+	public boolean isConsulta() {
+		return InicioViewModel.rol.equals(DataUtil.ROL_CONSULTA);
 	}
 
 	public String getFilterID() {

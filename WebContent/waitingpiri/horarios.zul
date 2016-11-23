@@ -122,7 +122,7 @@
 								
 						</rows>
 				</grid>
-					<hlayout>
+					<hlayout visible="@load(!vm.consulta)">
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-plus"
 							 style="background-color:#008080"

@@ -71,7 +71,7 @@ style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 								</row>
 						</rows>
 				</grid>
-					<hlayout>
+					<hlayout visible="@load(!vm.consulta)">
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-plus"
 							 style="background-color:#008080"> Nuevo</button>

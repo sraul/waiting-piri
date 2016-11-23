@@ -11,6 +11,47 @@ import com.waitingpiri.domain.Horario;
 import com.waitingpiri.domain.Tarifa;
 
 public class DataUtil {
+	
+	public static final String ROL_ADMINISTRADOR = "ADMINISTRADOR";
+	public static final String ROL_OPERADOR = "OPERADOR";
+	public static final String ROL_CONSULTA = "CONSULTA";
+	
+	public static final String PERFIL_ADM_FUNCIONARIOS = "ADMINISTRAR FUNCIONARIOS";
+	public static final String PERFIL_ADM_USUARIOS = "ADMINISTRAR USUARIOS";
+	public static final String PERFIL_ADM_COLECTIVOS = "ADMINISTRAR COLECTIVOS";
+	public static final String PERFIL_ADM_TARIFAS = "ADMINISTRAR TARIFAS";
+	public static final String PERFIL_ADM_HORARIOS = "ADMINISTRAR HORARIOS";
+	public static final String PERFIL_ADM_CARGOS = "ADMINISTRAR CARGOS";
+	public static final String PERFIL_ADM_INFORMES = "ADMINISTRAR INFORMES";
+	public static final String PERFIL_ADM_MONITOREO = "MONITOREAR COLECTIVOS";
+	
+	/**
+	 * @return los roles..
+	 */
+	public static List<String> getRoles() {
+		List<String> out = new ArrayList<String>();
+		out.add(ROL_ADMINISTRADOR);
+		out.add(ROL_OPERADOR);
+		out.add(ROL_CONSULTA);
+		return out;
+	}
+	
+	/**
+	 * @return los roles..
+	 */
+	public static List<String> getPerfiles() {
+		List<String> out = new ArrayList<String>();
+		out.add(PERFIL_ADM_FUNCIONARIOS);
+		out.add(PERFIL_ADM_USUARIOS);
+		out.add(PERFIL_ADM_COLECTIVOS);
+		out.add(PERFIL_ADM_TARIFAS);
+		out.add(PERFIL_ADM_HORARIOS);
+		out.add(PERFIL_ADM_CARGOS);
+		out.add(PERFIL_ADM_INFORMES);
+		out.add(PERFIL_ADM_MONITOREO);
+		return out;
+	}
+	
 	/**
 	 * @return los datos de cargos..
 	 */
@@ -75,9 +116,16 @@ public class DataUtil {
 
 		String[] password = new String[] { "13254", "987541", "65495", "46584",
 				"65485", "3219", "984325", "98435", "6314", "51889" };
+		
+		String[] roles = new String[] { ROL_ADMINISTRADOR, ROL_OPERADOR, ROL_CONSULTA, ROL_ADMINISTRADOR,
+				ROL_ADMINISTRADOR, ROL_OPERADOR, ROL_CONSULTA, ROL_ADMINISTRADOR, ROL_OPERADOR, ROL_CONSULTA };
+		
+		String[] perfiles = new String[] { PERFIL_ADM_FUNCIONARIOS, PERFIL_ADM_USUARIOS, PERFIL_ADM_COLECTIVOS,
+				PERFIL_ADM_FUNCIONARIOS, PERFIL_ADM_FUNCIONARIOS, PERFIL_ADM_USUARIOS, PERFIL_ADM_FUNCIONARIOS,
+				PERFIL_ADM_USUARIOS, PERFIL_ADM_FUNCIONARIOS, PERFIL_ADM_USUARIOS };
 
 		for (int i = 0; i < 10; i++) {
-			Usuario usu = new Usuario(i + 1, nick[i], password[i]);
+			Usuario usu = new Usuario(i + 1, nick[i], password[i], roles[i], perfiles[i]);
 			out.add(usu);
 		}
 
@@ -121,6 +169,7 @@ public class DataUtil {
 		}
 		return out;
 	}
+	
 	/**
 	 * @return los datos de Tarifas 
 	 */
@@ -135,19 +184,4 @@ public class DataUtil {
 		}
 		return out;
 	}
-	/**
-	 * @return los datos de sugerencias..
-	 */
-	/**
-	public static List<Sugerencia> getSugerenciasData() {
-		List<Sugerencia> out = new ArrayList<Sugerencia>();
-		String[] fechas = new String[] { "01-09-2016", "02-09-2016", "03-09-2016" };
-		String[] descripciones = new String[] { "Sugerencia 1", "Sugerencia 2", "Sugerencia 3" };
-		
-		for (int i = 0; i <= 2; i++) {
-			Sugerencia sug = new Sugerencia(i + 1, fechas[i], descripciones[i]);
-			out.add(sug);
-		}
-		return out;
-	}*/
 }

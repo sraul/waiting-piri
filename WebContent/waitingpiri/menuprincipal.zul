@@ -22,19 +22,22 @@
 			<hlayout>
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-briefcase"
 				height="100px" href="funcionarios.zul"
-				style="background-color:#008080;font-size:14px">
+				style="background-color:#008080;font-size:14px"
+				disabled="@load(vm.funcionariosDisabled)">
 				Administrar Funcionarios
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-group"
 				height="100px" href="usuarios.zul"
-				style="background-color:#008080;font-size:15px">
+				style="background-color:#008080;font-size:15px"
+				disabled="@load(vm.usuariosDisabled)">
 				Administrar Usuarios
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-check-circle"
 				height="100px" href="colectivos.zul"
-				style="background-color:#008080;font-size:15px">
+				style="background-color:#008080;font-size:15px"
+				disabled="@load(vm.colectivosDisabled)">
 				Administrar Colectivos
 			</button>
 			</hlayout>
@@ -43,12 +46,14 @@
 			<hlayout>
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-money"
 				height="100px" href="tarifas.zul"
-				style="background-color:#008080;font-size:14px">
+				style="background-color:#008080;font-size:14px"
+				disabled="@load(vm.tarifasDisabled)">
 				Informaciones Tarifas
 			</button>
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-clock-o"
 				height="100px" href="horarios.zul"
-				style="background-color:#008080;font-size:14px">
+				style="background-color:#008080;font-size:14px"
+				disabled="@load(vm.horariosDisabled)">
 				Informaciones Horarios
 			</button>
 			</hlayout>
@@ -57,20 +62,23 @@
 			<hlayout>
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-male"
 				height="100px"  href="cargo.zul"
-				style="background-color:#008080;font-size:15px">
+				style="background-color:#008080;font-size:15px"
+				disabled="@load(vm.cargosDisabled)">
 				Administrar Cargos
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-file-text" 
 				height="100px"
 				style="background-color:#008080;font-size:15px"
-				href="informes.zul">
+				href="informes.zul"
+				disabled="@load(vm.informesDisabled)">
 				Informes
 			</button>
 			<div height="10px" />
 			<button sclass="btn-success btn-lg" width="100%" iconSclass="z-icon-map-marker" 
 				height="100px" style="background-color:#008080;font-size:15px"
-				href="monitoreo.zul">
+				href="monitoreo.zul"
+				disabled="@load(vm.monitorearDisabled)">
 				Monitorear Colectivos
 			</button>
 		</hlayout>

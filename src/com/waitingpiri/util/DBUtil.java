@@ -23,7 +23,7 @@ public class DBUtil {
 
 	static final String CREATE_TABLE_USUARIO = "CREATE TABLE USUARIO ("
 			+ "ID INT(64) NOT NULL AUTO_INCREMENT," + "NICK VARCHAR(200),"
-			+ "PASSWORD VARCHAR(200)," + "PRIMARY KEY(ID))";
+			+ "PASSWORD VARCHAR(200), ROL VARCHAR(200), PERFIL VARCHAR(200)," + "PRIMARY KEY(ID))";
 	
 	static final String CREATE_TABLE_COLECTIVO = "CREATE TABLE COLECTIVO ("
 			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "NROCOLEC VARCHAR(200)," 
@@ -39,7 +39,7 @@ public class DBUtil {
 
 	public static final String INSERT_FUNCIONARIO = "INSERT INTO FUNCIONARIO (NOMBRE, APELLIDO, CEDULA, DIRECCION, TELEFONO, IDCARGO) values (";
 
-	public static final String INSERT_USUARIO = "INSERT INTO USUARIO (NICK, PASSWORD) values (";
+	public static final String INSERT_USUARIO = "INSERT INTO USUARIO (NICK, PASSWORD, ROL, PERFIL) values (";
 	
 	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS , NROCHAPA, IMEI) values (";
 	
@@ -114,7 +114,7 @@ public class DBUtil {
 			}			
 					
 			for (Usuario usu :  usuarios) {
-				String insert = INSERT_USUARIO + "'" + usu.getNick() + "','" + usu.getPassword() + "')";
+				String insert = INSERT_USUARIO + "'" + usu.getNick() + "','" + usu.getPassword()+ "','" + usu.getRol() + "','" + usu.getPerfil() + "')";
 				conn.executeUpdate(insert);
 				System.out.println("Usuario insertado..");
 			}

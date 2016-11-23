@@ -73,7 +73,7 @@ public class CargoViewModel implements ABM {
 		@NotifyChange({"modoEdicion","cargosNuevos", "selectedCargo", " cargos"})
 		public void guardar() {
 			if (!this.validarDatos()) {
-				Messagebox.show("Error de Datos, verifique..", "Validación de Datos..", Messagebox.OK, Messagebox.ERROR);
+				Messagebox.show("Error de Datos, verifique..", "Validaciï¿½n de Datos..", Messagebox.OK, Messagebox.ERROR);
 				return;
 			}
 			if (!this.editando) {
@@ -117,84 +117,108 @@ public class CargoViewModel implements ABM {
 			
 				}}}
 		
-		@Override
-		@DependsOn("modoEdicion")
-		public boolean isNuevoEnabled() {
-			boolean out = true;		
-			if (this.isModoEdicion()) {
-				out = false;}
-			return out;
+	@Override
+	@DependsOn("modoEdicion")
+	public boolean isNuevoEnabled() {
+		boolean out = true;
+		if (this.isModoEdicion()) {
+			out = false;
 		}
-		
-		@Override
-		@DependsOn("selectedCargo")
-		public boolean isEditarEnabled() {
-			return this.selectedCargo != null;
+		return out;
+	}
+
+	@Override
+	@DependsOn("selectedCargo")
+	public boolean isEditarEnabled() {
+		return this.selectedCargo != null;
+	}
+
+	@Override
+	@DependsOn("modoEdicion")
+	public boolean isGuardarEnabled() {
+		return this.isModoEdicion();
+	}
+
+	@Override
+	@DependsOn({ "selectedCargo", "modoEdicion" })
+	public boolean isEliminarEnabled() {
+		return this.selectedCargo != null && !this.isModoEdicion();
+	}
+
+	@Override
+	public int getLastId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean isConsulta() {
+		return InicioViewModel.rol.equals(DataUtil.ROL_CONSULTA);
+	}
+
+	/** Get and set **/
+
+	@DependsOn({ "filterID", "filterDESCRIPCION" })
+	public List<Cargo> getCargo() {
+		ConnectDB conn = ConnectDB.getInstance();
+		return conn.getCargos(this.filterID, this.filterDESCRIPCION);
+	}
+
+	@Override
+	public boolean validarDatos() {
+		boolean out = true;
+		// campos obligatorios..
+		if (this.selectedCargo.getDescripcion().trim().isEmpty()) {
+			out = false;
 		}
-		@Override
-		@DependsOn("modoEdicion")
-		public boolean isGuardarEnabled() {
-			return this.isModoEdicion();
-		}
-		@Override
-		@DependsOn({ "selectedCargo", "modoEdicion" })
-		public boolean isEliminarEnabled() {
-			return this.selectedCargo != null && !this.isModoEdicion();
-		}
-		@Override
-		public int getLastId() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-		/** Get and set **/
-		
-		@DependsOn({"filterID","filterDESCRIPCION"})
-		public List<Cargo> getCargo(){
-			ConnectDB conn = ConnectDB.getInstance();
-		return conn.getCargos(this.filterID,this.filterDESCRIPCION);
-		}
-		@Override
-		public boolean validarDatos() {
-			boolean out=true;
-			// campos obligatorios..
-		if(this.selectedCargo.getDescripcion().trim().isEmpty()){
-		 out=false;	
-		}	
-			return out;
-		}
-		public List<Cargo> getCargosNuevos() {
-			return cargosNuevos;
-		}
-		public void setCargosNuevos(List<Cargo> cargosNuevos) {
-			this.cargosNuevos = cargosNuevos;
-		}
-		public Cargo getSelectedCargo() {
-			return selectedCargo;
-		}
-		public void setSelectedCargo(Cargo selectedCargo) {
-			this.selectedCargo = selectedCargo;
-		}
-		public boolean isModoEdicion() {
-			return modoEdicion;
-		}
-		public void setModoEdicion(boolean modoEdicion) {
-			this.modoEdicion = modoEdicion;
-		}
-		public boolean isEditando() {
-			return editando;
-		}
-		public void setEditando(boolean editando) {
-			this.editando = editando;
-		}
-		public String getFilterID() {
-			return filterID;
-		}
-		public void setFilterID(String filterID) {
-			this.filterID = filterID;
-		}
-		public String getFilterDESCRIPCION() {
-			return filterDESCRIPCION;
-		}
-		public void setFilterDESCRIPCION(String filterDESCRIPCION) {
-			this.filterDESCRIPCION = filterDESCRIPCION;
-		}}
+		return out;
+	}
+
+	public List<Cargo> getCargosNuevos() {
+		return cargosNuevos;
+	}
+
+	public void setCargosNuevos(List<Cargo> cargosNuevos) {
+		this.cargosNuevos = cargosNuevos;
+	}
+
+	public Cargo getSelectedCargo() {
+		return selectedCargo;
+	}
+
+	public void setSelectedCargo(Cargo selectedCargo) {
+		this.selectedCargo = selectedCargo;
+	}
+
+	public boolean isModoEdicion() {
+		return modoEdicion;
+	}
+
+	public void setModoEdicion(boolean modoEdicion) {
+		this.modoEdicion = modoEdicion;
+	}
+
+	public boolean isEditando() {
+		return editando;
+	}
+
+	public void setEditando(boolean editando) {
+		this.editando = editando;
+	}
+
+	public String getFilterID() {
+		return filterID;
+	}
+
+	public void setFilterID(String filterID) {
+		this.filterID = filterID;
+	}
+
+	public String getFilterDESCRIPCION() {
+		return filterDESCRIPCION;
+	}
+
+	public void setFilterDESCRIPCION(String filterDESCRIPCION) {
+		this.filterDESCRIPCION = filterDESCRIPCION;
+	}
+}

@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
 import com.waitingpiri.domain.ConnectDB;
+import com.waitingpiri.util.DataUtil;
 import com.waitingpiri.domain.Colectivo;
 public class ColectivoViewModel implements ABM{
 	
@@ -66,7 +67,7 @@ public class ColectivoViewModel implements ABM{
 	@NotifyChange({"modoEdicion","colectivosNuevos", "selectedColectivo", "colectivos"})
 	public void guardar() {
 		if (!this.validarDatos()) {
-			Messagebox.show("Error de Datos, verifique..", "Validación de Datos..", Messagebox.OK, Messagebox.ERROR);
+			Messagebox.show("Error de Datos, verifique..", "Validaciï¿½n de Datos..", Messagebox.OK, Messagebox.ERROR);
 			return;
 		}
 		if (!this.editando) {
@@ -110,6 +111,7 @@ public class ColectivoViewModel implements ABM{
 						null, 0);
 		
 			}}}
+
 	@Override
 	public int getLastId() {
 		// TODO Auto-generated method stub
@@ -118,40 +120,41 @@ public class ColectivoViewModel implements ABM{
 
 	@Override
 	public boolean validarDatos() {
-		boolean out=true;
+		boolean out = true;
 		// campos obligatorios..
-	if(this.selectedColectivo.getNroColec().trim().isEmpty()|| this.selectedColectivo.getNroChasis().trim().isEmpty()|| 
-			this.selectedColectivo.getNroChapa().trim().isEmpty()){
-		out=false;
-		}	
+		if (this.selectedColectivo.getNroColec().trim().isEmpty()
+				|| this.selectedColectivo.getNroChasis().trim().isEmpty()
+				|| this.selectedColectivo.getNroChapa().trim().isEmpty()) {
+			out = false;
+		}
 		return out;
 	}
+
 	/**
 	 * GET / SET
-	 */		
+	 */
 	@DependsOn({ "filterID", "filterNROCOL", "filterCHAPA" })
 	public List<Colectivo> getColectivos() {
 		ConnectDB conn = ConnectDB.getInstance();
 		return conn.getColectivos(this.filterID, this.filterNROCOL, this.filterCHAPA);
-	}	
-	
+	}
 
 	@Override
 	@DependsOn("modoEdicion")
 	public boolean isNuevoEnabled() {
-		boolean out = true;		
+		boolean out = true;
 		if (this.isModoEdicion()) {
-			out = false;}
+			out = false;
+		}
 		return out;
 	}
-	
+
 	@Override
 	@DependsOn("selectedColectivo")
 	public boolean isEditarEnabled() {
 		return this.selectedColectivo != null;
 	}
-	
-	
+
 	@Override
 	@DependsOn("modoEdicion")
 	public boolean isGuardarEnabled() {
@@ -164,50 +167,65 @@ public class ColectivoViewModel implements ABM{
 		return this.selectedColectivo != null && !this.isModoEdicion();
 	}
 
+	@Override
+	public boolean isConsulta() {
+		return InicioViewModel.rol.equals(DataUtil.ROL_CONSULTA);
+	}
+
 	public String getFilterID() {
 		return filterID;
 	}
+
 	public void setFilterID(String filterID) {
 		this.filterID = filterID;
 	}
+
 	public String getFilterNROCOL() {
 		return filterNROCOL;
 	}
+
 	public void setFilterNROCOL(String filterNROCOL) {
 		this.filterNROCOL = filterNROCOL;
 	}
+
 	public String getFilterCHAPA() {
 		return filterCHAPA;
 	}
+
 	public void setFilterCHAPA(String filterCHAPA) {
 		this.filterCHAPA = filterCHAPA;
 	}
+
 	public List<Colectivo> getColectivosNuevos() {
 		return colectivosNuevos;
 	}
+
 	public void setColectivosNuevos(List<Colectivo> colectivosNuevos) {
 		this.colectivosNuevos = colectivosNuevos;
 	}
+
 	public Colectivo getSelectedColectivo() {
 		return selectedColectivo;
 	}
+
 	public void setSelectedColectivo(Colectivo selectedColectivo) {
 		this.selectedColectivo = selectedColectivo;
 	}
+
 	public boolean isModoEdicion() {
 		return modoEdicion;
 	}
+
 	public void setModoEdicion(boolean modoEdicion) {
 		this.modoEdicion = modoEdicion;
 	}
+
 	public boolean isEditando() {
 		return editando;
 	}
+
 	public void setEditando(boolean editando) {
 		this.editando = editando;
 	}
-	
-	
-
 }
 

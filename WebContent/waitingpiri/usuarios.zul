@@ -71,7 +71,7 @@ style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 							</auxheader>
 						</auxhead>
 						<columns>
-							<column width="30%" />
+							<column width="25%" />
 							<column />
 						</columns>
 						<rows>
@@ -101,9 +101,60 @@ style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 									readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 								</row>
+								<row>
+								<hlayout valign="middle">
+									<label sclass="field" value="ROL"/>
+									<label sclass="required">*</label>
+								</hlayout>
+									<combobox readonly="@load(!vm.modoEdicion)" 
+										buttonVisible="@load(vm.modoEdicion)"
+										model="@load(vm.roles)"
+										selectedItem="@bind(vm.selectedUsuario.rol)">
+										<template name="model">
+											<comboitem label="@load(each)" image="/images/user.png"/>
+										</template>
+									</combobox>
+								</row>
+								<row>
+									<hlayout valign="middle">
+										<label sclass="field" value="PERFIL" />
+										<label sclass="required"> * </label>
+									</hlayout>
+									<hbox align="center">
+										<listbox sclass="rounded" height="200px" style="margin-top:15px" width="220px"
+											model="@load(vm.selectedUsuario.perfiles)">
+											<listhead>
+												<listheader label="Perfil del Usuario" style="text-align:center"></listheader>
+											</listhead>
+											<template name="model">
+												<listitem label="@load(each)" />
+											</template>
+										</listbox>
+										<button
+											sclass="btn-sm btn-success"  iconSclass="z-icon-arrow-left"
+											style="background-color:#008080;margin:5px"
+											visible="@load(vm.modoEdicion)"
+											disabled="@load(vm.selectedPerfil eq null)"
+											onClick="@command('addPerfil')">
+										</button>
+										<listbox sclass="rounded" height="200px" style="margin-top:15px"
+											visible="@load(vm.modoEdicion)" width="220px"
+											model="@load(vm.perfiles)"
+											selectedItem="@bind(vm.selectedPerfil)">
+											<listhead>
+												<listheader label="Perfiles del Sistema" style="text-align:center"></listheader>
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="@load(each)"></listcell>
+												</listitem>
+											</template>
+										</listbox>
+									</hbox>
+								</row>
 						</rows>
 				</grid>
-					<hlayout>
+					<hlayout visible="@load(!vm.consulta)">
 						<button sclass="btn-success" width="130px"
 							iconSclass="z-icon-plus"
 							 style="background-color:#008080"

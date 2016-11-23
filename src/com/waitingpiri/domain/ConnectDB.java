@@ -72,7 +72,9 @@ public class ConnectDB {
 			ResultSet result = statement.executeQuery(sql);
 			while (result.next()) {
 				int id = result.getInt("ID");
-				Usuario user = new Usuario(id, nick, password);
+				String rol = result.getString("ROL");
+				String perfil = result.getString("PERFIL");
+				Usuario user = new Usuario(id, nick, password, rol, perfil);
 				out.add(user);
 			}
 		} catch (Exception e) {
@@ -145,7 +147,9 @@ public class ConnectDB {
 				int idUsu= result.getInt("ID");
 				String nickUsu =result.getString("NICK");
 				String passUsu = result.getString("PASSWORD");
-				Usuario usu=new Usuario(idUsu,nickUsu,passUsu);
+				String rol = result.getString("ROL");
+				String perfil = result.getString("PERFIL");
+				Usuario usu = new Usuario(idUsu, nickUsu, passUsu, rol, perfil);
 				out.add(usu);
 			}
 			
@@ -318,16 +322,16 @@ public class ConnectDB {
 	 * inserta un nuevo usuario..
 	 */
 	public void insertUsuario(Usuario usu) throws Exception{
-		String insert=DBUtil.INSERT_USUARIO+"'"+usu.getNick()+"','"+usu.getPassword()+"')";
+		String insert=DBUtil.INSERT_USUARIO +"'" +usu.getNick() + "','" + usu.getPassword() + "','" + usu.getRol() + "','" + usu.getPerfil() + "')";
 		this.executeUpdate(insert);
 		
 	}
 	/**
 	 * update usuario..
 	 */
-	public void updateUsuario(Usuario usu) throws Exception{
-		String update=DBUtil.UPDATE_USUARIO + "NICK = '"+usu.getNick()+"', PASSWORD = '"
-		+usu.getPassword()+"'"+ "WHERE ID= "+usu.getId();
+	public void updateUsuario(Usuario usu) throws Exception {
+		String update = DBUtil.UPDATE_USUARIO + "NICK = '" + usu.getNick() + "', PASSWORD = '" + usu.getPassword() + "', ROL = '" + usu.getRol() + "', PERFIL = '" + usu.getPerfil() + "'"
+				+ "WHERE ID= " + usu.getId();
 		this.executeUpdate(update);
 	}
 	/** 

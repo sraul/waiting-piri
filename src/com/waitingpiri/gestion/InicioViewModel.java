@@ -1,5 +1,8 @@
 package com.waitingpiri.gestion;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
@@ -13,6 +16,9 @@ public class InicioViewModel {
 	
 	private String nick = "";
 	private String password = "";
+	
+	public static Map<String, String> perfiles = new HashMap<String, String>();
+	public static String rol = "";
 
 	@Init
 	public void init() {
@@ -30,7 +36,11 @@ public class InicioViewModel {
 			Clients.showNotification("No se encontro un usuario con los datos ingresados..",
 					Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
 		} else {
-			// Guardar el usuario en la session..
+			rol = usuario.getRol();
+			perfiles = new HashMap<String, String>();
+			for (String perfil : usuario.getPerfiles()) {
+				perfiles.put(perfil, perfil);
+			}			
 			Executions.sendRedirect("/waitingpiri/menuprincipal.zul");
 		}
 	}
