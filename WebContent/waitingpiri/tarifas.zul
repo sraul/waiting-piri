@@ -103,9 +103,7 @@ style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 									readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 
-								</row>
-							
-								
+								</row>	
 						</rows>
 				</grid>
 					<hlayout>
