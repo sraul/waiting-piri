@@ -47,7 +47,7 @@
 				Informaciones Tarifas
 			</button>
 			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-clock-o"
-				height="100px" href="informaciones.zul"
+				height="100px" href="horarios.zul"
 				style="background-color:#008080;font-size:14px">
 				Informaciones Horarios
 			</button>
@@ -68,7 +68,7 @@
 				Informes
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-map-marker" 
+			<button sclass="btn-success btn-lg" width="100%" iconSclass="z-icon-map-marker" 
 				height="100px" style="background-color:#008080;font-size:15px"
 				href="monitoreo.zul">
 				Monitorear Colectivos
