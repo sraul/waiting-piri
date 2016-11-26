@@ -39,5 +39,44 @@
 	font-family:Berlin Sans FB;
 }
 
+@media screen and (max-width: 750px) {
+	.button {
+		width: 50px;
+		font-size: 120%;
+		font-weight: bold;
+		padding: 1px 1px 1px 1px;
+		-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		border-radius: 8px;
+	}
+	.description-area {
+		font-weight: bold;
+		font-size: 130%;
+		color: white;
+	}
+	.input {
+		width: 60%;
+		font-weight: bold;
+		font-size: 180%;
+		text-align: right;
+		padding: 5px 5px 5px 5px;
+		-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		border-radius: 8px;
+		display: block;
+	}
+	.reloj {
+		font-weight: bold;
+		font-size: 10pt;
+		color: white;
+		font-family: arial;
+		float: right;
+		text-align: center;
+		background: transparent;
+		border: none;
+		text-shadow: 3px 3px 3px #000066;
+	}
+}
+
 
 

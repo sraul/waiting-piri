@@ -12,6 +12,10 @@ import com.waitingpiri.gestion.Localizacion;
 import com.waitingpiri.util.DBUtil;
 
 public class ConnectDB {
+	
+	/**
+	 * API de coneccion a la bd..(es un Singleton)
+	 */
 
 	static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/waitingpiri";
@@ -105,9 +109,7 @@ public class ConnectDB {
 		catch (Exception e){
 			 e.printStackTrace();
 		 }
-		 return out;
-		 
-		
+		 return out;		
 	}
 	
 	/**

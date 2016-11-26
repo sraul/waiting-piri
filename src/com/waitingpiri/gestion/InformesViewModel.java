@@ -92,7 +92,7 @@ public class InformesViewModel {
 	public void showReport() {
 		
 		this.verInfo.setDisabled(true);
-		Clients.showBusy(this.report, "Procesando Información..");
+		Clients.showBusy(this.report, "Procesando Informacion..");
 		
 		String source = null;
 		JRDataSource dataSource = null;

@@ -23,10 +23,11 @@
 		</hbox>
 		<vbox width="100%" vflex="true" style="padding:20px"
 			pack="center" align="center">
-			<radiogroup>
-				<radio  label=" DE ASUNCION A PIRIBEBUY" style="font-weight:bold; margin-right:20px"
-					selected="true"></radio>
-				<radio label=" DE PIRIBEBUY A ASUNCION" style="font-weight:bold; margin-right:10px"></radio>
+			<radiogroup model="@load(vm.mapas)"
+				selectedItem="@bind(vm.selectedMapa)">
+				<template name="model">
+					<radio label="@load(each[1])" style="margin:20px"/>
+				</template>
 			</radiogroup>
 			<borderlayout width="1000px" vflex="true">
 				<center fulfill="self.onCreate">
@@ -37,7 +38,7 @@
 							<template name="children">
 								<gmarker lat="@load(each.latitud)"
 									lng="@load(each.longitud)"
-									content="@load(each.colectivo.nroChasis)" open="true" />
+									content="@load(each.colectivo.nroColec)" open="true" />
 							</template>
 						</gmaps>
 					</div>

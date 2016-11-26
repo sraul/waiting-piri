@@ -6,8 +6,7 @@
 	apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('com.waitingpiri.gestion.MainMenuViewModel')"
 		style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
-		<hbox height="50px" width="100%" sclass="cabecera rounded" align="center">
-			
+		<hbox height="50px" width="100%" sclass="cabecera rounded" align="center">			
 			<button sclass="btn-success" iconSclass="z-icon-sign-out"
 				style="background-color:white;color:#008080; margin-left: 15px" onClick="@command('salir')">
 				Salir..
@@ -15,7 +14,7 @@
 			<label sclass="titulo">Menú Principal</label>
 			<div hflex="true"/>
 			<div width="20px"></div>
-			</hbox>
+		</hbox>
 			<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
 			
 			<hbox vflex="true" width="100%" pack="center" align="center">

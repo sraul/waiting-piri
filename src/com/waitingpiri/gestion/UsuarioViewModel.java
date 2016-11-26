@@ -1,7 +1,6 @@
 package com.waitingpiri.gestion;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.zkoss.bind.annotation.AfterCompose;
@@ -25,25 +24,25 @@ public class UsuarioViewModel implements ABM {
 	private String filterID = "";
 	private String filterNICK = "";
 	
-	private List<Usuario>usuariosNuevos=new ArrayList<Usuario>();
+	private List<Usuario> usuariosNuevos = new ArrayList<Usuario>();
 	
 	private Usuario selectedUsuario;
 	private String selectedPerfil;
 	
-	private boolean modoEdicion=false;
-	private boolean editando=false;
+	private boolean modoEdicion = false;
+	private boolean editando = false;
 	
 	@Init
-	public void init(){
-		
+	public void init() {		
 	}
+	
 	@AfterCompose
-	public void afterCompose(@ContextParam(ContextType.VIEW)Component view){
+	public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
 		Selectors.wireEventListeners(view, this);
 	}
 	
 	@Command
-	@NotifyChange({"selectedPerfil", "selectedUsuario"})
+	@NotifyChange({ "selectedPerfil", "selectedUsuario" })
 	public void addPerfil() {
 		if (Messagebox.show("Desea agregar el Perfil?", "Agregar Perfil",Messagebox.OK | Messagebox.CANCEL,
 				Messagebox.QUESTION) == Messagebox.OK) {
@@ -79,7 +78,7 @@ public class UsuarioViewModel implements ABM {
 	
 
 	@Command
-	@NotifyChange({"modoEdicion","usuariosNuevos", "selectedUsuario", "usuario"})
+	@NotifyChange({ "modoEdicion", "usuariosNuevos", "selectedUsuario", "usuario" })
 	public void guardar() {
 		if (!this.validarDatos()) {
 			Messagebox.show("Error de Datos, verifique..", "Validacion de Datos..", Messagebox.OK, Messagebox.ERROR);
@@ -92,9 +91,9 @@ public class UsuarioViewModel implements ABM {
 			} catch (Exception e) {
 				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
 						null, 0);
-			}			
-		}		
-		if(this.editando){
+			}
+		}
+		if (this.editando) {
 			ConnectDB conn = ConnectDB.getInstance();
 			try {
 				conn.updateUsuario(this.selectedUsuario);
@@ -103,41 +102,35 @@ public class UsuarioViewModel implements ABM {
 						null, 0);
 			}
 		}
-		
-		InicioViewModel.rol = this.selectedUsuario.getRol();
-		InicioViewModel.perfiles = new HashMap<String, String>();
-		for (String perfil : this.selectedUsuario.getPerfiles()) {
-			InicioViewModel.perfiles.put(perfil, perfil);
-		}
-		
+
 		this.selectedUsuario = null;
 		this.modoEdicion = false;
 		this.editando = false;
 		Clients.showNotification("Registro Guardado..");
-}
+	}
 
 	@Override
 	@Command
 	@NotifyChange({ "selectedUsuario", "usuario" })
 	public void eliminar() {
-		if (Messagebox.show("Desea eliminar el Registro?", "Eliminar Registro",Messagebox.OK | Messagebox.CANCEL,
-				Messagebox.QUESTION) == Messagebox.OK){
-			ConnectDB conn=ConnectDB.getInstance();
-			try{
+		if (Messagebox.show("Desea eliminar el Registro?", "Eliminar Registro", 
+				Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION) == Messagebox.OK) {
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
 				conn.deleteUsuario(this.selectedUsuario);
-				this.selectedUsuario=null;
+				this.selectedUsuario = null;
 				Clients.showNotification("Registro Eliminado..");
-				
-			}catch (Exception e) {
+
+			} catch (Exception e) {
 				Clients.showNotification("No se pudo eliminar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
-						null, 0);	
-		}}
-	
+						null, 0);
+			}
+		}
 	}
 
 	@Override
 	public int getLastId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -151,9 +144,11 @@ public class UsuarioViewModel implements ABM {
 		return out;
 	}
 	
+	
 	/**
 	 * GET / SET
 	 */
+	
 	@DependsOn({ "filterID", "filterNICK" })
 	public List<Usuario> getUsuario() {
 		ConnectDB conn = ConnectDB.getInstance();
@@ -189,16 +184,16 @@ public class UsuarioViewModel implements ABM {
 	public boolean isEliminarEnabled() {
 		return this.selectedUsuario != null && !this.isModoEdicion();
 	}
-	
+
 	@Override
 	public boolean isConsulta() {
 		return InicioViewModel.rol.equals(DataUtil.ROL_CONSULTA);
 	}
-	
+
 	public List<String> getRoles() {
 		return DataUtil.getRoles();
 	}
-	
+
 	public List<String> getPerfiles() {
 		return DataUtil.getPerfiles();
 	}
@@ -250,9 +245,11 @@ public class UsuarioViewModel implements ABM {
 	public void setEditando(boolean editando) {
 		this.editando = editando;
 	}
+
 	public String getSelectedPerfil() {
 		return selectedPerfil;
 	}
+
 	public void setSelectedPerfil(String selectedPerfil) {
 		this.selectedPerfil = selectedPerfil;
 	}		

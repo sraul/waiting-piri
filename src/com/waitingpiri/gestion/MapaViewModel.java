@@ -7,6 +7,7 @@ import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.DependsOn;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
@@ -16,6 +17,14 @@ import com.waitingpiri.domain.Colectivo;
 import com.waitingpiri.domain.ConnectDB;
 
 public class MapaViewModel {
+	
+	static final int IDA = 1;
+	static final int VUELTA = 2;
+	
+	static final Object[] MAPA_IDA = new Object[] { IDA, " DE ASUNCION A PIRIBEBUY" };
+	static final Object[] MAPA_VUELTA = new Object[] { VUELTA, " DE PIRIBEBUY A ASUNCION" };
+	
+	private Object[] selectedMapa = MAPA_IDA;
 	
 	@Init
 	public void init() {
@@ -39,10 +48,15 @@ public class MapaViewModel {
 		return conn.getColectivos("", "", "");
 	}
 	
+	@DependsOn("selectedMapa")
+	public List<Localizacion> getLocalizaciones() {
+		return this.selectedMapa.equals(MAPA_IDA)? this.getLocalizacionesIda() : this.getLocalizacionesVuelta();
+	}
+	
 	/**
 	 * @return las localizaciones de los colectivos..
 	 */
-	public List<Localizacion> getLocalizacionesIda() {
+	private List<Localizacion> getLocalizacionesIda() {
 		ConnectDB conn = ConnectDB.getInstance();
 		List<Localizacion> out = new ArrayList<Localizacion>();
 		for (Colectivo colectivo : this.getColectivos()) {
@@ -57,7 +71,7 @@ public class MapaViewModel {
 	/**
 	 * @return las localizaciones de los colectivos..
 	 */
-	public List<Localizacion> getLocalizacionesVuelta() {
+	private List<Localizacion> getLocalizacionesVuelta() {
 		ConnectDB conn = ConnectDB.getInstance();
 		List<Localizacion> out = new ArrayList<Localizacion>();
 		for (Colectivo colectivo : this.getColectivos()) {
@@ -67,5 +81,23 @@ public class MapaViewModel {
 			}			
 		}
 		return out;
+	}
+	
+	/**
+	 * @return los destinos..
+	 */
+	public List<Object[]> getMapas() {
+		List<Object[]> out = new ArrayList<Object[]>();
+		out.add(MAPA_IDA);
+		out.add(MAPA_VUELTA);
+		return out;
+	}
+
+	public Object[] getSelectedMapa() {
+		return selectedMapa;
+	}
+
+	public void setSelectedMapa(Object[] selectedMapa) {
+		this.selectedMapa = selectedMapa;
 	}
 }

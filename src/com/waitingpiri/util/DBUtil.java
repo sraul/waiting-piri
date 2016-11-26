@@ -12,6 +12,10 @@ import com.waitingpiri.domain.Usuario;
 
 public class DBUtil {
 
+	/**
+	 * Clase para poblar la base de datos..
+	 */
+	
 	static final String CREATE_TABLE_CARGO = "CREATE TABLE CARGO (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
 						+ "DESCRIPCION VARCHAR(200),"+ "PRIMARY KEY(ID))";
 	
@@ -70,6 +74,7 @@ public class DBUtil {
 	public static final String UPDATE_HORARIO = "UPDATE HORARIO SET ";
 	
 	public static final String UPDATE_TARIFA = "UPDATE TARIFA SET ";
+	
 	
 	/**
 	 * pobla la base de datos..
@@ -139,20 +144,6 @@ public class DBUtil {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * test usuario..
-	 */
-	public static void testUsuario(String nick, String password) {
-		ConnectDB conn = ConnectDB.getInstance();
-		Usuario user = conn.getUsuario(nick, password);
-		if (user == null) {
-			System.out.println("No se encontro un usuario con esos datos..");
-		} else {
-			System.out.println("Usuario encontrado.. ID: " + user.getId() + " NICK: " + user.getNick() + " PASS: "
-					+ user.getPassword());
 		}
 	}
 

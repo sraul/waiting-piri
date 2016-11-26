@@ -9,16 +9,12 @@ import java.util.List;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.ContextParam;
-import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.DependsOn;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
-import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
-import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
@@ -49,8 +45,7 @@ public class FuncionarioViewModel implements ABM {
 	}
 	
 	@AfterCompose
-	public void afterCompose(@ContextParam(ContextType.VIEW) Component view) {
-		Selectors.wireEventListeners(view, this);
+	public void afterCompose() {
 	}
 	
 	/**
@@ -93,8 +88,14 @@ public class FuncionarioViewModel implements ABM {
 	}
 	
 	@Command
-	public void uploadImage(@BindingParam("event") UploadEvent event) throws IOException {
-		this.subirImagen(event);
+	public void uploadImage(@BindingParam("event") UploadEvent event) {
+		try {
+			this.subirImagen(event);
+		} catch (IOException e) {
+			Clients.showNotification("Hubo un error al intentar subir la imagen..", Clients.NOTIFICATION_TYPE_ERROR,
+					null, null, 0);
+			e.printStackTrace();
+		}
 	}
 	
 	@Command
