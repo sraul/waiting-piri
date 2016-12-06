@@ -114,9 +114,10 @@ public class DataUtil {
 				"SergioAce", "Kokito", "Lito", "noname", "wendy", "loli",
 				"dudu" };
 
-		String[] password = new String[] { "13254", "987541", "65495", "46584",
-				"65485", "3219", "984325", "98435", "6314", "51889" };
-		
+		String[] password = new String[] { Util.encriptar("13254"), Util.encriptar("987541"), Util.encriptar("65495"),
+				Util.encriptar("46584"), Util.encriptar("65485"), Util.encriptar("3219"), Util.encriptar("984325"),
+				Util.encriptar("98435"), Util.encriptar("6314"), Util.encriptar("51889") };
+	
 		String[] roles = new String[] { ROL_ADMINISTRADOR, ROL_OPERADOR, ROL_CONSULTA, ROL_ADMINISTRADOR,
 				ROL_ADMINISTRADOR, ROL_OPERADOR, ROL_CONSULTA, ROL_ADMINISTRADOR, ROL_OPERADOR, ROL_CONSULTA };
 		

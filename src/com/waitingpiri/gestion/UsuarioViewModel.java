@@ -28,6 +28,7 @@ public class UsuarioViewModel implements ABM {
 	
 	private Usuario selectedUsuario;
 	private String selectedPerfil;
+	private String selectedPerfilUsuario;
 	
 	private boolean modoEdicion = false;
 	private boolean editando = false;
@@ -52,6 +53,18 @@ public class UsuarioViewModel implements ABM {
 			}
 			this.selectedUsuario.setPerfil(old + this.selectedPerfil);
 			this.selectedPerfil = null;
+		}
+	}
+	
+	@Command
+	@NotifyChange({ "selectedPerfilUsuario", "selectedUsuario" })
+	public void removePerfil() {
+		if (Messagebox.show("Desea remover el Perfil?", "Remover Perfil",Messagebox.OK | Messagebox.CANCEL,
+				Messagebox.QUESTION) == Messagebox.OK) {
+			String replace = this.selectedPerfilUsuario;
+			if(this.selectedUsuario.getPerfil().contains(";")) replace = ";" + this.selectedPerfilUsuario;
+			this.selectedUsuario.setPerfil(this.selectedUsuario.getPerfil().replace(replace, ""));
+			this.selectedPerfilUsuario = null;
 		}
 	}
 	
@@ -96,7 +109,11 @@ public class UsuarioViewModel implements ABM {
 		if (this.editando) {
 			ConnectDB conn = ConnectDB.getInstance();
 			try {
-				conn.updateUsuario(this.selectedUsuario);
+				if (this.selectedUsuario.isCambiarPassword()) {
+					conn.updateUsuarioAndPassword(this.selectedUsuario);
+				} else {
+					conn.updateUsuario(this.selectedUsuario);
+				}				
 			} catch (Exception e) {
 				Clients.showNotification("No se pudo guardar, hubo un error..", Clients.NOTIFICATION_TYPE_ERROR, null,
 						null, 0);
@@ -194,8 +211,13 @@ public class UsuarioViewModel implements ABM {
 		return DataUtil.getRoles();
 	}
 
+	@DependsOn("selectedUsuario.perfil")
 	public List<String> getPerfiles() {
-		return DataUtil.getPerfiles();
+		List<String> out = new ArrayList<String>();
+		out.addAll(DataUtil.getPerfiles());
+		if(this.selectedUsuario != null && this.selectedUsuario.getPerfiles() != null)
+		out.removeAll(this.selectedUsuario.getPerfiles());
+		return out;
 	}
 
 	public String getFilterID() {
@@ -252,6 +274,14 @@ public class UsuarioViewModel implements ABM {
 
 	public void setSelectedPerfil(String selectedPerfil) {
 		this.selectedPerfil = selectedPerfil;
+	}
+
+	public String getSelectedPerfilUsuario() {
+		return selectedPerfilUsuario;
+	}
+
+	public void setSelectedPerfilUsuario(String selectedPerfilUsuario) {
+		this.selectedPerfilUsuario = selectedPerfilUsuario;
 	}		
 }
 	

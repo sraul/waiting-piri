@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.waitingpiri.util.Util;
+
 public class Usuario {
 
 	private int id;
@@ -11,7 +13,8 @@ public class Usuario {
 	private String password;
 	private String rol;
 	private String perfil;
-	//private boolean activo;
+	
+	private boolean cambiarPassword = false;
 	
 	public Usuario(int id, String nick, String password, String rol, String perfil) {
 		this.id = id;
@@ -19,7 +22,6 @@ public class Usuario {
 		this.password = password;
 		this.rol = rol;
 		this.perfil = perfil;
-		//this.activo = activo;
 	}
 	
 	public List<String> getPerfiles() {
@@ -35,6 +37,10 @@ public class Usuario {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
+	
+	public String getPasswordEncriptado() {
+		return Util.encriptar(this.password);
+	}
 
 	public String getPassword() {
 		return password;
@@ -42,16 +48,9 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+		this.cambiarPassword = true;
 	}
-
-/*	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-*/
+	
 	public int getId() {
 		return id;
 	}
@@ -74,5 +73,13 @@ public class Usuario {
 
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
+	}
+
+	public boolean isCambiarPassword() {
+		return cambiarPassword;
+	}
+
+	public void setCambiarPassword(boolean cambiarPassword) {
+		this.cambiarPassword = cambiarPassword;
 	}
 }

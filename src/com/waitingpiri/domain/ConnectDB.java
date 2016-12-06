@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.waitingpiri.gestion.Localizacion;
 import com.waitingpiri.util.DBUtil;
+import com.waitingpiri.util.Util;
 
 public class ConnectDB {
 	
@@ -69,7 +70,7 @@ public class ConnectDB {
 	 */
 	public Usuario getUsuario(String nick, String password) {
 		List<Usuario> out = new ArrayList<Usuario>();
-		String sql = "SELECT * FROM USUARIO WHERE NICK = '" + nick + "' AND PASSWORD = '" + password + "'";
+		String sql = "SELECT * FROM USUARIO WHERE NICK = '" + nick + "' AND PASSWORD = '" + Util.encriptar(password) + "'";
 
 		try {
 			Statement statement = connection.createStatement();
@@ -324,7 +325,7 @@ public class ConnectDB {
 	 * inserta un nuevo usuario..
 	 */
 	public void insertUsuario(Usuario usu) throws Exception{
-		String insert=DBUtil.INSERT_USUARIO +"'" +usu.getNick() + "','" + usu.getPassword() + "','" + usu.getRol() + "','" + usu.getPerfil() + "')";
+		String insert=DBUtil.INSERT_USUARIO +"'" +usu.getNick() + "','" + usu.getPasswordEncriptado() + "','" + usu.getRol() + "','" + usu.getPerfil() + "')";
 		this.executeUpdate(insert);
 		
 	}
@@ -332,7 +333,15 @@ public class ConnectDB {
 	 * update usuario..
 	 */
 	public void updateUsuario(Usuario usu) throws Exception {
-		String update = DBUtil.UPDATE_USUARIO + "NICK = '" + usu.getNick() + "', PASSWORD = '" + usu.getPassword() + "', ROL = '" + usu.getRol() + "', PERFIL = '" + usu.getPerfil() + "'"
+		String update = DBUtil.UPDATE_USUARIO + "NICK = '" + usu.getNick()  + "', ROL = '" + usu.getRol() + "', PERFIL = '" + usu.getPerfil() + "'"
+				+ "WHERE ID= " + usu.getId();
+		this.executeUpdate(update);
+	}
+	/**
+	 * update usuario..
+	 */
+	public void updateUsuarioAndPassword(Usuario usu) throws Exception {
+		String update = DBUtil.UPDATE_USUARIO + "NICK = '" + usu.getNick() + "', PASSWORD = '" + usu.getPasswordEncriptado() + "', ROL = '" + usu.getRol() + "', PERFIL = '" + usu.getPerfil() + "'"
 				+ "WHERE ID= " + usu.getId();
 		this.executeUpdate(update);
 	}
