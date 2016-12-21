@@ -40,16 +40,19 @@
 			</hbox>
 			<hbox vflex="true" width="100%" pack="center" align="center">
 			<hlayout>
+			<div height="10px" />
 			<button sclass="botones"  width="200px" iconSclass="z-icon-money"
 				height="80px" href="tarifas.zul"
 				disabled="@load(vm.tarifasDisabled)">
 				Informaciones Tarifas
 			</button>
+			<div height="10px" />
 			<button sclass="botones"  width="200px" iconSclass="z-icon-clock-o"
 				height="80px" href="horarios.zul"
 				disabled="@load(vm.horariosDisabled)">
 				Informaciones Horarios
 			</button>
+			<div height="10px" />
 			<button sclass="botones"  width="200px" iconSclass="z-icon-envelope"
 				height="80px" href="sugerencia.zul">
 				Sugerencias de Usuarios
@@ -58,6 +61,7 @@
 			</hbox>
 			<hbox vflex="true" width="100%" pack="center" align="center">
 			<hlayout>
+		
 			<button sclass="botones" width="200px" iconSclass="z-icon-male"
 				height="80px"  href="cargo.zul"
 				disabled="@load(vm.cargosDisabled)">
@@ -71,7 +75,7 @@
 				Informes
 			</button>
 			<div height="10px" />
-			<button sclass="botones" width="100%" iconSclass="z-icon-map-marker" 
+			<button sclass="botones" width="200px" iconSclass="z-icon-map-marker" 
 				height="80px"
 				href="monitoreo.zul"
 				disabled="@load(vm.monitorearDisabled)">
