@@ -7,7 +7,7 @@
 		viewModel="@id('vm') @init('com.waitingpiri.gestion.MainMenuViewModel')"
 		style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
 		<hbox height="50px" width="100%" sclass="cabecera rounded" align="center">			
-			<button sclass="btn-success" iconSclass="z-icon-sign-out"
+			<button sclass="btn-success"  iconSclass="z-icon-sign-out"
 				style="background-color:white;color:#008080; margin-left: 15px" onClick="@command('salir')">
 				Salir..
 			</button>
@@ -19,23 +19,20 @@
 			
 			<hbox vflex="true" width="100%" pack="center" align="center">
 			<hlayout>
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-briefcase"
-				height="100px" href="funcionarios.zul"
-				style="background-color:#008080;font-size:14px"
+			<button sclass="botones"  width="200px" iconSclass="z-icon-briefcase"
+				height="80px" href="funcionarios.zul"
 				disabled="@load(vm.funcionariosDisabled)">
 				Administrar Funcionarios
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-group"
-				height="100px" href="usuarios.zul"
-				style="background-color:#008080;font-size:15px"
+			<button sclass="botones" width="200px" iconSclass="z-icon-group"
+				height="80px" href="usuarios.zul"
 				disabled="@load(vm.usuariosDisabled)">
 				Administrar Usuarios
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-check-circle"
-				height="100px" href="colectivos.zul"
-				style="background-color:#008080;font-size:15px"
+			<button sclass="botones" width="200px" iconSclass="z-icon-check-circle"
+				height="80px" href="colectivos.zul"
 				disabled="@load(vm.colectivosDisabled)">
 				Administrar Colectivos
 			</button>
@@ -43,39 +40,39 @@
 			</hbox>
 			<hbox vflex="true" width="100%" pack="center" align="center">
 			<hlayout>
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-money"
-				height="100px" href="tarifas.zul"
-				style="background-color:#008080;font-size:14px"
+			<button sclass="botones"  width="200px" iconSclass="z-icon-money"
+				height="80px" href="tarifas.zul"
 				disabled="@load(vm.tarifasDisabled)">
 				Informaciones Tarifas
 			</button>
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-clock-o"
-				height="100px" href="horarios.zul"
-				style="background-color:#008080;font-size:14px"
+			<button sclass="botones"  width="200px" iconSclass="z-icon-clock-o"
+				height="80px" href="horarios.zul"
 				disabled="@load(vm.horariosDisabled)">
 				Informaciones Horarios
+			</button>
+			<button sclass="botones"  width="200px" iconSclass="z-icon-envelope"
+				height="80px" href="sugerencia.zul">
+				Sugerencias de Usuarios
 			</button>
 			</hlayout>
 			</hbox>
 			<hbox vflex="true" width="100%" pack="center" align="center">
 			<hlayout>
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-male"
-				height="100px"  href="cargo.zul"
-				style="background-color:#008080;font-size:15px"
+			<button sclass="botones" width="200px" iconSclass="z-icon-male"
+				height="80px"  href="cargo.zul"
 				disabled="@load(vm.cargosDisabled)">
 				Administrar Cargos
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="200px" iconSclass="z-icon-file-text" 
-				height="100px"
-				style="background-color:#008080;font-size:15px"
+			<button sclass="botones" width="200px" iconSclass="z-icon-file-text" 
+				height="80px"
 				href="informes.zul"
 				disabled="@load(vm.informesDisabled)">
 				Informes
 			</button>
 			<div height="10px" />
-			<button sclass="btn-success btn-lg" width="100%" iconSclass="z-icon-map-marker" 
-				height="100px" style="background-color:#008080;font-size:15px"
+			<button sclass="botones" width="100%" iconSclass="z-icon-map-marker" 
+				height="80px"
 				href="monitoreo.zul"
 				disabled="@load(vm.monitorearDisabled)">
 				Monitorear Colectivos

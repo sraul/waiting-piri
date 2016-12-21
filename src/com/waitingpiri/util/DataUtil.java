@@ -9,6 +9,7 @@ import com.waitingpiri.domain.Funcionario;
 import com.waitingpiri.domain.Usuario;
 import com.waitingpiri.domain.Horario;
 import com.waitingpiri.domain.Tarifa;
+import com.waitingpiri.domain.Sugerencia;
 
 public class DataUtil {
 	
@@ -73,7 +74,7 @@ public class DataUtil {
 		List<Cargo> cargos = DataUtil.getCargosData();
 
 		String[] nombres = new String[] { "Juan", "Luis", "Lida", "Geronimo",
-				"Hipolito", "Violeta", "Damian", "Fabian", "Kike",
+				"Hipolito", "Violeta", "Damian", "Fabian", "Alberto",
 				"Dario" };
 
 		String[] apellidos = new String[] { "Perez", "Gimenez", "Herrera",
@@ -111,8 +112,8 @@ public class DataUtil {
 		List<Usuario> out = new ArrayList<Usuario>();
 
 		String[] nick = new String[] { "jesrazal", "Lizilla", "Gabybu",
-				"SergioAce", "Kokito", "Lito", "noname", "wendy", "loli",
-				"dudu" };
+				"MarE", "SergioA", "DanielV", "cesarR", "DianaG", "AnaA",
+				"RoqueA" };
 
 		String[] password = new String[] { Util.encriptar("13254"), Util.encriptar("987541"), Util.encriptar("65495"),
 				Util.encriptar("46584"), Util.encriptar("65485"), Util.encriptar("3219"), Util.encriptar("984325"),
@@ -143,9 +144,9 @@ public class DataUtil {
 		String[] nroChasis = new String[] { "D2262662", "142GE4AA",
 				"79652F4S2", "9654F124", "19844RF6515", "96F4856E",
 				"98AS4DF651", "98DSF974", "646ADS654", "DSGDF988651" };
-		String[] nroChapa = new String[] { "AKA 047", "BOB 963", "LIZ 968",
-				"GAB 425", "ANA 965", "JES 789", "GHJ 456", "ASD 456",
-				"VBN 654", "SDF 987" };
+		String[] nroChapa = new String[] { "AKA 047", "BOB 963", "KAU 020",
+				"BOX 425", "APF 965", "AAX 789", "BBF 456", "ASD 456",
+				"BBP 654", "ABZ 987" };
 		String[] imei=new String[]{"12365478941236587","12589633255","2326595230","789456123","1548310311","7894002232",
 				"4512369874","78456311222","554557412","458255221"};
 		
@@ -184,5 +185,23 @@ public class DataUtil {
 			out.add(tarifa);
 		}
 		return out;
+	}
+	
+	/**
+	 * @return los datos de Sugerencia
+	 */
+	
+	public static List<Sugerencia> getSugerenciaData(){
+		List<Sugerencia> out = new ArrayList<Sugerencia>();
+		String[] nombre=new String[]{"Liz","Jesus","Gabriela"};
+		String[] mail=new String[]{"lizilla@gmail.com","jesusR@hotmail.com","gabyB@gmail.com"};
+		String[] sugerencia =new String[]{"Sugerencia1","Sugerencia2", "sugerencia3"};
+		
+		for(int i=0; i<3;i++){
+			Sugerencia sugerencias =new Sugerencia(i + 1 ,nombre[i],mail[i],sugerencia[i]);
+			out.add(sugerencias);
+		}
+		return out;
+		
 	}
 }

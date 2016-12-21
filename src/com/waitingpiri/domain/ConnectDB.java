@@ -224,7 +224,7 @@ public class ConnectDB {
 	public List<Horario> getHorarios(String id, String salida,String llegada) {
 		List<Horario> out = new ArrayList<Horario>();
 		String sql = "SELECT * FROM HORARIO WHERE CAST(ID AS CHAR(10)) LIKE '%" + id + "%' AND"
-				+ " SALIDA LIKE UPPER('%" + salida.toUpperCase() + "%')"+ "AND LLEGADA LIKE UPPER('%" + llegada.toUpperCase() + "%')";
+				+ " SALIDA LIKE UPPER('%" + salida.toUpperCase() + "%')" + " AND LLEGADA LIKE UPPER('%" + llegada.toUpperCase() + "%')";
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -289,7 +289,31 @@ public class ConnectDB {
 		}
 		return out;
 	}
-	
+	/**
+	 * @return Sugerencia
+	 */
+	public List<Sugerencia> getSugerencia(String id, String nombre, String mail) {
+		List<Sugerencia> out = new ArrayList<Sugerencia>();
+		String sql = "SELECT * FROM SUGERENCIA WHERE CAST(ID AS CHAR(10))  LIKE '%" + id + "%' AND"
+				+ " NOMBRE LIKE UPPER('%" + nombre.toUpperCase() + "%')" 
+				+"AND  MAIL LIKE UPPER('%" + mail.toUpperCase() + "%')";
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				int idSu = result.getInt("ID");
+				String nombre_ = result.getString("NOMBRE");
+				String mail_ = result.getString("MAIL");
+				String sugerencia_ = result.getString("SUGERENCIA");
+				
+				Sugerencia sugerencia= new Sugerencia(idSu,nombre_,mail_,sugerencia_);
+				out.add(sugerencia);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return out;
+	}
 	/**
 	 * inserta un nuevo funcionario..
 	 */
@@ -451,6 +475,34 @@ public class ConnectDB {
 	 */
 	public void deleteCargo(Cargo car) throws Exception {
 		String delete = DBUtil.DELETE_CARGO + car.getId();
+		this.executeUpdate(delete);
+	}
+	
+	/**
+	 * inserta un nuevo sugerencia..
+	 */
+	public void insertSugerencia(Sugerencia sug) throws Exception {
+		String insert = DBUtil.INSERT_SUGERENCIA+ "'" + sug.getNombre()
+		+ "', '"+ sug.getMail() + "', '" + sug.getSugerencia() + ")";
+		this.executeUpdate(insert);
+	}
+	
+	/**
+	 * update sugerencia..
+	 */
+	public void updateSugerencia(Sugerencia sug) throws Exception {
+		String update = DBUtil.UPDATE_SUGERENCIA + "NOMBRE = '" + sug.getNombre() +
+			 "'," + "MAIL = '" + sug.getMail() + 
+				"'," + "SUGERENCIA = '" + sug.getSugerencia() + "'" + "WHERE ID= "
+				+ sug.getId();
+		this.executeUpdate(update);
+	}
+	
+	/**
+	 * elimina un sugerencia
+	 */
+	public void deleteSugerencia(Sugerencia sug) throws Exception {
+		String delete = DBUtil.DELETE_SUGERENCIA + sug.getId();
 		this.executeUpdate(delete);
 	}
 }

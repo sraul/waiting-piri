@@ -27,7 +27,7 @@
 				visible="@load(!vm.modoEdicion)">
 				<listhead style="text-align:center">
 					<listheader label="ID" align="right"
-						style="text-align:center" width="100px" />
+						style="text-align:center" />
 					<listheader label="SALIDA"
 						style="text-align:center" />
 					<listheader label="LLEGADA"

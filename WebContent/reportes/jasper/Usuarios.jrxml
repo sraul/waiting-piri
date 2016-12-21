@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="planCuentas" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bda7b4d1-2372-4fef-9c52-f5d49003bc73">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sugerencias" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bda7b4d1-2372-4fef-9c52-f5d49003bc73">
 	<property name="ireport.zoom" value="0.9330147604194676"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -15,25 +15,12 @@
 	</style>
 	<parameter name="Empresa" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select '1' "Cuenta", '1' "Nivel", 'Activo' "Desc Cuenta", null "Cuenta Totalizadora",  'A' "Tipo", 'S' "Asentable"
-from plancuenta where id = '1'
-union all
-select '111' "Cuenta", '1' "Nivel", 'Caja' "Desc Cuenta", 1 "Cuenta Totalizadora",  'A' "Tipo", 'S' "Asentable"
-from plancuenta where id = '1'
-union all
-select '11111001' "Cuenta", '1' "Nivel", 'Caja M/L' "Desc Cuenta", 111 "Cuenta Totalizadora",  'A' "Tipo", 'S' "Asentable"
-from plancuenta where id = '1'
-union all
-select '11111002' "Cuenta", '1' "Nivel", 'Caja M/E' "Desc Cuenta", 111 "Cuenta Totalizadora",  'A' "Tipo", 'S' "Asentable"
-from plancuenta where id = '1'
-union all
-select '11111003' "Cuenta", '1' "Nivel", 'Recaudaciones a Depositar' "Desc Cuenta", 111 "Cuenta Totalizadora",  'A' "Tipo", 'S' "Asentable"
-from plancuenta where id = '1']]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="Nick" class="java.lang.String"/>
-	<field name="Nivel" class="java.lang.String"/>
+	<field name="Nombre" class="java.lang.String"/>
+	<field name="mail" class="java.lang.String"/>
 	<field name="Apellido" class="java.lang.String"/>
-	<field name="Cuenta Totalizadora" class="java.lang.String"/>
+	<field name="Sugerencia" class="java.lang.String"/>
 	<field name="Tipo" class="java.lang.String"/>
 	<field name="Asentable" class="java.lang.String"/>
 	<background>
@@ -42,17 +29,26 @@ from plancuenta where id = '1']]>
 	<title>
 		<band height="72" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="300" y="0" width="196" height="42" uuid="d3e3551f-82df-4aa6-813d-511e9eb4183f"/>
+				<reportElement uuid="d3e3551f-82df-4aa6-813d-511e9eb4183f" style="Title" x="170" y="30" width="262" height="30"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="16"/>
+					<font fontName="SansSerif" size="14"/>
 				</textElement>
-				<text><![CDATA[Usuarios]]></text>
+				<text><![CDATA[Listado de Sugerencias de Usuarios]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="300" y="42" width="196" height="20" uuid="53b58c50-7187-445b-a276-cfef9a588b68"/>
-				<textElement textAlignment="Center"/>
+				<reportElement uuid="53b58c50-7187-445b-a276-cfef9a588b68" x="122" y="0" width="380" height="30"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{Empresa}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement uuid="bd23a369-4a8f-4598-8288-510d32b5b18f" x="73" y="10" width="80" height="54"/>
+				<imageExpression><![CDATA["C:\\project\\waiting-piri\\WebContent\\reportes\\jasper\\Liz-Logo-Small.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement uuid="29c150df-53eb-4bc0-8ac3-6ca7418c8bad" x="1" y="64" width="554" height="1" forecolor="#009999"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
@@ -61,28 +57,64 @@ from plancuenta where id = '1']]>
 	<columnHeader>
 		<band height="22" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="122" height="18" forecolor="#736343" uuid="14f90aa9-a113-41aa-a0f8-a266ea66d6d7"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Nick]]></text>
+				<reportElement uuid="14f90aa9-a113-41aa-a0f8-a266ea66d6d7" style="Column header" x="0" y="0" width="122" height="18" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="18" width="800" height="1" uuid="65406532-5ff0-44cc-a864-c89ea988fc7e"/>
+				<reportElement uuid="65406532-5ff0-44cc-a864-c89ea988fc7e" positionType="FixRelativeToBottom" x="0" y="18" width="555" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement uuid="447936e8-b116-4aee-aa66-dad317b93baf" x="122" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d44e592e-130b-436a-b502-d10491d57b2d" x="222" y="2" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="984de3fc-001e-4433-b5ef-09bb90be64af" x="322" y="1" width="233" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sugerencia]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
 			<frame>
-				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="21" uuid="89bd1596-da5a-4342-a4ee-299482c96370"/>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="1" y="0" width="122" height="21" uuid="41abdf4f-8890-4b69-a146-537611bcb6cf"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="10"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{Nick}]]></textFieldExpression>
+				<reportElement uuid="89bd1596-da5a-4342-a4ee-299482c96370" style="Row" mode="Opaque" x="0" y="0" width="555" height="21"/>
+				<textField>
+					<reportElement uuid="74cccee4-91bf-4538-a021-d13f294142d9" x="1" y="0" width="121" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="50692bc1-1b7a-4be1-a198-34b7982f5a4b" x="122" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Apellido}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="20dbad03-23a5-42a1-8385-0072d564a7b9" x="222" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{mail}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="8457ccac-834f-4d62-bcb1-3d9eca3a43e0" x="322" y="0" width="233" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Sugerencia}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -90,7 +122,7 @@ from plancuenta where id = '1']]>
 	<columnFooter>
 		<band height="8" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="800" height="1" uuid="0e0dd04c-945f-4e94-9a6e-28ca493dd508"/>
+				<reportElement uuid="0e0dd04c-945f-4e94-9a6e-28ca493dd508" positionType="FixRelativeToBottom" x="0" y="3" width="539" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
@@ -100,9 +132,9 @@ from plancuenta where id = '1']]>
 	<pageFooter>
 		<band height="26" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="1" y="1" width="799" height="25" forecolor="#D0B48E" backcolor="#E2F0ED" uuid="e9512908-7954-4e12-a13f-bcd886c4261d"/>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement style="Column header" x="22" y="1" width="147" height="20" forecolor="#736343" uuid="80f0a835-8308-4a95-8ec4-10ab80803ad1"/>
+				<reportElement uuid="e9512908-7954-4e12-a13f-bcd886c4261d" mode="Opaque" x="1" y="1" width="554" height="25" forecolor="#D0B48E" backcolor="#E2F0ED"/>
+				<textField pattern="EEE, d MMM yyyy - HH:mm:ss ">
+					<reportElement uuid="80f0a835-8308-4a95-8ec4-10ab80803ad1" style="Column header" x="22" y="1" width="147" height="20" forecolor="#000000"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
@@ -110,18 +142,18 @@ from plancuenta where id = '1']]>
 				</textField>
 			</frame>
 			<textField evaluationTime="Report">
-				<reportElement style="Column header" x="738" y="0" width="40" height="20" forecolor="#736343" uuid="902c8b29-d394-4a9d-b75d-2dbe0f92eb04"/>
+				<reportElement uuid="902c8b29-d394-4a9d-b75d-2dbe0f92eb04" style="Column header" x="499" y="6" width="40" height="20" forecolor="#000000"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Column header" x="658" y="0" width="80" height="20" forecolor="#736343" uuid="0ca5b060-a612-4387-ad83-592847f89a79"/>
+				<reportElement uuid="0ca5b060-a612-4387-ad83-592847f89a79" style="Column header" x="419" y="6" width="80" height="20" forecolor="#000000"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
@@ -131,7 +163,7 @@ from plancuenta where id = '1']]>
 	<noData>
 		<band height="50">
 			<staticText>
-				<reportElement mode="Opaque" x="1" y="11" width="799" height="20" forecolor="#000000" backcolor="#E2F0ED" uuid="53f4f85d-ee2f-4b27-b8cd-2b7af6a1a506"/>
+				<reportElement uuid="53f4f85d-ee2f-4b27-b8cd-2b7af6a1a506" mode="Opaque" x="1" y="11" width="554" height="20" forecolor="#000000" backcolor="#E2F0ED"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[NO SE ENCONTRARON DATOS..]]></text>
 			</staticText>
