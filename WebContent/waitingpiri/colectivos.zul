@@ -115,17 +115,6 @@
 								readonly="@load(!vm.modoEdicion)"
 									constraint="no empty"/>
 							</row>
-							<row>
-							  <hlayout valign="middle">
-								<label sclass="field" value="IMEI:"/>
-								<label sclass="required">*</label>								
-								</hlayout>
-								<textbox hflex="true"
-								value="@bind(vm.selectedColectivo.imei)"
-								readonly="@load(!vm.modoEdicion)"
-									constraint="no empty"/>
-								
-								</row>
 						</rows>
 					</grid>	
 					<hlayout visible="@load(!vm.consulta)">

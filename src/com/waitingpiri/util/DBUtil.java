@@ -32,7 +32,7 @@ public class DBUtil {
 	
 	static final String CREATE_TABLE_COLECTIVO = "CREATE TABLE COLECTIVO ("
 			+"ID INT(64) NOT NULL AUTO_INCREMENT," + "NROCOLEC VARCHAR(200)," 
-			+ "NROCHASIS VARCHAR(200)," + "NROCHAPA VARCHAR(200),"+"IMEI VARCHAR(25)," + "PRIMARY KEY(ID))";
+			+ "NROCHASIS VARCHAR(200)," + "NROCHAPA VARCHAR(200)," + "PRIMARY KEY(ID))";
 	
 	static final String CREATE_TABLE_HORARIO = "CREATE TABLE HORARIO (" + "ID INT (64) NOT NULL AUTO_INCREMENT," 
 			+ "SALIDA VARCHAR(6),"+ " LLEGADA VARCHAR(6),"+ "PRIMARY KEY(ID))";
@@ -51,7 +51,7 @@ public class DBUtil {
 
 	public static final String INSERT_USUARIO = "INSERT INTO USUARIO (NICK, PASSWORD, ROL, PERFIL) values (";
 	
-	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS , NROCHAPA, IMEI) values (";
+	public static final String INSERT_COLECTIVO = "INSERT INTO COLECTIVO (NROCOLEC, NROCHASIS , NROCHAPA) values (";
 	
 	public static final String INSERT_HORARIO = "INSERT INTO HORARIO (SALIDA, LLEGADA) values (";
 	
@@ -139,7 +139,7 @@ public class DBUtil {
 			}
 			
 			for (Colectivo col : colectivos){
-				String insert = INSERT_COLECTIVO + "'" + col.getNroColec() + "','" + col.getNroChasis() + "','" + col.getNroChapa() + "','"+col.getImei()+"')";
+				String insert = INSERT_COLECTIVO + "'" + col.getNroColec() + "','" + col.getNroChasis() + "','" + col.getNroChapa() + "')";
 				conn.executeUpdate(insert);
 				System.out.println("Colectivo insertado..");
 			}

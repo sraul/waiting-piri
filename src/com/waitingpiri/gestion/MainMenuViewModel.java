@@ -71,4 +71,8 @@ public class MainMenuViewModel {
 	public boolean isMonitorearDisabled() {
 		return InicioViewModel.perfiles.get(DataUtil.PERFIL_ADM_MONITOREO) == null;
 	}
+	
+	public boolean isSugerenciaDisabled() {
+		return InicioViewModel.perfiles.get(DataUtil.PERFIL_ADM_SUGERENCIA) == null;
+	}
 }

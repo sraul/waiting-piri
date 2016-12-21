@@ -25,6 +25,7 @@ public class DataUtil {
 	public static final String PERFIL_ADM_CARGOS = "ADMINISTRAR CARGOS";
 	public static final String PERFIL_ADM_INFORMES = "ADMINISTRAR INFORMES";
 	public static final String PERFIL_ADM_MONITOREO = "MONITOREAR COLECTIVOS";
+	public static final String PERFIL_ADM_SUGERENCIA = "SUGERENCIAS DE USUARIOS";
 	
 	/**
 	 * @return los roles..
@@ -50,6 +51,7 @@ public class DataUtil {
 		out.add(PERFIL_ADM_CARGOS);
 		out.add(PERFIL_ADM_INFORMES);
 		out.add(PERFIL_ADM_MONITOREO);
+		out.add(PERFIL_ADM_SUGERENCIA);
 		return out;
 	}
 	
@@ -124,7 +126,7 @@ public class DataUtil {
 		
 		String[] perfiles = new String[] { PERFIL_ADM_FUNCIONARIOS, PERFIL_ADM_USUARIOS, PERFIL_ADM_COLECTIVOS,
 				PERFIL_ADM_FUNCIONARIOS, PERFIL_ADM_FUNCIONARIOS, PERFIL_ADM_USUARIOS, PERFIL_ADM_FUNCIONARIOS,
-				PERFIL_ADM_USUARIOS, PERFIL_ADM_FUNCIONARIOS, PERFIL_ADM_USUARIOS };
+				PERFIL_ADM_USUARIOS, PERFIL_ADM_FUNCIONARIOS, PERFIL_ADM_USUARIOS, PERFIL_ADM_SUGERENCIA };
 
 		for (int i = 0; i < 10; i++) {
 			Usuario usu = new Usuario(i + 1, nick[i], password[i], roles[i], perfiles[i]);
@@ -147,12 +149,11 @@ public class DataUtil {
 		String[] nroChapa = new String[] { "AKA 047", "BOB 963", "KAU 020",
 				"BOX 425", "APF 965", "AAX 789", "BBF 456", "ASD 456",
 				"BBP 654", "ABZ 987" };
-		String[] imei=new String[]{"12365478941236587","12589633255","2326595230","789456123","1548310311","7894002232",
-				"4512369874","78456311222","554557412","458255221"};
+		
 		
 		for (int i = 0; i < 10; i++) {
 			Colectivo col = new Colectivo(i + 1, nroColec[i], nroChasis[i],
-					nroChapa[i],imei[i]);
+					nroChapa[i]);
 			out.add(col);
 		}
 		return out;
