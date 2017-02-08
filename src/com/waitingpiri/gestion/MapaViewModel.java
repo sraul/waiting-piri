@@ -56,7 +56,7 @@ public class MapaViewModel {
 	/**
 	 * @return las localizaciones de los colectivos..
 	 */
-	private List<Localizacion> getLocalizacionesIda() {
+	public List<Localizacion> getLocalizacionesIda() {
 		ConnectDB conn = ConnectDB.getInstance();
 		List<Localizacion> out = new ArrayList<Localizacion>();
 		for (Colectivo colectivo : this.getColectivos()) {
@@ -71,7 +71,7 @@ public class MapaViewModel {
 	/**
 	 * @return las localizaciones de los colectivos..
 	 */
-	private List<Localizacion> getLocalizacionesVuelta() {
+	public List<Localizacion> getLocalizacionesVuelta() {
 		ConnectDB conn = ConnectDB.getInstance();
 		List<Localizacion> out = new ArrayList<Localizacion>();
 		for (Colectivo colectivo : this.getColectivos()) {
