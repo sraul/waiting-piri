@@ -7,6 +7,8 @@
 		viewModel="@id('vm') @init('com.waitingpiri.gestion.MapaViewModel')"
 		style="background-color:#E6E6E6;"
 		contentStyle="background-color:#E6E6E6;" id="win">
+		
+		<timer delay="5000" repeats="true" onTimer="@command('test')"></timer>
 
 		<!-- Cabecera -->
 		<hbox height="50px" width="100%" sclass="cabecera rounded"

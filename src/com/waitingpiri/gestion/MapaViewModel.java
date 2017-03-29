@@ -21,8 +21,8 @@ public class MapaViewModel {
 	static final int IDA = 1;
 	static final int VUELTA = 2;
 	
-	static final Object[] MAPA_IDA = new Object[] { IDA, " DE ASUNCION A PIRIBEBUY" };
-	static final Object[] MAPA_VUELTA = new Object[] { VUELTA, " DE PIRIBEBUY A ASUNCION" };
+	static final Object[] MAPA_IDA = new Object[] { IDA, " DE PIRIBEBUY A ASUNCION" };
+	static final Object[] MAPA_VUELTA = new Object[] { VUELTA, " DE ASUNCION A PIRIBEBUY" };
 	
 	private Object[] selectedMapa = MAPA_IDA;
 	
@@ -80,6 +80,18 @@ public class MapaViewModel {
 				out.add(locs.get(0));
 			}			
 		}
+		return out;
+	}
+	
+	/**
+	 * @return las localizaciones de los colectivos..
+	 */
+	public List<Localizacion> getLocalizacionesParadas() {
+		List<Localizacion> out = new ArrayList<Localizacion>();
+		out.add(new Localizacion(-25.4663528, -57.0478755));
+		out.add(new Localizacion(-25.463059, -57.043176));
+		out.add(new Localizacion(-25.464912, -57.039442));
+		out.add(new Localizacion(-25.459273, -57.044715));
 		return out;
 	}
 	

@@ -4,24 +4,22 @@
 	<style src="/css/style.css" />
 	<window border="0" width="100%" height="100%"
 		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('com.waitingpiri.gestion.TarifasViewModel')" style="background-color:#E6E6E6;" contentStyle="background-color:#E6E6E6;">
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.InformacionesViewModel')" style="background-color:#E6E6E6;" 
+		contentStyle="background-color:#E6E6E6;">
 		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:10px">
 				<listbox vflex="true" width="100%" sclass="rounded"
-				model="@load(vm.tarifas)"
-				selectedItem="@bind(vm.selectedTarifa)"
-				visible="@load(!vm.modoEdicion)">
+				model="@load(vm.horarios)">
 					<listhead style="text-align:center">
-						<listheader label="DESCRIPCIÓN" 
+						<listheader label="SALIDA" 
 							style="font-size:40pt;line-height:50px; text-align:center" height="150px" />
-						<listheader label="PRECIO" width="30%" 
+						<listheader label="LLEGADA"
 							align="right"
 							style="font-size:40pt;line-height:50px; text-align:center" height="150px" />
 					</listhead>
 					<template name="model">
 						<listitem>
-							<listcell label="@load(each.descripcion)" style="font-size:40pt;line-height:50px" height="150px"/>
-							<listcell label="@load(each.precio) @converter('formattedNumber', format='###,###,##0')" 
-								style="font-size:40pt;line-height:50px" height="150px"/>
+							<listcell label="@load(each.salida)" style="font-size:40pt;line-height:50px" height="150px"/>
+							<listcell label="@load(each.llegada)" style="font-size:40pt;line-height:50px" height="150px"/>
 						</listitem>
 					</template>		
 				</listbox>

@@ -1,0 +1,35 @@
+<?page title="Waiting Piri- Web" contentType="text/html;charset=UTF-8"?>
+<?link rel="icon" type="image/x-icon" href="/images/icono.ico"?>
+<zk>
+	<style src="/css/style.css" />
+	<window border="0" width="100%" height="100%"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.waitingpiri.gestion.SugerenciaViewModel')"
+		style="background-color:#E6E6E6;" 
+		contentStyle="background-color:#E6E6E6;">
+		<vbox width="100%" vflex="true" pack="center" align="center" style="padding:50px">
+				
+				<label value="Sugerencias" style="font-size:30pt"></label>
+				<space></space>
+				<textbox hflex="true" placeholder="Ingrese su Nombre y Apellido.." height="70px"
+					style="font-size:30pt"
+					value="@bind(vm.nuevaSugerencia.nombre)"></textbox>
+				<space></space>
+				<textbox hflex="true" placeholder="Ingrese su correo.." height="70px"
+					style="font-size:30pt"
+					value="@bind(vm.nuevaSugerencia.mail)"></textbox>
+				<space></space>
+				<textbox hflex="true" rows="10" placeholder="Mensaje.."
+					style="font-size:30pt;line-height:50px"
+					value="@bind(vm.nuevaSugerencia.sugerencia)"></textbox>
+				<space></space>
+				<hlayout style="text-align:right">
+					<button sclass="btn-success btn-lg" iconSclass="z-icon-check"
+						height="100px" width="100px"
+						onClick="@command('addSugerencia')"></button>
+				</hlayout>	
+				
+				
+			</vbox>
+</window>
+</zk>

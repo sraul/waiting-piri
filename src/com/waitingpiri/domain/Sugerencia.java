@@ -7,10 +7,10 @@ public class Sugerencia {
 	private String sugerencia;
 	
 	public Sugerencia(int id,String nombre,String mail, String sugerencia){
-		this.id=id;
-		this.nombre=nombre;
-		this.mail=mail;
-		this.sugerencia= sugerencia;
+		this.id = id;
+		this.nombre = nombre;
+		this.mail = mail;
+		this.sugerencia = sugerencia;
 	}
 
 

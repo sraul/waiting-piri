@@ -482,7 +482,7 @@ public class ConnectDB {
 	 */
 	public void insertSugerencia(Sugerencia sug) throws Exception {
 		String insert = DBUtil.INSERT_SUGERENCIA+ "'" + sug.getNombre()
-		+ "', '"+ sug.getMail() + "', '" + sug.getSugerencia() + ")";
+		+ "', '"+ sug.getMail() + "', '" + sug.getSugerencia() + "')";
 		this.executeUpdate(insert);
 	}
 	

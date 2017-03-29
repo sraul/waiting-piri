@@ -31,6 +31,7 @@ import com.waitingpiri.util.DBUtil;
 		
 		
 		private Sugerencia selectedSugerencia;
+		private Sugerencia nuevaSugerencia = new Sugerencia(0, "", "", "");
 		private boolean modoEdicion=false;
 		private boolean editando=false;
 		
@@ -49,9 +50,7 @@ import com.waitingpiri.util.DBUtil;
 			 */
 			@Command
 			@NotifyChange({"modoEdicion","selectedSugerencia"})
-			public void nuevo() {
-			
-				
+			public void nuevo() {				
 			}
 
 
@@ -71,8 +70,7 @@ import com.waitingpiri.util.DBUtil;
 			@Command
 			@NotifyChange({})
 			public void guardar() {
-				
-				}
+			}
 				
 
 			@Override
@@ -125,6 +123,23 @@ import com.waitingpiri.util.DBUtil;
 			// TODO Auto-generated method stub
 			return 0;
 		}
+		
+		@Command
+		@NotifyChange("*")
+		public void addSugerencia() {
+			this.nuevaSugerencia.setId(this.getLastId() + 1);
+			ConnectDB conn = ConnectDB.getInstance();
+			try {
+				conn.insertSugerencia(this.nuevaSugerencia);
+				this.nuevaSugerencia = new Sugerencia(0, "", "", "");
+				Clients.showNotification("Sugerencia enviada..", 
+						Clients.NOTIFICATION_TYPE_INFO, null, null, 0);
+			} catch (Exception e) {
+				e.printStackTrace();
+				Clients.showNotification("Hubo un error al intentar enviar la sugerencia..", 
+						Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
+			}			
+		}
 
 
 		/** Get and set **/
@@ -134,7 +149,6 @@ import com.waitingpiri.util.DBUtil;
 			ConnectDB conn = ConnectDB.getInstance();
 			return conn.getSugerencia(this.filterID, this.filterNOMBRE, this.filterMail);
 		}
-
 		
 		public String getFilterMail() {
 			return filterMail;
@@ -190,6 +204,12 @@ import com.waitingpiri.util.DBUtil;
 		public boolean isConsulta() {
 			// TODO Auto-generated method stub
 			return false;
+		}
+		public Sugerencia getNuevaSugerencia() {
+			return nuevaSugerencia;
+		}
+		public void setNuevaSugerencia(Sugerencia nuevaSugerencia) {
+			this.nuevaSugerencia = nuevaSugerencia;
 		}
 
 }

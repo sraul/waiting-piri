@@ -7,6 +7,14 @@ public class Localizacion {
 	private double latitud;
 	private double longitud;
 	private Colectivo colectivo;
+	
+	public Localizacion() {
+	}
+	
+	public Localizacion(double latitud, double longitud) {
+		this.latitud = latitud;
+		this.longitud = longitud;
+	}
 
 	public double getLatitud() {
 		return latitud;
