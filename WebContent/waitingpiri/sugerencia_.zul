@@ -12,19 +12,24 @@
 				<label value="Sugerencias" style="font-size:30pt"></label>
 				<space></space>
 				<textbox hflex="true" placeholder="Ingrese su Nombre y Apellido.." height="70px"
+				constraint="no empty"
 					style="font-size:30pt"
 					value="@bind(vm.nuevaSugerencia.nombre)"></textbox>
 				<space></space>
 				<textbox hflex="true" placeholder="Ingrese su correo.." height="70px"
 					style="font-size:30pt"
+					constraint="no empty"
 					value="@bind(vm.nuevaSugerencia.mail)"></textbox>
 				<space></space>
 				<textbox hflex="true" rows="10" placeholder="Mensaje.."
+				constraint="no empty"
 					style="font-size:30pt;line-height:50px"
 					value="@bind(vm.nuevaSugerencia.sugerencia)"></textbox>
 				<space></space>
+				
 				<hlayout style="text-align:right">
-					<button sclass="btn-success btn-lg" iconSclass="z-icon-check"
+					<button sclass="btn-success btn-circle" iconSclass="z-icon-check"
+						style="background-color:#008080; border-radius:50px"
 						height="100px" width="100px"
 						onClick="@command('addSugerencia')"></button>
 				</hlayout>	

@@ -127,8 +127,14 @@ import com.waitingpiri.util.DBUtil;
 		@Command
 		@NotifyChange("*")
 		public void addSugerencia() {
-			this.nuevaSugerencia.setId(this.getLastId() + 1);
-			ConnectDB conn = ConnectDB.getInstance();
+			
+			if (!this.validarDatos()) {
+				Messagebox.show("Error de Datos, verifique..", "Validaci�n de Datos..", Messagebox.OK, Messagebox.ERROR);
+				return;
+			}
+				this.nuevaSugerencia.setId(this.getLastId() + 1);
+				ConnectDB conn = ConnectDB.getInstance();
+			
 			try {
 				conn.insertSugerencia(this.nuevaSugerencia);
 				this.nuevaSugerencia = new Sugerencia(0, "", "", "");
@@ -140,8 +146,7 @@ import com.waitingpiri.util.DBUtil;
 						Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
 			}			
 		}
-
-
+		
 		/** Get and set **/
 
 		@DependsOn({ "filterID", "filterNOMBRE", "filterMail"})
@@ -197,9 +202,12 @@ import com.waitingpiri.util.DBUtil;
 		}
 		@Override
 		public boolean validarDatos() {
-			// TODO Auto-generated method stub
-			return false;
-		}
+			boolean out = true;
+			// campos obligatorios..
+			if (this.nuevaSugerencia.getNombre().trim().isEmpty()|| this.nuevaSugerencia.getMail().trim().isEmpty() || this.nuevaSugerencia.getSugerencia().trim().isEmpty()) {
+				out = false;
+			}
+			return out;}
 		@Override
 		public boolean isConsulta() {
 			// TODO Auto-generated method stub
