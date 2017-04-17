@@ -18,7 +18,7 @@
 		<![CDATA[]]>
 	</queryString>
 	<field name="Nombre" class="java.lang.String"/>
-	<field name="mail" class="java.lang.String"/>
+	<field name="Mail" class="java.lang.String"/>
 	<field name="Apellido" class="java.lang.String"/>
 	<field name="Sugerencia" class="java.lang.String"/>
 	<field name="Tipo" class="java.lang.String"/>
@@ -43,7 +43,7 @@
 				<textFieldExpression><![CDATA[$P{Empresa}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement uuid="bd23a369-4a8f-4598-8288-510d32b5b18f" x="73" y="10" width="80" height="54"/>
+				<reportElement uuid="bd23a369-4a8f-4598-8288-510d32b5b18f" x="56" y="6" width="80" height="54"/>
 				<imageExpression><![CDATA["C:\\project\\waiting-piri\\WebContent\\reportes\\jasper\\Liz-Logo-Small.jpg"]]></imageExpression>
 			</image>
 			<line>
@@ -70,21 +70,14 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement uuid="447936e8-b116-4aee-aa66-dad317b93baf" x="122" y="0" width="100" height="20"/>
-				<textElement>
-					<font fontName="Arial" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Apellido]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="d44e592e-130b-436a-b502-d10491d57b2d" x="222" y="2" width="100" height="20"/>
+				<reportElement uuid="d44e592e-130b-436a-b502-d10491d57b2d" x="122" y="2" width="100" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Mail]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="984de3fc-001e-4433-b5ef-09bb90be64af" x="322" y="1" width="233" height="20"/>
+				<reportElement uuid="984de3fc-001e-4433-b5ef-09bb90be64af" x="222" y="2" width="233" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
@@ -102,17 +95,12 @@
 					<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="50692bc1-1b7a-4be1-a198-34b7982f5a4b" x="122" y="0" width="100" height="20"/>
+					<reportElement uuid="20dbad03-23a5-42a1-8385-0072d564a7b9" x="122" y="0" width="100" height="20"/>
 					<textElement/>
-					<textFieldExpression><![CDATA[$F{Apellido}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{Mail}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="20dbad03-23a5-42a1-8385-0072d564a7b9" x="222" y="0" width="100" height="20"/>
-					<textElement/>
-					<textFieldExpression><![CDATA[$F{mail}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement uuid="8457ccac-834f-4d62-bcb1-3d9eca3a43e0" x="322" y="0" width="233" height="20"/>
+					<reportElement uuid="8457ccac-834f-4d62-bcb1-3d9eca3a43e0" x="222" y="0" width="317" height="20"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$F{Sugerencia}]]></textFieldExpression>
 				</textField>

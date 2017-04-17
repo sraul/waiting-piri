@@ -27,7 +27,7 @@ import org.zkoss.zul.Window;
 import com.waitingpiri.domain.Colectivo;
 import com.waitingpiri.domain.ConnectDB;
 import com.waitingpiri.domain.Funcionario;
-import com.waitingpiri.domain.Usuario;
+import com.waitingpiri.domain.Sugerencia;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -55,11 +55,11 @@ public class InformesViewModel {
 	private Button verInfo;
 	
 	static final int FUNCIONARIOS = 1;
-	static final int USUARIOS = 2;
+	static final int SUGERENCIAS = 2;
 	static final int COLECTIVOS = 3;
 	
 	static final String JASPER_FUNCIONARIOS = "/reportes/jasper/Funcionarios.jasper";
-	static final String JASPER_USUARIOS = "/reportes/jasper/Usuarios.jasper";
+	static final String JASPER_SUGERENCIAS = "/reportes/jasper/Usuarios.jasper";
 	static final String JASPER_COLECTIVOS = "/reportes/jasper/Colectivos.jasper";
 	
 	static List<Object[]> reportes = new ArrayList<Object[]>();
@@ -71,7 +71,7 @@ public class InformesViewModel {
 	
 	static {
 		reportes.add(new Object[] { FUNCIONARIOS, "Funcionarios", true, false });
-		reportes.add(new Object[] { USUARIOS, "Usuarios", true, true });
+		reportes.add(new Object[] { SUGERENCIAS, "Sugerencias de Usuarios", true, true });
 		reportes.add(new Object[] { COLECTIVOS, "Colectivos", true, true });
 		
 		formatos.add(new Object[] { "PDF", "pdf" });
@@ -107,9 +107,9 @@ public class InformesViewModel {
 			params.put("Empresa", "Empresa de Transporte Piribebuy S.A.");
 			break;
 		
-		case USUARIOS:
-			source = JASPER_USUARIOS;
-			dataSource = new UsuariosDataSource();
+		case SUGERENCIAS:
+			source = JASPER_SUGERENCIAS;
+			dataSource = new SugerenciasDataSource();
 			params.put("Empresa", "Empresa de Transporte Piribebuy S.A.");
 			break;
 			
@@ -202,13 +202,13 @@ public class InformesViewModel {
 	}
 	
 	/**
-	 * DataSource de Usuarios..
+	 * DataSource de Sugerencia..
 	 */
-	class UsuariosDataSource implements JRDataSource {
+	class SugerenciasDataSource implements JRDataSource {
 		
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Sugerencia> sugerencia = new ArrayList<Sugerencia>();
 		
-		public UsuariosDataSource() {
+		public SugerenciasDataSource() {
 			try {
 				this.obtenerValores();
 			} catch (Exception e) {
@@ -221,7 +221,7 @@ public class InformesViewModel {
 		 */		
 		private void obtenerValores() throws Exception {
 			ConnectDB conn = ConnectDB.getInstance();
-			this.usuarios = conn.getUsuarios("", "");
+			this.sugerencia= conn.getSugerencia("", "", "");
 		}
 		
 		private int index = -1;
@@ -230,17 +230,21 @@ public class InformesViewModel {
 		public Object getFieldValue(JRField field) throws JRException {
 	        Object value = null;
 	        String fieldName = field.getName();
-	        Usuario usuario = this.usuarios.get(index);
+	        Sugerencia sugerencia = this.sugerencia.get(index);
 	         
-	        if ("Nick".equals(fieldName)) {
-	            value = usuario.getNick();
-	        }         
+	        if ("Nombre".equals(fieldName)) {
+	            value = sugerencia.getNombre();
+	        }  else if ("Mail".equals(fieldName)){
+	        	value = sugerencia.getMail();
+	        } else if ("Sugerencia".equals(fieldName)){
+	        	value = sugerencia.getSugerencia();
+	        }
 	        return value;
 	    }
 
 		@Override
 		public boolean next() throws JRException {
-			if (index < usuarios.size() - 1) {
+			if (index < sugerencia.size() - 1) {
 				index ++;
 				return true;
 			}
